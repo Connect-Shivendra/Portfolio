@@ -1,2 +1,1 @@
-# Portfolio
-Portfolio and blog website on JS
+Portfolio Website to share CV for opportunities and coding skills.
