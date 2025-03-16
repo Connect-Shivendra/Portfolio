@@ -2,18 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import * as React from 'react';
 
 export default function BlogPost({ params }) {
-  // Don't destructure params.slug directly
+  // Use React.use() to handle the async params
+  const { slug } = React.use(params);
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
   useEffect(() => {
-    // Access params.slug inside the useEffect
+    // Access slug inside the useEffect
     const fetchBlog = async () => {
       try {
-        const response = await fetch(`/api/blogs/${params.slug}`);
+        const response = await fetch(`/api/blogs/${slug}`);
         if (!response.ok) {
           throw new Error('Blog post not found');
         }
@@ -27,7 +29,7 @@ export default function BlogPost({ params }) {
     };
     
     fetchBlog();
-  }, [params.slug]); // Use params.slug directly in the dependency array
+  }, [slug]); // Use slug directly in the dependency array
 
   if (loading) {
     return (
