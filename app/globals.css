@@ -2,29 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Below code Applies Outfit Font to all - 29/1/25 */
-
-*{
-  font-family: Outfit;
-}
-
-
-/* 29/1/25
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --hover-bg: #fcf4ff;
+  --accent-color: #3d4127;
+  --transition-duration: 0.5s;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --hover-bg: #2a004a;
+    --accent-color: #2a004a;
   }
+}
+
+* {
+  font-family: Outfit;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .section-container {
+    @apply w-full px-[12%] py-10 scroll-mt-20;
+  }
+  
+  .heading-primary {
+    @apply text-center text-5xl font-Ovo;
+  }
+  
+  .heading-secondary {
+    @apply text-center text-2xl font-Ovo mb-6;
+  }
+  
+  .card-hover {
+    @apply hover:bg-lightHover dark:hover:bg-darkHover transition-all duration-500;
+  }
+  
+  .custom-shadow {
+    @apply shadow-black dark:shadow-white;
+  }
+  
+  .button-primary {
+    @apply px-3 py-1 rounded-full text-sm transition-colors duration-300;
+  }
+  
+  .button-active {
+    @apply bg-darkTheme dark:bg-darkHover text-white;
+  }
+  
+  .button-inactive {
+    @apply bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-lightHover dark:hover:bg-darkHover;
+  }
+  
+  .link-with-icon {
+    @apply flex items-center gap-2 text-darkTheme dark:text-darkHover hover:underline;
+  }
+  
+  .blog-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-black dark:shadow-white overflow-hidden h-full;
+  }
+  
+  .blog-category-tag {
+    @apply bg-darkTheme dark:bg-darkHover text-white text-xs px-2 py-1;
+  }
 }
 */
