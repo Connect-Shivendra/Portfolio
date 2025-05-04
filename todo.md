@@ -1,5 +1,6 @@
 ## Local Execution
     Extract the zip file to replace your current project files
+    npx create-next-app@latest
     Run npm install next-mdx-remote gray-matter remark remark-html
     Run npm run dev
 
