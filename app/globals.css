@@ -73,3 +73,9 @@ body {
     @apply bg-darkTheme dark:bg-darkHover text-white text-xs px-2 py-1;
   }
 }
+
+/*
+darkBg: '#0F172A', // Premium deep navy background
+darkCard: '#1E293B', // Slightly lighter for contrast
+darkText: '#E2E8F0', // Soft light gray for readability
+darkAccent: '#7F1D1D', // A deep, premium red for highlights */
