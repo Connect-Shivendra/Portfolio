@@ -53,7 +53,8 @@ export default function Home() {
   }, [isDarkMode]);
 
   return (
-    <>
+    // Wrap everything in a flex container, ensure min height, AND apply background color directly
+    <div className="flex flex-col min-h-screen bg-[var(--background)]"> {/* Added bg-[var(--background)] here */}
       {/* Pass setActiveSection state setter to Navbar */}
       <Navbar 
         isDarkMode={isDarkMode} 
@@ -62,8 +63,8 @@ export default function Home() {
         setActiveSection={setActiveSection} // Pass the setter function
       />
       
-      {/* Add a main container with top padding to push content below the fixed navbar */}
-      <main className="pt-28"> {/* Added pt-28 here */}
+      {/* Add flex-grow to main container to make it fill available space */}
+      <main className="pt-28 flex-grow"> {/* Added flex-grow */}
         {/* Conditionally render sections based on activeSection state */}
         {activeSection === 'top' ? (
             <> {/* Render all sections when 'top' is active */}
@@ -85,9 +86,9 @@ export default function Home() {
           )}
       </main>
       
-      {/* Footer is always rendered */}
+      {/* Footer is always rendered, pushed down by flex-grow on main */}
       <Footer isDarkMode={isDarkMode} />
-    </>
+    </div>
   );
 }
 

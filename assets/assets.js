@@ -76,27 +76,27 @@ export const assets = {
 export const workData = [
     {
         title: 'Data Strategy',
-        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy for both private and public organisations, laying the foundation for a modern, cloud-based data ecosystem. This strategy streamlined data processes, enhanced data quality, and improved overall business intelligence capabilities.',
+        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy',
         bgImage: '/work-1.png',
     },
     {
         title: 'Data Architecture',
-        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy for both private and public organisations, laying the foundation for a modern, cloud-based data ecosystem. This strategy streamlined data processes, enhanced data quality, and improved overall business intelligence capabilities.',
+        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy for both private and public organisations',
         bgImage: '/work-1.png',
     },
     {
         title: 'Business Intelligence & Analytics',
-        description: 'With a deep understanding of business needs and data challenges, I have successfully implemented solutions that empower organizations to harness the full potential of their data. Whether it\'s building an enterprise data warehouse from scratch, designing intuitive dashboards, or setting up a comprehensive data governance framework, my work revolves around making data trustable, accessible and actionable',
+        description: 'With a deep understanding of business needs and data challenges, I have successfully implemented solutions that empower',
         bgImage: '/work-2.png',
     },
     {
         title: 'Data Engineering & Integration',
-        description: 'Building scalable and efficient data pipelines using modern technologies like Azure, Databricks, Snowflake, Informatica, Matillion and Power BI to ensure seamless data integration across business functions',
+        description: 'Building scalable and efficient data pipelines using modern technologies li',
         bgImage: '/work-3.png',
     },
     {
         title: 'Enterprise Information Management & Compliance',
-        description: 'Managing information effectively is critical to governance and compliance. I have implemented Microsoft Purview, OpenText Content Manager, and RecordPoint to enhance records and information management in alignment with NSW State Records Act and other regulatory requirements. By ensuring proper classification, retention, and disposal of records, I help organizations maintain compliance while improving accessibility and security of critical business information.',
+        description: 'Managing information effectively is critical to governance and compliance. I have implemented .',
         bgImage: '/work-4.png',
     },
 ];

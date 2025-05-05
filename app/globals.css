@@ -3,24 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --hover-bg: #fcf4ff;
-  --accent-color: #3d4127;
+  /* Option 2: Pink & Gray - Light Mode */
+  --background: #F8F8F8; /* Off-White background */
+  --foreground: #4A4A4A; /* Dark Gray text */
+  --hover-bg: #EAEAEA; /* Light Gray hover/secondary */
+  --accent-color: #FFB6C1; /* Light/Baby Pink accent */
   --transition-duration: 0.5s;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --hover-bg: #2a004a;
-    --accent-color: #2a004a;
+    /* Option 2: Pink & Gray - Dark Mode */
+    --background: #2C2C2C; /* Dark Gray background */
+    --foreground: #F0F0F0; /* Light Gray text */
+    --hover-bg: #404040; /* Medium-Dark Gray hover/secondary */
+    --accent-color: #F48FB1; /* Deeper Pink accent */
   }
 }
 
 * {
-  font-family: Outfit;
+  /* Changed default font to Inter */
+  font-family: Inter;
 }
 
 body {
@@ -34,15 +37,18 @@ body {
   }
   
   .heading-primary {
-    @apply text-center text-5xl font-Ovo;
+    /* Changed font to Sora and size to 4xl */
+    @apply text-center text-4xl font-Sora;
   }
   
   .heading-secondary {
-    @apply text-center text-2xl font-Ovo mb-6;
+    /* Changed font to Sora */
+    @apply text-center text-2xl font-Sora mb-6;
   }
   
+  /* Updated to use CSS variables */
   .card-hover {
-    @apply hover:bg-lightHover dark:hover:bg-darkHover transition-all duration-500;
+    @apply hover:bg-[var(--hover-bg)] transition-all duration-500;
   }
   
   .custom-shadow {
@@ -53,29 +59,35 @@ body {
     @apply px-3 py-1 rounded-full text-sm transition-colors duration-300;
   }
   
+  /* Adjusted for Option 2 palette */
   .button-active {
-    @apply bg-darkTheme dark:bg-darkHover text-white;
+    /* Using pink accent */
+    @apply bg-[var(--accent-color)] text-[var(--foreground)] dark:bg-[var(--accent-color)] dark:text-[var(--background)];
   }
   
   .button-inactive {
-    @apply bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-lightHover dark:hover:bg-darkHover;
+    /* Using gray hover for consistency */
+    @apply bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-[var(--hover-bg)] dark:hover:bg-[var(--hover-bg)];
   }
   
   .link-with-icon {
-    @apply flex items-center gap-2 text-darkTheme dark:text-darkHover hover:underline;
+    /* Using foreground and accent */
+    @apply flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent-color)] dark:text-[var(--foreground)] dark:hover:text-[var(--accent-color)] hover:underline;
   }
   
   .blog-card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-black dark:shadow-white overflow-hidden h-full;
+    /* Using background/foreground for consistency */
+    @apply bg-[var(--background)] dark:bg-[var(--background)] rounded-lg shadow-black dark:shadow-white overflow-hidden h-full;
   }
   
   .blog-category-tag {
-    @apply bg-darkTheme dark:bg-darkHover text-white text-xs px-2 py-1;
+    /* Using pink accent */
+    @apply bg-[var(--accent-color)] text-[var(--foreground)] dark:bg-[var(--accent-color)] dark:text-[var(--background)] text-xs px-2 py-1;
   }
 }
 
-/*
-darkBg: '#0F172A', // Premium deep navy background
-darkCard: '#1E293B', // Slightly lighter for contrast
-darkText: '#E2E8F0', // Soft light gray for readability
-darkAccent: '#7F1D1D', // A deep, premium red for highlights */
+/* Original purple colors (for reference, removed from use):
+Light Hover: #fcf4ff
+Dark Hover/Accent: #2a004a
+*/
+

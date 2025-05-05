@@ -10,13 +10,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        lightHover: '#fcf4ff',
-        darkHover: '#2a004a',
-        darkTheme: '#11001F' //Original darkTheme was #11001F
+        // Option 2: Pink & Gray
+        lightHover: '#EAEAEA', // Light Gray hover/secondary (Light Mode)
+        darkHover: '#404040', // Medium-Dark Gray hover/secondary (Dark Mode)
+        darkTheme: '#2C2C2C' // Dark Gray background (Dark Mode)
       },
       fontFamily: {
-        Outfit: ["Outfit","sans-serif"],
-        Ovo: ["Ovo","serif"]
+        // Replaced Outfit/Ovo with Inter/Sora
+        Inter: ["Inter", "sans-serif"],
+        Sora: ["Sora", "sans-serif"]
       },
       boxShadow: {
         'black' : '4px 4px 0 #000',
@@ -31,8 +33,14 @@ export default {
   plugins: [],
 };
 
-{/*
-darkBg: '#0F172A', // Premium deep navy background
-darkCard: '#1E293B', // Slightly lighter for contrast
-darkText: '#E2E8F0', // Soft light gray for readability
-darkAccent: '#7F1D1D', // A deep, premium red for highlights */}
+/*
+Original Colors:
+lightHover: '#fcf4ff',
+darkHover: '#2a004a',
+darkTheme: '#11001F'
+
+Original Fonts:
+Outfit: ["Outfit","sans-serif"],
+Ovo: ["Ovo","serif"]
+*/
+

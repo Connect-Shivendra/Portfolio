@@ -1,30 +1,22 @@
-//import { Geist, Geist_Mono } from "next/font/google"; //29/01/24 This is the fonts on the Webpage
-
-import {Outfit, Ovo} from "next/font/google";
+import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 
-/* 29/01/24
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Configure Inter font for body text
+const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // Common weights for body
+  variable: "--font-inter", // Optional CSS variable
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Configure Sora font for headings (used via Tailwind classes)
+const sora = Sora({
   subsets: ["latin"],
-});
-*/
-
-const outfit = Outfit({
-  subsets: ["latin"], weight: ["400","500","600","700"]
-});
-
-const ovo = Ovo({
-  subsets: ["latin"], weight: ["400"]
+  weight: ["400", "500", "600", "700"], // Common weights for headings
+  variable: "--font-sora", // Optional CSS variable
 });
 
 
-// This is the Title on the browser Tab //29/01/24
+// This is the Title on the browser Tab
 export const metadata = {
   title: "Portfolio - Data & Analytics",
   description: "Share Data Knowledge to the world #Free",
@@ -33,9 +25,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
+      {/* Apply Inter font to the body, Sora is applied via Tailwind classes */}
+      {/* Removed dark:bg-darkTheme to rely on CSS variable --background */}
       <body
-        className={`${outfit.className} ${ovo.className} antialiased leading-8
-        overflow-x-hidden dark:bg-darkTheme
+        className={`${inter.variable} ${sora.variable} ${inter.className} antialiased leading-8
+        overflow-x-hidden 
         dark:text-white`}
       >
         {children}
@@ -43,3 +37,16 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+/*
+Original font imports:
+import {Outfit, Ovo} from "next/font/google";
+const outfit = Outfit({
+  subsets: ["latin"], weight: ["400","500","600","700"]
+});
+const ovo = Ovo({
+  subsets: ["latin"], weight: ["400"]
+});
+Applied to body: className={`${outfit.className} ${ovo.className} ...`}
+*/
+
