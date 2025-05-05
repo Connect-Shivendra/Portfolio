@@ -1,3 +1,4 @@
+
 'use client'
 import { useState, useEffect } from "react";
 import About from "./components/About";
@@ -8,16 +9,15 @@ import Navbar from "./components/Navbar";
 import Services from "./components/Services";
 import Work from "./components/Work";
 import Blogs from "./components/Blogs";
-// Remove direct import of getAllBlogs
 
-// Below creates the contents of the Page  //29/01/24
-// Call Navbar.jsx for Page
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [blogs, setBlogs] = useState([]);
+  // Default to 'top' to show all sections initially
+  const [activeSection, setActiveSection] = useState('top'); 
 
+  // Load blogs
   useEffect(() => {
-    // Load blogs from API instead of direct file system access
     const loadBlogs = async () => {
       try {
         const response = await fetch('/api/blogs');
@@ -27,40 +27,67 @@ export default function Home() {
         console.error("Error loading blogs:", error);
       }
     };
-    
     loadBlogs();
   }, []);
 
+  // Dark mode initialization
   useEffect(() => {
-    if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.
-    matchMedia('(prefers-color-scheme: dark)').matches)){
-      setIsDarkMode(true)
-    }else{
-      setIsDarkMode(false)
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
     }
-  },[])
+  }, []);
 
+  // Apply dark mode
   useEffect(() => {
-    if(isDarkMode){
+    if (isDarkMode) {
       document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
-    }else{
+      localStorage.setItem('theme', 'dark');
+    } else {
       document.documentElement.classList.remove('dark');
-      localStorage.theme = '';
+      localStorage.setItem('theme', 'light');
     }
-  },[isDarkMode])
+  }, [isDarkMode]);
 
   return (
-  <>
-  <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
-  {/* Header */}
-  <Header isDarkMode={isDarkMode} />
-  <About isDarkMode={isDarkMode} />
-  <Services isDarkMode={isDarkMode} />
-  <Blogs isDarkMode={isDarkMode} blogs={blogs} />
-  <Work isDarkMode={isDarkMode} />
-  <Contact isDarkMode={isDarkMode} />
-  <Footer isDarkMode={isDarkMode} />
-  </>
+    <>
+      {/* Pass setActiveSection state setter to Navbar */}
+      <Navbar 
+        isDarkMode={isDarkMode} 
+        setIsDarkMode={setIsDarkMode} 
+        isOnBlogPage={false} 
+        setActiveSection={setActiveSection} // Pass the setter function
+      />
+      
+      {/* Add a main container with top padding to push content below the fixed navbar */}
+      <main className="pt-28"> {/* Added pt-28 here */}
+        {/* Conditionally render sections based on activeSection state */}
+        {activeSection === 'top' ? (
+            <> {/* Render all sections when 'top' is active */}
+              <Header isDarkMode={isDarkMode} />
+              <About isDarkMode={isDarkMode} />
+              <Services isDarkMode={isDarkMode} />
+              <Blogs isDarkMode={isDarkMode} blogs={blogs} />
+              <Work isDarkMode={isDarkMode} />
+              <Contact isDarkMode={isDarkMode} />
+            </>
+          ) : (
+            <> {/* Render only the active section otherwise */}
+              {activeSection === 'about' && <About isDarkMode={isDarkMode} />} 
+              {activeSection === 'services' && <Services isDarkMode={isDarkMode} />} 
+              {activeSection === 'blogs' && <Blogs isDarkMode={isDarkMode} blogs={blogs} />} 
+              {activeSection === 'work' && <Work isDarkMode={isDarkMode} />} 
+              {activeSection === 'contact' && <Contact isDarkMode={isDarkMode} />} 
+            </>
+          )}
+      </main>
+      
+      {/* Footer is always rendered */}
+      <Footer isDarkMode={isDarkMode} />
+    </>
   );
 }
+

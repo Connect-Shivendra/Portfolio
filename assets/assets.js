@@ -75,7 +75,12 @@ export const assets = {
 
 export const workData = [
     {
-        title: 'Data Strategy & Architecture',
+        title: 'Data Strategy',
+        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy for both private and public organisations, laying the foundation for a modern, cloud-based data ecosystem. This strategy streamlined data processes, enhanced data quality, and improved overall business intelligence capabilities.',
+        bgImage: '/work-1.png',
+    },
+    {
+        title: 'Data Architecture',
         description: 'One of my key achievements was leading the development of an Enterprise Data Strategy for both private and public organisations, laying the foundation for a modern, cloud-based data ecosystem. This strategy streamlined data processes, enhanced data quality, and improved overall business intelligence capabilities.',
         bgImage: '/work-1.png',
     },
@@ -85,7 +90,7 @@ export const workData = [
         bgImage: '/work-2.png',
     },
     {
-        title: 'Building Scalable Data Solutions',
+        title: 'Data Engineering & Integration',
         description: 'Building scalable and efficient data pipelines using modern technologies like Azure, Databricks, Snowflake, Informatica, Matillion and Power BI to ensure seamless data integration across business functions',
         bgImage: '/work-3.png',
     },
@@ -97,10 +102,14 @@ export const workData = [
 ];
 
 export const serviceData = [
-    { icon: assets.mobile_icon, title: 'Data Strategy & Architecture', description: 'Providing end-to-end data strategy solutions, including designing robust data architectures, governance frameworks, and cloud-based data platforms to enable data-driven decision-making.', link: '' },
+    { icon: assets.mobile_icon, title: 'Data Strategy', description: 'Providing end-to-end data strategy solutions, including designing robust data architectures, governance frameworks, and cloud-based data platforms to enable data-driven decision-making.', link: '' },
+    { icon: assets.mobile_icon, title: 'Data Architecture', description: 'Providing end-to-end data strategy solutions, including designing robust data architectures, governance frameworks, and cloud-based data platforms to enable data-driven decision-making.', link: '' },
     { icon: assets.web_icon, title: 'Business Intelligence & Analytics', description: 'Delivering actionable insights through interactive dashboards and reports, enabling organizations to make informed decisions using Power BI and other analytics tools.', link: '' },
     { icon: assets.ui_icon, title: 'Data Engineering & Integration', description: 'Building scalable and efficient data pipelines using modern technologies like Azure, Databricks, and Power BI to ensure seamless data integration across business functions.', link: '' },
     { icon: assets.graphics_icon, title: 'Information Management', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
+    { icon: assets.graphics_icon, title: 'Leadership & Coaching', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
+    { icon: assets.graphics_icon, title: 'Data Security', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
+    { icon: assets.graphics_icon, title: 'Vendor, Contract & Budget Management', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
 ];
 
 export const infoList = [

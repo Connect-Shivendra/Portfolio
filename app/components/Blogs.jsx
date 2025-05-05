@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -70,8 +71,7 @@ const Blogs = ({ blogs }) => {
     <motion.div 
       {...fadeIn}
       id='blogs' 
-      className='w-full px-[12%] py-10 scroll-mt-20'
-    >
+      className='w-full px-[12%] py-10'> {/* Removed scroll-mt, fixed quotes */}
       <motion.h2 
         {...slideDown}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -127,3 +127,4 @@ const Blogs = ({ blogs }) => {
 };
 
 export default Blogs;
+
