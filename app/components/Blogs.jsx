@@ -1,11 +1,10 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BlogsList } from '@/assets/assets';
-import { motion } from "motion/react";
-import { fadeIn, slideDown, slideUp, staggerContainer } from '@/app/utils/animations';
+import { motion } from "framer-motion"; // Ensures framer-motion is used
+import { fadeIn, slideIn, slideUp, staggerContainer } from '@/app/utils/animations	ions'; // Ensures slideDown is NOT imported, and slideIn IS imported
 
 const BlogCard = ({ blog, index }) => {
   return (
@@ -13,16 +12,16 @@ const BlogCard = ({ blog, index }) => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         whileHover={{ 
           scale: 1.05,
           backgroundColor: 'var(--hover-bg)',
           transition: { duration: 0.3 }
         }}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-black dark:shadow-white overflow-hidden h-full"
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-700 overflow-hidden h-full"
       >
         <div className="h-48 bg-gray-200 dark:bg-gray-700 relative">
-          {/* If we have a cover image, use it */}
           {blog.frontmatter.coverImage ? (
             <motion.div 
               initial={{ scale: 1 }}
@@ -69,20 +68,27 @@ const Blogs = ({ blogs }) => {
 
   return (
     <motion.div 
-      {...fadeIn}
+      variants={fadeIn} 
+      initial="initial"
+      animate="whileInView" 
+      viewport={{ once: true, amount: 0.1 }}
       id='blogs' 
-      className='w-full px-[12%] py-10'> {/* Removed scroll-mt, fixed quotes */}
+      className='w-full px-[12%] py-10'>
       <motion.h2 
-        {...slideDown}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        variants={slideIn('down', 'tween', 0.2, 0.5)} // Uses slideIn variant
+        initial="initial"
+        animate="whileInView"
+        viewport={{ once: true, amount: 0.1 }}
         className='text-center mb-6 text-2xl font-Ovo'
       >
         My Blogs
       </motion.h2>
       
       <motion.div 
-        {...slideUp}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        variants={slideUp}
+        initial="initial"
+        animate="whileInView"
+        viewport={{ once: true, amount: 0.1 }}
         className='flex flex-wrap items-center gap-3 md:gap-6 rounded-full px-4 md:px-12 py-3 justify-center mb-8 overflow-x-auto whitespace-nowrap'
       >
         {BlogsList.map((item, index) => (
@@ -105,7 +111,8 @@ const Blogs = ({ blogs }) => {
         <motion.div 
           variants={staggerContainer(0.1, 0.3)}
           initial="initial"
-          whileInView="whileInView"
+          animate="whileInView"
+          viewport={{ once: true, amount: 0.1 }}
           className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
         >
           {filteredBlogs.map((blog, index) => (
@@ -127,4 +134,3 @@ const Blogs = ({ blogs }) => {
 };
 
 export default Blogs;
-
