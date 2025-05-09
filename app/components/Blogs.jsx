@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BlogsList } from '@/assets/assets';
 import { motion } from "framer-motion"; // Ensures framer-motion is used
-import { fadeIn, slideIn, slideUp, staggerContainer } from '@/app/utils/animations	ions'; // Ensures slideDown is NOT imported, and slideIn IS imported
+import { fadeIn, slideIn, slideUp, staggerContainer } from '@/app/utils/animations'; // Ensures slideDown is NOT imported, and slideIn IS imported
 
 const BlogCard = ({ blog, index }) => {
   return (
