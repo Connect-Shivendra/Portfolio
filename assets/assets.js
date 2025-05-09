@@ -102,14 +102,14 @@ export const workData = [
 ];
 
 export const serviceData = [
-    { icon: assets.mobile_icon, title: 'Data Strategy', description: 'Providing end-to-end data strategy solutions, including designing robust data architectures, governance frameworks, and cloud-based data platforms to enable data-driven decision-making.', link: '' },
-    { icon: assets.mobile_icon, title: 'Data Architecture', description: 'Providing end-to-end data strategy solutions, including designing robust data architectures, governance frameworks, and cloud-based data platforms to enable data-driven decision-making.', link: '' },
-    { icon: assets.web_icon, title: 'Business Intelligence & Analytics', description: 'Delivering actionable insights through interactive dashboards and reports, enabling organizations to make informed decisions using Power BI and other analytics tools.', link: '' },
-    { icon: assets.ui_icon, title: 'Data Engineering & Integration', description: 'Building scalable and efficient data pipelines using modern technologies like Azure, Databricks, and Power BI to ensure seamless data integration across business functions.', link: '' },
-    { icon: assets.graphics_icon, title: 'Information Management', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
-    { icon: assets.graphics_icon, title: 'Leadership & Coaching', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
-    { icon: assets.graphics_icon, title: 'Data Security', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
-    { icon: assets.graphics_icon, title: 'Vendor, Contract & Budget Management', description: 'Helping businesses manage, govern, and optimize their data assets by implementing industry best practices for data governance, quality, and compliance', link: '' },
+    { icon: assets.mobile_icon, title: 'Data Strategy & Roadmap Development', description: 'Crafting a clear data strategy aligned with your business goals. We\'ll help you define your data vision, identify key data assets, and create a roadmap for data-driven success', link: '' },
+    { icon: assets.mobile_icon, title: 'Data Governance & Compliance', description: 'Establishing robust data governance frameworks and ensuring compliance with relevant regulations (e.g., GDPR, CCPA). We help you manage data quality, security, and ethical use', link: '' },
+    { icon: assets.web_icon, title: 'Advanced Analytics & Insights', description: 'Leveraging advanced analytics and machine learning to uncover hidden patterns and generate actionable insights from your data. We help you make smarter decisions and predict future trends', link: '' },
+    { icon: assets.ui_icon, title: 'Data Platform, Security & Infrastructure Modernization', description: 'Designing and implementing modern data platforms (cloud, on-prem, or hybrid) that are scalable, reliable, and cost-effective. We help you migrate from legacy systems and embrace new technologies', link: '' },
+    { icon: assets.graphics_icon, title: 'Business Intelligence & Reporting', description: 'Developing interactive dashboards and reports that provide a clear view of your business performance. We empower your teams with self-service analytics capabilities', link: '' },
+    { icon: assets.graphics_icon, title: 'Data-Driven Product Development', description: 'Incorporating data analytics into your product development lifecycle to create innovative, customer-centric products and services', link: '' },
+    { icon: assets.graphics_icon, title: 'AI & Machine Learning Solutions', description: 'Building and deploying custom AI and machine learning models to solve complex business problems, from predictive maintenance to personalized customer experiences', link: '' },
+    { icon: assets.graphics_icon, title: 'Data Literacy & Upskilling Programs', description: 'Empowering your workforce with the data literacy and skills needed to thrive in a data-driven world. We offer tailored training programs and workshops', link: '' },
 ];
 
 export const infoList = [

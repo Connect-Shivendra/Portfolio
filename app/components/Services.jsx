@@ -14,19 +14,19 @@ const Services = () => {
           initial={{opacity: 0, y: -20}}
           whileInView={{opacity: 1, y:0}}
           transition={{duration: 0.3, delay: 0.5}}
-          className='text-center mb-2 text-lg font-Ovo'>What I Offer</motion.h4>
+          className='text-center mb-2 text-lg font-Ovo'>What we Offer</motion.h4>
         <motion.h2 
           initial={{opacity: 0, y: -20}}
           whileInView={{opacity: 1, y:0}}
           transition={{duration: 0.5, delay: 0.5}}        
-          className='text-center text-5xl font-Ovo'>My Services</motion.h2>
+          className='text-center text-5xl font-Ovo'>Our Boutique Services</motion.h2>
 
         <motion.p 
           initial={{opacity: 0}}
           whileInView={{opacity: 1}}
           transition={{duration: 0.5, delay: 0.7}}
           className='text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo'>
-            I provide the following services......
+            Our experienced team provides boutique data solutions with a focus on data strategy, architecture, and engineering. We help you unlock the full potential of your data assets, enabling informed decision-making and driving business growth.
         </motion.p>
 
         <motion.div 
