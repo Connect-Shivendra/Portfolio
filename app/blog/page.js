@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import * as React from 'react';
 import { motion } from "framer-motion";
-import { fadeIn, slideDown, slideUp } from '@/app/utils/animations';
+import { fadeIn, slideIn, slideUp } from '@/app/utils/animations';
 import Image from 'next/image';
 // import { assets } from '@/assets/assets'; // Commented out as arrow is replaced
 import Navbar from '@/app/components/Navbar';
@@ -99,7 +99,7 @@ export default function BlogPost({ params }) {
     return renderStatusPage(
       <>
         <motion.h1 
-          {...slideDown}
+          variants={slideIn("down", "tween", 0.2, 0.5)} initial="initial" animate="whileInView" viewport={{ once: true, amount: 0.1 }}
           className="text-2xl font-bold mb-4 font-Ovo"
         >
           {error ? 'Error loading post' : 'Blog post not found'}

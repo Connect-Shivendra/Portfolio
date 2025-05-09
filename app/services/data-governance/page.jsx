@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import { motion } from 'framer-motion';
-import { fadeIn, slideUp, staggerContainer } from '../../utils/animations';
+import { fadeIn, slideUp, staggerContainer } from '@/app/utils/animations';
 
 const DataGovernancePage = () => {
   const serviceTitle = "Data Governance & Compliance";

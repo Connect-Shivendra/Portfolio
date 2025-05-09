@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import * as React from 'react'; // Keep React import for React.use
 import { motion } from "framer-motion";
-import { fadeIn, slideDown, slideUp } from '@/app/utils/animations';
+import { fadeIn, slideIn, slideUp } from '@/app/utils/animations';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
 import Navbar from '@/app/components/Navbar';
