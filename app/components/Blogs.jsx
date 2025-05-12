@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BlogsList } from '@/assets/assets';
-import { motion } from "framer-motion"; // Ensures framer-motion is used
-import { fadeIn, slideIn, slideUp, staggerContainer } from '@/app/utils/animations'; // Ensures slideDown is NOT imported, and slideIn IS imported
+import { motion } from "framer-motion";
+import { fadeIn, slideIn, slideUp, staggerContainer } from '@/app/utils/animations';
 
 const BlogCard = ({ blog, index }) => {
   return (
@@ -12,14 +12,14 @@ const BlogCard = ({ blog, index }) => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.1 }} // Ensure viewport is set for whileInView
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ 
+        whileHover={{
           scale: 1.05,
-          backgroundColor: 'var(--hover-bg)',
+          // backgroundColor: 'var(--hover-bg)', // Removed to allow CSS class to control hover
           transition: { duration: 0.3 }
         }}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-700 overflow-hidden h-full"
+        className="blog-card"
       >
         <div className="h-48 bg-gray-200 dark:bg-gray-700 relative">
           {blog.frontmatter.coverImage ? (
@@ -40,8 +40,8 @@ const BlogCard = ({ blog, index }) => {
           </div>
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white font-Ovo">{blog.frontmatter.title}</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{blog.frontmatter.excerpt}</p>
+          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-900 font-Ovo">{blog.frontmatter.title}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-700 mb-3">{blog.frontmatter.excerpt}</p>
           <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
             <span>{blog.frontmatter.date}</span>
             <span>By {blog.frontmatter.author}</span>
@@ -73,9 +73,9 @@ const Blogs = ({ blogs }) => {
       animate="whileInView" 
       viewport={{ once: true, amount: 0.1 }}
       id='blogs' 
-      className='w-full px-[12%] py-10'>
+      className='w-full px-[12%] py-10 bg-[var(--background)] text-[var(--foreground)]'>
       <motion.h2 
-        variants={slideIn('down', 'tween', 0.2, 0.5)} // Uses slideIn variant
+        variants={slideIn('down', 'tween', 0.2, 0.5)} // CORRECTED: Use slideIn variant
         initial="initial"
         animate="whileInView"
         viewport={{ once: true, amount: 0.1 }}
@@ -134,3 +134,4 @@ const Blogs = ({ blogs }) => {
 };
 
 export default Blogs;
+

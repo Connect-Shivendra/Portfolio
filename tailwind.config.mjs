@@ -42,5 +42,10 @@ darkTheme: '#11001F'
 Original Fonts:
 Outfit: ["Outfit","sans-serif"],
 Ovo: ["Ovo","serif"]
-*/
 
+
+        // Option 2: Pink & Gray
+        lightHover: '#EAEAEA', // Light Gray hover/secondary (Light Mode)
+        darkHover: '#404040', // Medium-Dark Gray hover/secondary (Dark Mode)
+        darkTheme: '#2C2C2C' // Dark Gray background (Dark Mode)
+ */
