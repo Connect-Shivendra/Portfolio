@@ -5,7 +5,6 @@ import edu_icon from './edu-icon.png';
 import edu_icon_dark from './edu-icon-dark.png';
 import project_icon from './project-icon.png';
 import project_icon_dark from './project-icon-dark.png';
-
 import git from './git.png';
 import right_arrow_white from './right-arrow-white.png';
 import logo from './logo.png';

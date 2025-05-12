@@ -1,8 +1,10 @@
+"use client";
+
 import React from 'react';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import { motion } from 'framer-motion';
-import { fadeIn, slideUp, staggerContainer } from '@/app/utils/animations';
+import { fadeIn, slideUp, staggerContainer } from '../../utils/animations';
 
 const DataPlatformPage = () => {
   const serviceTitle = "Data Platform & Infrastructure Modernization";

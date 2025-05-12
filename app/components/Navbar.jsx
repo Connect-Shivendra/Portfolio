@@ -33,20 +33,21 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
 
     // Handle navigation clicks to update state and scroll
     const handleNavClick = (sectionId) => {
-      if (!isOnBlogPage) {
-        setActiveSection(sectionId); // Update state in parent
-        // Optional: Smooth scroll after state update (might need slight delay or useEffect)
-        // setTimeout(() => {
-        //   const element = document.getElementById(sectionId);
-        //   if (element) {
-        //     element.scrollIntoView({ behavior: 'smooth' });
-        //   }
-        // }, 0);
-        closeMenu(); // Close mobile menu if open
-      }
-      // If on blog page, navigate to home page with hash
-      else {
-        window.location.href = `/#${sectionId}`; 
+      closeMenu(); // Close mobile menu if open, do this first
+
+      // If on a page that should handle section scrolling (main page, not a blog page, and setActiveSection is provided)
+      if (!isOnBlogPage && typeof setActiveSection === 'function') {
+        setActiveSection(sectionId);
+        // Optional: Smooth scroll logic can be handled by the parent component
+        // that provides setActiveSection, reacting to changes in the active section.
+      } else {
+        // If on a blog page, or any other page where setActiveSection is not relevant/provided
+        // (like service detail pages), navigate to the main page with the hash.
+        if (sectionId === 'top') {
+          window.location.href = '/'; // Navigate to homepage root
+        } else {
+          window.location.href = `/#${sectionId}`; // Navigate to homepage section
+        }
       }
     };
 
