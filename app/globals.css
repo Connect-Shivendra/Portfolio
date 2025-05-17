@@ -76,8 +76,19 @@ body {
   }
   
   .blog-card {
-    /* Using background/foreground for consistency */
-    @apply bg-white dark:bg-yellow-400 rounded-lg shadow-lg dark:shadow-black/20 overflow-hidden h-full transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-yellow-500;
+    /* Base styles for light mode */
+    @apply bg-white rounded-lg shadow-lg overflow-hidden h-full transition-colors duration-300 hover:bg-gray-50;
+  }
+  
+  /* Explicit dark mode styles for .blog-card - PRODUCTION */
+  html.dark .blog-card {
+    background-color: #e2e8f0; /* slate-200 */
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    /* Ensure dark shadow is applied if needed, or define explicitly. The @apply rule had dark:shadow-black/20 */
+  }
+
+  html.dark .blog-card:hover {
+    background-color: #cbd5e1; /* slate-300 */
   }
   
   .blog-category-tag {

@@ -31,6 +31,15 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         return () => window.removeEventListener('scroll', handleScroll);
     },[])
 
+    // Add useEffect to toggle 'dark' class on <html> tag
+    useEffect(() => {
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [isDarkMode]);
+
     // Handle navigation clicks to update state and scroll
     const handleNavClick = (sectionId) => {
       closeMenu(); // Close mobile menu if open, do this first
