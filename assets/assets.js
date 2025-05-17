@@ -74,27 +74,32 @@ export const assets = {
 
 export const workData = [
     {
-        title: 'Data Strategy',
-        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy',
+        title: 'Local Government: Camden Council',
+        description: 'Data Strategy, Azure-Databricks-PowerBI Data Platform, Information management, etc.',
         bgImage: '/work-1.png',
     },
     {
-        title: 'Data Architecture',
-        description: 'One of my key achievements was leading the development of an Enterprise Data Strategy for both private and public organisations',
+        title: 'Event Hospitality & Entertainment(ASX: EVT)',
+        description: 'placeholder goes here',
         bgImage: '/work-1.png',
     },
     {
-        title: 'Business Intelligence & Analytics',
+        title: 'Woolworths Group (ASX: WOW)',
         description: 'With a deep understanding of business needs and data challenges, I have successfully implemented solutions that empower',
         bgImage: '/work-2.png',
     },
     {
-        title: 'Data Engineering & Integration',
+        title: 'Optus Pty Ltd (Singtel Group)',
         description: 'Building scalable and efficient data pipelines using modern technologies li',
         bgImage: '/work-3.png',
     },
     {
-        title: 'Enterprise Information Management & Compliance',
+        title: 'Fidelity International',
+        description: 'Managing information effectively is critical to governance and compliance. I have implemented .',
+        bgImage: '/work-4.png',
+    },
+        {
+        title: 'Amdocs Limited (NASDAQ: DOX)',
         description: 'Managing information effectively is critical to governance and compliance. I have implemented .',
         bgImage: '/work-4.png',
     },

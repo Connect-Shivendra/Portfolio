@@ -9,6 +9,8 @@
   --hover-bg: #EAEAEA; /* Light Gray hover/secondary */
   --accent-color: #FFB6C1; /* Light/Baby Pink accent */
   --transition-duration: 0.5s;
+  --card-bg: #FFFFFF; /* Card background for light mode */
+  --section-bg: transparent; /* Section background for light mode */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +20,24 @@
     --foreground: #F0F0F0; /* Light Gray text */
     --hover-bg: #404040; /* Medium-Dark Gray hover/secondary */
     --accent-color: #F48FB1; /* Deeper Pink accent */
+    --card-bg: var(--hover-bg); /* Use the hover-bg color for card backgrounds */
+    --section-bg: #1F1F1F; /* Darker background for sections in dark mode */
+  }
+}
+
+/* Base text styles for dark mode */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-[var(--foreground)] dark:text-[var(--foreground)];
+  }
+  
+  p {
+    @apply text-[var(--foreground)] dark:text-[var(--foreground)];
+  }
+  
+  /* Ensure all text containers have proper dark mode background */
+  section, header, footer, main, .text-container {
+    @apply dark:bg-[var(--background)];
   }
 }
 
@@ -38,12 +58,12 @@ body {
   
   .heading-primary {
     /* Changed font to Sora and size to 4xl */
-    @apply text-center text-4xl font-Sora;
+    @apply text-center text-4xl font-Sora text-[var(--foreground)] dark:text-[var(--foreground)];
   }
   
   .heading-secondary {
     /* Changed font to Sora */
-    @apply text-center text-2xl font-Sora mb-6;
+    @apply text-center text-2xl font-Sora mb-6 text-[var(--foreground)] dark:text-[var(--foreground)];
   }
   
   /* Updated to use CSS variables */
@@ -75,6 +95,18 @@ body {
     @apply flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent-color)] dark:text-[var(--foreground)] dark:hover:text-[var(--accent-color)] hover:underline;
   }
   
+  /* New reusable card component class */
+  .card-component {
+    @apply bg-white dark:bg-darkHover border-[0.5px] border-gray-400 dark:border-white 
+    rounded-xl p-6 hover:bg-lightHover dark:hover:bg-darkHover/70 
+    hover:-translate-x-1 duration-500 hover:shadow-black dark:hover:shadow-white;
+  }
+  
+  /* New text container class for sections with text that needs dark background in dark mode */
+  .text-container {
+    @apply bg-transparent dark:bg-darkHover p-4 rounded-lg;
+  }
+  
   .blog-card {
     /* Base styles for light mode */
     @apply bg-white rounded-lg shadow-lg overflow-hidden h-full transition-colors duration-300 hover:bg-gray-50;
@@ -84,7 +116,6 @@ body {
   html.dark .blog-card {
     background-color: #e2e8f0; /* slate-200 */
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    /* Ensure dark shadow is applied if needed, or define explicitly. The @apply rule had dark:shadow-black/20 */
   }
 
   html.dark .blog-card:hover {
@@ -101,4 +132,3 @@ body {
 Light Hover: #fcf4ff
 Dark Hover/Accent: #2a004a
 */
-

@@ -1,14 +1,11 @@
+"use client";
 import { assets } from '@/assets/assets'
 import Image from 'next/image'
 import React from 'react'
 import { motion } from "motion/react"
-
- {/*------------coding for header Image & text----------------- */}
- {/*------------CV Needs to be in /assets/public folder----------------- */}
-
 const Header = () => {
   return (
-    <div className='w-11/12 max-w-3xl text-center mx-auto min-h-[96vh] flex flex-col items-center justify-center gap-4'>
+    <div className='w-11/12 max-w-3xl text-center mx-auto min-h-[96vh] flex flex-col items-center justify-center gap-4 dark:bg-[var(--background)]'>
       <motion.div 
          initial={{ scale:0 }}
          whileInView={{scale:1}}
@@ -21,7 +18,7 @@ const Header = () => {
       whileInView={{y: 0, opacity: 1}}
       transition={{duration: 0.6, delay: 0.3}}
       className='flex items-end gap-2 text-xm md:text-2xl mb-3
-        font-Ovo'>
+        font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>
             Hi! I'm Shivendra Singh <Image src={assets.hand_icon} alt='' 
             className='w-6'/></motion.h3>
         <motion.h1
@@ -29,12 +26,12 @@ const Header = () => {
         whileInView={{y: 0, opacity: 1}}
         transition={{duration: 0.8, delay: 0.5}} 
         className='text-3xl sm:text-6xl lg:text-[66px]
-        font-Ovo'>Executive Data & Technology Leader based in Sydney, Australia</motion.h1>
+        font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>Executive Data & Technology Leader based in Sydney, Australia</motion.h1>
         <motion.p 
         initial={{opacity: 0}}
         whileInView={{opacity: 1}}
         transition={{duration: 0.6, delay: 0.7}} 
-        className='max-w-2xl mx-auto font-Ovo'>
+        className='max-w-2xl mx-auto font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>
         Transformational Leader with 14+ years of experience in  Data Strategy, Architecture, Data Engineering, Analytics, and Program Delivery.
         Passionate about transforming businesses through trusted, accessible, and actionable data.
         </motion.p>
@@ -44,7 +41,7 @@ const Header = () => {
             whileInView={{y: 0, opacity: 1}}
             transition={{duration: 0.6, delay: 1}}
             href="#contact" className='px-10 py-3 items-center gap-2 rounded-full 
-            border border-white bg-black text-white flex dark:bg-transparent'>Say Hello<Image src=
+            border border-white bg-black text-white flex dark:bg-darkHover'>Say Hello<Image src=
             {assets.right_arrow_white} alt='' className='w-4'/></motion.a>
             <motion.a 
             initial={{y: 30, opacity: 0}}
@@ -58,5 +55,4 @@ const Header = () => {
     </div>
   )
 }
-
 export default Header
