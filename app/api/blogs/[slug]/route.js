@@ -1,12 +1,12 @@
+// app/api/blogs/[slug]/route.js
 import { NextResponse } from 'next/server';
 import { getBlogBySlug } from '@/app/utils/mdx-utils';
 import { remark } from 'remark';
 import html from 'remark-html';
+import remarkGfm from 'remark-gfm';
 
 export async function GET(request, context) {
-  const params = await context.params; // ✅ Await params
-  console.log("Context Params:", params); // Debugging log
-
+  const params = await context.params;
   const slug = params?.slug;
 
   try {
@@ -19,14 +19,16 @@ export async function GET(request, context) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
-    // Convert markdown to HTML
+    // Enhanced markdown processing pipeline with remarkGfm
     const processedContent = await remark()
-      .use(html)
+      .use(remarkGfm)
+      .use(html, {
+        sanitize: false // Allow HTML in markdown for advanced formatting
+      })
       .process(blog.content);
 
     const contentHtml = processedContent.toString();
 
-    // Add the HTML content to the blog object
     const blogWithHtml = {
       ...blog,
       contentHtml

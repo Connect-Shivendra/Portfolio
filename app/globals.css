@@ -1,6 +1,8 @@
+@import './styles/blog-styles.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
   /* Option 2: Pink & Gray - Light Mode */

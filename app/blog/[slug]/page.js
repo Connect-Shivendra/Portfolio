@@ -1,18 +1,19 @@
+// Modified version of app/blog/[slug]/page.js to incorporate blog beautification
 
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import * as React from 'react'; // Keep React import for React.use
+import * as React from 'react';
 import { motion } from "framer-motion";
 import { fadeIn, slideIn, slideUp } from '@/app/utils/animations';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
+import BlogEnhancer from '@/app/components/BlogEnhancer'; // Import the new component
 
 export default function BlogPost({ params }) {
-  // Use React.use() to handle potentially async params in Client Components (Next.js 15+)
   const { slug } = React.use(params);
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,13 +41,12 @@ export default function BlogPost({ params }) {
     }
   }, [isDarkMode]);
 
-  // Fetch blog post data - useEffect depends on slug, which is now resolved via React.use()
+  // Fetch blog post data
   useEffect(() => {
     const fetchBlog = async () => {
       setLoading(true);
       setError(null);
       try {
-        // Fetch using the resolved slug
         const response = await fetch(`/api/blogs/${slug}`);
         if (!response.ok) {
           throw new Error('Blog post not found');
@@ -60,12 +60,10 @@ export default function BlogPost({ params }) {
       }
     };
 
-    // Only fetch if slug is available (React.use might return undefined initially)
     if (slug) {
       fetchBlog();
     }
-
-  }, [slug]); // Dependency array remains [slug]
+  }, [slug]);
 
   // Common wrapper for Loading and Error states
   const renderStatusPage = (content) => (
@@ -91,7 +89,7 @@ export default function BlogPost({ params }) {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-        className="text-2xl font-bold mb-4 font-Ovo"
+        className="text-2xl font-bold mb-4 font-Sora"
       >
         Loading...
       </motion.h1>
@@ -104,7 +102,7 @@ export default function BlogPost({ params }) {
       <>
         <motion.h1
           {...slideDown}
-          className="text-2xl font-bold mb-4 font-Ovo"
+          className="text-2xl font-bold mb-4 font-Sora"
         >
           {error ? 'Error loading post' : 'Blog post not found'}
         </motion.h1>
@@ -127,6 +125,7 @@ export default function BlogPost({ params }) {
   return (
     <>
       <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} isOnBlogPage={true} />
+      <BlogEnhancer /> {/* Add the BlogEnhancer component */}
       <motion.div
         {...fadeIn}
         className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 pt-32 pb-16"
@@ -143,11 +142,11 @@ export default function BlogPost({ params }) {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-6"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 font-Ovo">{blog.frontmatter.title}</h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 font-Sora">{blog.frontmatter.title}</h1>
             <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-4 gap-x-4 gap-y-2">
               <span>Published on {blog.frontmatter.date}</span>
               <span>By {blog.frontmatter.author}</span>
-              <span className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-2 py-1 rounded-full text-xs">
+              <span className="bg-[var(--accent-color)] text-darkTheme dark:text-white px-2 py-1 rounded-full text-xs">
                 {blog.frontmatter.category}
               </span>
             </div>
@@ -177,4 +176,3 @@ export default function BlogPost({ params }) {
     </>
   );
 }
-
