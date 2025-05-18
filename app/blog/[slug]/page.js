@@ -1,8 +1,6 @@
-// Modified version of app/blog/[slug]/page.js to incorporate blog beautification
-
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import * as React from 'react';
 import { motion } from "framer-motion";
@@ -11,14 +9,34 @@ import Image from 'next/image';
 import { assets } from '@/assets/assets';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
-import BlogEnhancer from '@/app/components/BlogEnhancer'; // Import the new component
+import BlogEnhancer from '@/app/components/BlogEnhancer';
+import { useRouter } from 'next/navigation';
 
 export default function BlogPost({ params }) {
+  const router = useRouter();
   const { slug } = React.use(params);
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const topRef = useRef(null);
+
+  // Store the previous page in session storage when component mounts
+  useEffect(() => {
+    // Set a flag in sessionStorage to indicate we came from a blog post
+    sessionStorage.setItem('fromBlogPost', 'true');
+  }, []);
+
+  // Handle back navigation to blogs section
+  const handleBackToBlogsClick = () => {
+    // Navigate to home page with blogs section hash
+    window.location.href = '/#blogs';
+  };
+
+  // Handle scroll to top
+  const handleScrollToTop = () => {
+    topRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // Dark mode effect
   useEffect(() => {
@@ -110,26 +128,47 @@ export default function BlogPost({ params }) {
           {...slideUp}
           transition={{ delay: 0.2 }}
         >
-          <Link href="/" className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-4 py-2 rounded-md inline-flex items-center gap-2 hover:opacity-80 transition-opacity text-sm">
+          <button 
+            onClick={handleBackToBlogsClick}
+            className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-4 py-2 rounded-md inline-flex items-center gap-2 hover:opacity-80 transition-opacity text-sm"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to home
-          </Link>
+            Back to blogs
+          </button>
         </motion.div>
       </>
-    );
+     );
   }
 
   // Blog post content
   return (
     <>
       <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} isOnBlogPage={true} />
-      <BlogEnhancer /> {/* Add the BlogEnhancer component */}
+      <BlogEnhancer />
+      <div ref={topRef}></div>
       <motion.div
         {...fadeIn}
         className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 pt-32 pb-16"
       >
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="mb-6"
+        >
+          <button 
+            onClick={handleBackToBlogsClick}
+            className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-4 py-2 rounded-md inline-flex items-center gap-2 hover:opacity-80 transition-opacity text-sm"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to blogs
+          </button>
+        </motion.div>
+        
         <motion.article
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -146,7 +185,7 @@ export default function BlogPost({ params }) {
             <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-4 gap-x-4 gap-y-2">
               <span>Published on {blog.frontmatter.date}</span>
               <span>By {blog.frontmatter.author}</span>
-              <span className="bg-[var(--accent-color)] text-darkTheme dark:text-white px-2 py-1 rounded-full text-xs">
+              <span className="bg-[var(--accent-color )] text-darkTheme dark:text-white px-2 py-1 rounded-full text-xs">
                 {blog.frontmatter.category}
               </span>
             </div>
@@ -170,9 +209,27 @@ export default function BlogPost({ params }) {
             className="prose dark:prose-invert lg:prose-xl max-w-none blog-content mt-8"
             dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
           />
+          
+          {/* Back to top button at the bottom */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-12 flex justify-center"
+          >
+            <button 
+              onClick={handleScrollToTop}
+              className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-4 py-2 rounded-md inline-flex items-center gap-2 hover:opacity-80 transition-opacity text-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
+              Back to top
+            </button>
+          </motion.div>
         </motion.article>
       </motion.div>
       <Footer isDarkMode={isDarkMode} />
     </>
-  );
+   );
 }
