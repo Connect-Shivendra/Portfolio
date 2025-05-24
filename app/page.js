@@ -16,6 +16,26 @@ export default function Home() {
   // Default to 'top' to show all sections initially
   const [activeSection, setActiveSection] = useState('top'); 
 
+  // Check URL hash on initial load and set active section accordingly
+  useEffect(() => {
+    // Get the hash from the URL (e.g., #work)
+    const hash = window.location.hash.replace('#', '');
+    
+    // If hash exists and is a valid section, set it as active
+    if (hash && ['about', 'services', 'blogs', 'work', 'contact'].includes(hash)) {
+      setActiveSection(hash);
+      
+      // Scroll to top of the page when loading with a hash
+      window.scrollTo(0, 0);
+    }
+  }, []);
+  
+  // Scroll to top whenever active section changes
+  useEffect(() => {
+    // Scroll to top of the page when active section changes
+    window.scrollTo(0, 0);
+  }, [activeSection]);
+
   // Load blogs
   useEffect(() => {
     const loadBlogs = async () => {

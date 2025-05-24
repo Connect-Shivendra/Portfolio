@@ -2,6 +2,7 @@
 
 import { assets, workData } from '@/assets/assets';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { motion } from "motion/react";
 
@@ -16,53 +17,46 @@ const Work = ({isDarkMode}) => {
           initial={{opacity: 0, y: -20}}
           whileInView={{opacity: 1, y:0}}
           transition={{duration: 0.3, delay: 0.5}}
-          className='text-center mb-2 text-lg font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>My Portfolio</motion.h4>
+          className='text-center mb-2 text-lg font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>Work Timeline</motion.h4>
         <motion.h2 
           initial={{opacity: 0, y: -20}}
           whileInView={{opacity: 1, y:0}}
           transition={{duration: 0.5, delay: 0.5}}
-          className='text-center text-5xl font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>My Latest Work</motion.h2>
+          className='text-center text-5xl font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>Previous Companies & Deliverables</motion.h2>
 
         <motion.p 
           initial={{opacity: 0}}
           whileInView={{opacity: 1}}
           transition={{duration: 0.5, delay: 0.7}}
           className='text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>
-            I work on....
+            I've worked with large multinational companies, local governments, and startups, delivering impactful solutions across various domains across the globe. Here are some of the key projects I've been involved in.
         </motion.p>
 
         <motion.div 
           initial={{opacity: 0}}
           whileInView={{opacity: 1}}
           transition={{duration: 0.6, delay: 0.9}}
-          className='grid grid-cols-auto gap-5 my-10'>
+          className='grid grid-cols-3 gap-1 my-10 max-w-6xl mx-auto'>
             {workData.map((project,index)=>(
-                <motion.div 
-                  whileHover={{scale: 1.05}}
-                  transition={{duration: 0.3}}
-                  key={index} 
-                  className='aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group'
-                  style={{backgroundImage: `url(${project.bgImage})`}}>
-                    <div className='bg-white dark:bg-darkHover w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7'>
-                        <div>
-                            <h2 className='font-semibold flex items-center dark:text-white'>{project.title}</h2>
-                            <p className='text-sm text-gray-700 flex items-center dark:text-white/90'>{project.description}</p>
-                        </div>
-                        <div className='border rounded-full border-black dark:border-white w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] dark:shadow-[2px_2px_0_#fff] group-hover:bg-lime-300 dark:group-hover:bg-lime-500 transition'>
-                            <Image src={assets.send_icon} alt='send icon' className='w-5' />
-                        </div>
-                    </div>
-                </motion.div>
+                <Link href={project.link} key={index}>
+                  <motion.div 
+                    whileHover={{scale: 1.02}}
+                    transition={{duration: 0.3}}
+                    className='aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group'
+                    style={{backgroundImage: `url(${project.bgImage})`}}>
+                      <div className='bg-white dark:bg-darkHover w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-2 px-3 flex items-center justify-between duration-500 group-hover:bottom-7'>
+                          <div className="flex-1 min-w-0">
+                              <h2 className='font-semibold text-xs truncate dark:text-white'>{project.title}</h2>
+                              <p className='text-[10px] text-gray-700 truncate dark:text-white/90'>{project.description}</p>
+                          </div>
+                          <div className='border rounded-full border-black dark:border-white w-6 aspect-square flex-shrink-0 flex items-center justify-center shadow-[1px_1px_0_#000] dark:shadow-[1px_1px_0_#fff] group-hover:bg-lime-300 dark:group-hover:bg-lime-500 transition ml-1'>
+                              <Image src={assets.send_icon} alt='send icon' className='w-3' />
+                          </div>
+                      </div>
+                  </motion.div>
+                </Link>
             ))}    
         </motion.div>
-        
-        <motion.a 
-          initial={{opacity: 0}}
-          whileInView={{opacity: 1}}
-          transition={{duration: 1.1, delay: 0.5}}
-          href="" className='w-max flex items-center justify-center gap-2 text-gray-700 border-[0.5px] border-gray-700 rounded-full px-10 py-3 mx-auto my-20 hover:bg-lightHover duration-500 dark:text-white dark:border-white dark:hover:bg-darkHover/70'>
-            Show More <Image src={isDarkMode ? assets.right_arrow_bold_dark : assets.right_arrow_bold} alt='Right Arrow' className='w-4'/>
-        </motion.a>
 
     </motion.div>
     )

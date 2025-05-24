@@ -4,10 +4,12 @@ import { assets } from '@/assets/assets'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'; // Import Link for internal navigation
+import { useRouter, usePathname } from 'next/navigation'; // Import router for programmatic navigation
 
 // Accept setActiveSection prop to handle clicks directly
 const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSection}) => {
-
+    const router = useRouter();
+    const pathname = usePathname();
     const [isScroll, setIsScroll] = useState(false)
     const sideMenuRef = useRef();
     const openMenu = ()=>{
@@ -35,19 +37,31 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
     const handleNavClick = (sectionId) => {
       closeMenu(); // Close mobile menu if open, do this first
 
-      // If on a page that should handle section scrolling (main page, not a blog page, and setActiveSection is provided)
-      if (!isOnBlogPage && typeof setActiveSection === 'function') {
-        setActiveSection(sectionId);
-        // Optional: Smooth scroll logic can be handled by the parent component
-        // that provides setActiveSection, reacting to changes in the active section.
-      } else {
-        // If on a blog page, or any other page where setActiveSection is not relevant/provided
-        // (like service detail pages), navigate to the main page with the hash.
-        if (sectionId === 'top') {
-          window.location.href = '/'; // Navigate to homepage root
-        } else {
-          window.location.href = `/#${sectionId}`; // Navigate to homepage section
+      // For all section navigation, ensure consistent behavior across all pages
+      if (sectionId === 'top') {
+        // Special case for home/top - just go to homepage
+        window.location.href = '/';
+        return;
+      }
+      
+      // For all other sections (including 'work'), always use the hash navigation
+      // This ensures consistent behavior regardless of current page
+      
+      if (pathname === '/') {
+        // If already on homepage, update active section and scroll
+        if (typeof setActiveSection === 'function') {
+          setActiveSection(sectionId);
         }
+        // Ensure the URL has the correct anchor
+        window.history.pushState({}, '', `/#${sectionId}`);
+        // Manually scroll to the section
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // If on another page, navigate to homepage with the section anchor
+        window.location.href = `/#${sectionId}`;
       }
     };
 

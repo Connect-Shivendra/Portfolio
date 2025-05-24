@@ -74,34 +74,40 @@ export const assets = {
 
 export const workData = [
     {
-        title: 'Local Government: Camden Council',
-        description: 'Data Strategy, Azure-Databricks-PowerBI Data Platform, Information management, etc.',
+        title: 'Camden Council',
+        description: 'Head of Information & BI Services',
         bgImage: '/work-1.png',
+        link: '/work/local-government-camden-council'
     },
     {
-        title: 'Event Hospitality & Entertainment(ASX: EVT)',
-        description: 'placeholder goes here',
+        title: 'Event Hospitality & Entertainment (ASX: EVT)',
+        description: 'Head of Data Platforms & Engineering',
         bgImage: '/work-1.png',
+        link: '/work/event-hospitality-entertainment'
     },
     {
         title: 'Woolworths Group (ASX: WOW)',
-        description: 'With a deep understanding of business needs and data challenges, I have successfully implemented solutions that empower',
+        description: 'Data Lead (Consultant)',
         bgImage: '/work-2.png',
+        link: '/work/woolworths-group'
     },
     {
         title: 'Optus Pty Ltd (Singtel Group)',
-        description: 'Building scalable and efficient data pipelines using modern technologies li',
+        description: 'Solution Designer',
         bgImage: '/work-3.png',
+        link: '/work/optus-pty-ltd'
     },
     {
-        title: 'Fidelity International',
-        description: 'Managing information effectively is critical to governance and compliance. I have implemented .',
+        title: 'Fidelity International (FIL)',
+        description: 'Data Warehouse Analyst',
         bgImage: '/work-4.png',
+        link: '/work/fidelity-international'
     },
-        {
+    {
         title: 'Amdocs Limited (NASDAQ: DOX)',
-        description: 'Managing information effectively is critical to governance and compliance. I have implemented .',
+        description: 'Senior Subject Matter Expert',
         bgImage: '/work-4.png',
+        link: '/work/amdocs-limited'
     },
 ];
 
