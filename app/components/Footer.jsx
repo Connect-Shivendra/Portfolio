@@ -10,7 +10,8 @@ const Footer = ({isDarkMode}) => {
         <Image src={isDarkMode ? assets.logo_dark : assets.logo} alt='' className='w-36 mx-auto
         mb-2' />
         <div className='w-max flex items-center gap-2 mx-auto'>
-        <Image src={isDarkMode ? assets.mail_icon_dark : assets.mail_icon} alt='' className='w-6' />connect.shivendra@gmail.com   
+        <Image src={isDarkMode ? assets.mail_icon : assets.mail_icon} alt='' className='w-6' />  {/* Chnaged email icon to be same in both dark and day modes */} 
+        <span className="text-center mb-2 text-lg font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]">connect.shivendra@gmail.com</span>   
         </div>
       </div>
 

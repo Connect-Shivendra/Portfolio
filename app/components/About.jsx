@@ -73,20 +73,28 @@ const About = ({isDarkMode}) => {
               initial={{y:20, opacity: 0}}
               whileInView={{y:0, opacity: 1}}
               transition={{duration: 1.3, duration: 0.5}}
-              className='my-6 text-gray-700 font-Ovo dark:text-white'>Tools of my Trade</motion.h4>
+              className='mt-12 mb-6 text-xl font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>Tools of the Trade</motion.h4>
             <motion.ul 
               initial={{opacity: 0}}
               whileInView={{opacity: 1}}
               transition={{duration: 1.5, duration: 0.6}}
-              className='flex items-center gap-3 sm:gap-5'>
+              className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-2xl'>
               {toolsData.map((tool,index)=>( 
                 <motion.li 
-                  whileHover={{scale: 1.1}}
-                  className='flex items-center justify-center w-12 sm:w-14 aspect-square border
-                  border-gray-400 rounded-lg cursor-pointer hover:-translate-x-1
-                       duration-500 dark:border-white dark:bg-darkHover' 
+                  whileHover={{scale: 1.05}}
+                  className='flex items-center justify-center w-full aspect-square border
+                  border-gray-400 rounded-lg cursor-pointer hover:-translate-x-1 p-4
+                       duration-500 bg-white hover:bg-lightHover dark:border-white dark:bg-darkTheme dark:shadow-[0_0_5px_rgba(255,255,255,0.5)]' 
                   key={index}>
-                    <Image src={tool.logo} alt={tool.name} width={56} height={56} className='w-5 sm:w-7' />
+                    <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full h-full">
+                      <Image 
+                        src={tool.logo} 
+                        alt={tool.name} 
+                        width={56} 
+                        height={56} 
+                        className='w-12 sm:w-16 md:w-20 dark:bg-white dark:p-2 dark:rounded-md' 
+                      />
+                    </a>
                 </motion.li>
               ))}
             </motion.ul>

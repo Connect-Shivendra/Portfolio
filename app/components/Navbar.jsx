@@ -85,12 +85,12 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         {/* Desktop Menu - Use buttons with onClick */}
         <ul className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3
         ${isScroll ? "" : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-darkHover/70"} `}>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('top')}>Home</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('about')}>Professional Highlights</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('services')}>Services</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('blogs')}>Blogs</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('work')}>My Work</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('contact')}>Contact Me</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('top')}>Home</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('about')}>Professional Highlights</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('services')}>Services</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('blogs')}>Blogs</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('work')}>My Work</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('contact')}>Contact Me</button></li>
         </ul>
         <div className='flex items-center gap-4'>
             {/* Dark Mode Toggle */}
@@ -119,12 +119,12 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
             <div className='absolute right-6 top-6 bg-white dark:bg-darkHover/90 p-2 rounded-full' onClick={closeMenu}>
                 <Image src={isDarkMode ? assets.close_white : assets.close_black} alt='' className='w-5 cursor-pointer' />
             </div>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('top')}>Home</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('about')}>About Me</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('services')}>Services</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('blogs')}>Blogs</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('work')}>My Work</button></li>
-            <li><button className='font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]' onClick={() => handleNavClick('contact')}>Contact Me</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('top')}>Home</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('about')}>About Me</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('services')}>Services</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('blogs')}>Blogs</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('work')}>My Work</button></li>
+            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('contact')}>Contact Me</button></li>
         </ul>
 
       </nav>

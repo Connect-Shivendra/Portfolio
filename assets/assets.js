@@ -112,14 +112,62 @@ export const workData = [
 ];
 
 export const serviceData = [
-    { icon: assets.mobile_icon, title: 'Data Strategy & Roadmap Development', description: 'Crafting a clear data strategy aligned with your business goals. We\'ll help you define your data vision, identify key data assets, and create a roadmap for data-driven success', link: '/services/data-strategy' },
-    { icon: assets.mobile_icon, title: 'Data Governance & Compliance', description: 'Establishing robust data governance frameworks and ensuring compliance with relevant regulations (e.g., GDPR, CCPA). We help you manage data quality, security, and ethical use', link: '/services/data-governance' },
-    { icon: assets.web_icon, title: 'Advanced Analytics & Insights', description: 'Leveraging advanced analytics and machine learning to uncover hidden patterns and generate actionable insights from your data. We help you make smarter decisions and predict future trends', link: '/services/advanced-analytics' },
-    { icon: assets.ui_icon, title: 'Data Platform, Security & Infrastructure Modernization', description: 'Designing and implementing modern data platforms (cloud, on-prem, or hybrid) that are scalable, reliable, and cost-effective. We help you migrate from legacy systems and embrace new technologies', link: '/services/data-platform' },
-    { icon: assets.graphics_icon, title: 'Business Intelligence & Reporting', description: 'Developing interactive dashboards and reports that provide a clear view of your business performance. We empower your teams with self-service analytics capabilities', link: '/services/business-intelligence' },
-    { icon: assets.graphics_icon, title: 'Data-Driven Product Development', description: 'Incorporating data analytics into your product development lifecycle to create innovative, customer-centric products and services', link: '/services/data-driven-product-dev' },
-    { icon: assets.graphics_icon, title: 'AI & Machine Learning Solutions', description: 'Building and deploying custom AI and machine learning models to solve complex business problems, from predictive maintenance to personalized customer experiences', link: '/services/ai-ml-solutions' },
-    { icon: assets.graphics_icon, title: 'Data Literacy & Upskilling Programs', description: 'Empowering your workforce with the data literacy and skills needed to thrive in a data-driven world. We offer tailored training programs and workshops', link: '/services/data-literacy' },
+    { 
+      icon: assets.mobile_icon, 
+      title: 'Data Strategy & Roadmap Development', 
+      description: 'Crafting a clear data strategy aligned with your business goals. We\'ll help you define your data vision, identify key data assets, and create a roadmap for data-driven success', 
+      link: '/services/data-strategy',
+      bgImage: '/images/DataStrategy.jpg'
+    },
+    { 
+      icon: assets.mobile_icon, 
+      title: 'Data Governance & Compliance', 
+      description: 'Establishing robust data governance frameworks and ensuring compliance with relevant regulations (e.g., GDPR, CCPA). We help you manage data quality, security, and ethical use', 
+      link: '/services/data-governance',
+      bgImage: '/images/Governance.jpg'
+    },
+    { 
+      icon: assets.web_icon, 
+      title: 'Advanced Analytics & Insights', 
+      description: 'Leveraging advanced analytics and machine learning to uncover hidden patterns and generate actionable insights from your data. We help you make smarter decisions and predict future trends', 
+      link: '/services/advanced-analytics',
+      bgImage: '/images/Advanced Analytics.png'
+    },
+    { 
+      icon: assets.ui_icon, 
+      title: 'Data Platform, Security & Infrastructure Modernization', 
+      description: 'Designing and implementing modern data platforms (cloud, on-prem, or hybrid) that are scalable, reliable, and cost-effective. We help you migrate from legacy systems and embrace new technologies', 
+      link: '/services/data-platform',
+      bgImage: '/images/AI-ML.jpg'
+    },
+    { 
+      icon: assets.graphics_icon, 
+      title: 'Business Intelligence & Reporting', 
+      description: 'Developing interactive dashboards and reports that provide a clear view of your business performance. We empower your teams with self-service analytics capabilities', 
+      link: '/services/business-intelligence',
+      bgImage: '/images/data-literacy.jpg'
+    },
+    { 
+      icon: assets.graphics_icon, 
+      title: 'Data-Driven Product Development', 
+      description: 'Incorporating data analytics into your product development lifecycle to create innovative, customer-centric products and services', 
+      link: '/services/data-driven-product-dev',
+      bgImage: '/images/data-driven-product.webp'
+    },
+    { 
+      icon: assets.graphics_icon, 
+      title: 'AI & Machine Learning Solutions', 
+      description: 'Building and deploying custom AI and machine learning models to solve complex business problems, from predictive maintenance to personalized customer experiences', 
+      link: '/services/ai-ml-solutions',
+      bgImage: '/images/AI-ML.jpg'
+    },
+    { 
+      icon: assets.graphics_icon, 
+      title: 'Data Literacy & Upskilling Programs', 
+      description: 'Empowering your workforce with the data literacy and skills needed to thrive in a data-driven world. We offer tailored training programs and workshops', 
+      link: '/services/data-literacy',
+      bgImage: '/images/data-literacy.jpg'
+    },
 ];
 
 export const infoList = [
