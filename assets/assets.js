@@ -184,7 +184,6 @@ export const BlogsList = [
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Data Engineering & Integration' },
     { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, name: 'Information Governance' },
     { icon: assets.project_icon, iconDark: assets.project_icon_dark, name: 'Data Security' },
-    // Added missing categories from markdown files
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'AI & Machine Learning Solutions' },
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Data Analytics' },
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Data Architecture' },
@@ -192,6 +191,7 @@ export const BlogsList = [
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Data Related Frameworks' },
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Data Strategy' },
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Policies, Procedures, Guidelines' },
+    { icon: assets.code_icon, iconDark: assets.code_icon_dark, name: 'Cyber Security' },
 ];
 
 export const toolsData = [
