@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server';
 
 export const revalidate = 3600; // Revalidate every hour
 
-export async function GET(request, { params }) {
+export async function GET(request, context) {
   try {
+    const { params = {} } = context || {};
     const { slug } = params;
     
     if (!slug) {

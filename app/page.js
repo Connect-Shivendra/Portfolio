@@ -1,4 +1,3 @@
-
 'use client'
 import { useState, useEffect } from "react";
 import About from "./components/About";
@@ -42,6 +41,7 @@ export default function Home() {
       try {
         const response = await fetch('/api/blogs');
         const data = await response.json();
+        console.log('Fetched blogs:', data.blogs); // Debug log
         setBlogs(data.blogs);
       } catch (error) {
         console.error("Error loading blogs:", error);

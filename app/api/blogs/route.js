@@ -3,7 +3,7 @@ import { getAllBlogs } from '@/app/utils/mdx-utils';
 
 export async function GET() {
   try {
-    const blogs = getAllBlogs();
+    const blogs = await getAllBlogs();
     return NextResponse.json({ blogs });
   } catch (error) {
     console.error('Error fetching blogs:', error);

@@ -13,6 +13,7 @@ const blogsDirectory = path.join(process.cwd(), 'content/blogs');
 // Cache the MDX processing
 export const processMDX = cache(async (content) => {
   try {
+    console.log('[MDX DEBUG] processMDX input:', content);
     const mdxSource = await serialize(content, {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
@@ -23,6 +24,7 @@ export const processMDX = cache(async (content) => {
       },
       parseFrontmatter: true,
     });
+    console.log('[MDX DEBUG] processMDX output:', mdxSource);
     return mdxSource;
   } catch (error) {
     console.error('Error processing MDX:', error);
@@ -34,18 +36,18 @@ export const processMDX = cache(async (content) => {
 export const getBlogData = cache(async (slug) => {
   try {
     const fullPath = path.join(blogsDirectory, `${slug}.mdx`);
+    console.log('[MDX DEBUG] Attempting to read:', fullPath); // Debug log
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-    
-    const mdxSource = await processMDX(content);
-    
+
+    // For next-mdx-remote v5+ with RSC, pass the raw MDX string
     return {
       slug,
       frontmatter: data,
-      content: mdxSource,
+      content, // raw MDX string
     };
   } catch (error) {
-    console.error('Error reading blog:', error);
+    console.error('[MDX DEBUG] Error reading blog:', error);
     throw new Error('Failed to read blog content');
   }
 });
