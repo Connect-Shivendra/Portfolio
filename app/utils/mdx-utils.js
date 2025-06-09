@@ -13,7 +13,6 @@ const blogsDirectory = path.join(process.cwd(), 'content/blogs');
 // Cache the MDX processing
 export const processMDX = cache(async (content) => {
   try {
-    console.log('[MDX DEBUG] processMDX input:', content);
     const mdxSource = await serialize(content, {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
@@ -24,10 +23,8 @@ export const processMDX = cache(async (content) => {
       },
       parseFrontmatter: true,
     });
-    console.log('[MDX DEBUG] processMDX output:', mdxSource);
     return mdxSource;
   } catch (error) {
-    console.error('Error processing MDX:', error);
     throw new Error('Failed to process MDX content');
   }
 });
@@ -36,18 +33,14 @@ export const processMDX = cache(async (content) => {
 export const getBlogData = cache(async (slug) => {
   try {
     const fullPath = path.join(blogsDirectory, `${slug}.mdx`);
-    console.log('[MDX DEBUG] Attempting to read:', fullPath); // Debug log
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-
-    // For next-mdx-remote v5+ with RSC, pass the raw MDX string
     return {
       slug,
       frontmatter: data,
       content, // raw MDX string
     };
   } catch (error) {
-    console.error('[MDX DEBUG] Error reading blog:', error);
     throw new Error('Failed to read blog content');
   }
 });
@@ -69,7 +62,6 @@ export const getAllBlogs = cache(async () => {
       new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
     );
   } catch (error) {
-    console.error('Error reading blogs:', error);
     throw new Error('Failed to read blog list');
   }
 });
@@ -81,7 +73,6 @@ export const getCategories = cache(async () => {
     const categories = new Set(blogs.map(blog => blog.frontmatter.category));
     return Array.from(categories);
   } catch (error) {
-    console.error('Error getting categories:', error);
     throw new Error('Failed to get categories');
   }
 });
