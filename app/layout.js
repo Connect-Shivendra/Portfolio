@@ -18,8 +18,22 @@ const sora = Sora({
 
 // This is the Title on the browser Tab
 export const metadata = {
-  title: "Portfolio - Data & Analytics",
+  title: {
+    default: "Portfolio - Data & Analytics",
+    template: "%s | Portfolio"
+  },
   description: "Share Data Knowledge to the world #Free",
+  openGraph: {
+    title: "Portfolio - Data & Analytics",
+    description: "Share Data Knowledge to the world #Free",
+    type: "website",
+    locale: "en_AU",
+    url: "https://your-domain.com", // TODO: Change to the actual domain
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({ children }) {
