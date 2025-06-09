@@ -40,7 +40,7 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
       // For all section navigation, ensure consistent behavior across all pages
       if (sectionId === 'top') {
         // Special case for home/top - just go to homepage
-        window.location.href = '/';
+        router.push('/');
         return;
       }
       
@@ -52,8 +52,8 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         if (typeof setActiveSection === 'function') {
           setActiveSection(sectionId);
         }
-        // Ensure the URL has the correct anchor
-        window.history.pushState({}, '', `/#${sectionId}`);
+        // Use router.replace to update the hash without full reload
+        router.replace(`/#${sectionId}`);
         // Manually scroll to the section
         const element = document.getElementById(sectionId);
         if (element) {
@@ -61,7 +61,7 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         }
       } else {
         // If on another page, navigate to homepage with the section anchor
-        window.location.href = `/#${sectionId}`;
+        router.push(`/#${sectionId}`);
       }
     };
 
@@ -78,19 +78,19 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20" : ""}`}>
         
         {/* Logo Link - Use onClick to set state to 'top' */}
-        <button onClick={() => handleNavClick('top')} className='cursor-pointer mr-14'> 
+        <button onClick={() => handleNavClick('top')} className='cursor-pointer mr-14' aria-label="Go to Home"> 
             <Image src={isDarkMode ? assets.logo_dark : assets.logo} className='w-28' alt='Logo' priority />
         </button>
 
         {/* Desktop Menu - Use buttons with onClick */}
         <ul className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3
         ${isScroll ? "" : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-darkHover/70"} `}>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('top')}>Home</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('about')}>Professional Highlights</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('services')}>Services</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('blogs')}>Blogs</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('work')}>My Work</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('contact')}>Contact Me</button></li>
+            <li><button aria-label="Go to Home" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('top')}>Home</button></li>
+            <li><button aria-label="Go to Professional Highlights" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('about')}>Professional Highlights</button></li>
+            <li><button aria-label="Go to Services" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('services')}>Services</button></li>
+            <li><button aria-label="Go to Blogs" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('blogs')}>Blogs</button></li>
+            <li><button aria-label="Go to My Work" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('work')}>My Work</button></li>
+            <li><button aria-label="Go to Contact Me" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('contact')}>Contact Me</button></li>
         </ul>
         <div className='flex items-center gap-4'>
             {/* Dark Mode Toggle */}
@@ -99,7 +99,7 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
             </button>
             
             {/* Contact Button - Changed text to white in dark mode */}
-            <button onClick={() => handleNavClick('contact')} className='hidden lg:flex items-center gap-3 px-10
+            <button onClick={() => handleNavClick('contact')} aria-label="Go to Contact Me" className='hidden lg:flex items-center gap-3 px-10
             py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo bg-white
             dark:border-white dark:text-white dark:bg-darkHover hover:bg-gray-100 dark:hover:bg-darkHover/70 transition-colors'>Contact
             <Image src={isDarkMode ? assets.arrow_icon_dark : assets.arrow_icon} alt='' className='w-3'/>
@@ -116,15 +116,15 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition-transform duration-500 transform translate-x-64 
         dark:bg-darkHover dark:text-[var(--foreground)]'>
             {/* Close Button */}
-            <div className='absolute right-6 top-6 bg-white dark:bg-darkHover/90 p-2 rounded-full' onClick={closeMenu}>
+            <div className='absolute right-6 top-6 bg-white dark:bg-darkHover/90 p-2 rounded-full' onClick={closeMenu} aria-label="Close menu">
                 <Image src={isDarkMode ? assets.close_white : assets.close_black} alt='' className='w-5 cursor-pointer' />
             </div>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('top')}>Home</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('about')}>About Me</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('services')}>Services</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('blogs')}>Blogs</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('work')}>My Work</button></li>
-            <li><button className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('contact')}>Contact Me</button></li>
+            <li><button aria-label="Go to Home" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('top')}>Home</button></li>
+            <li><button aria-label="Go to About Me" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('about')}>About Me</button></li>
+            <li><button aria-label="Go to Services" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('services')}>Services</button></li>
+            <li><button aria-label="Go to Blogs" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('blogs')}>Blogs</button></li>
+            <li><button aria-label="Go to My Work" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('work')}>My Work</button></li>
+            <li><button aria-label="Go to Contact Me" className={`font-Ovo ${isScroll ? "text-gray-700 dark:text-white" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}`} onClick={() => handleNavClick('contact')}>Contact Me</button></li>
         </ul>
 
       </nav>

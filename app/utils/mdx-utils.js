@@ -1,3 +1,5 @@
+// TODO: Consider migrating this file to TypeScript for better type safety and editor support.
+
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -10,7 +12,11 @@ import { cache } from 'react';
 // Path to our blogs directory
 const blogsDirectory = path.join(process.cwd(), 'content/blogs');
 
-// Cache the MDX processing
+/**
+ * Serialize MDX content for rendering.
+ * @param {string} content - The raw MDX string.
+ * @returns {Promise<any>} Serialized MDX source.
+ */
 export const processMDX = cache(async (content) => {
   try {
     const mdxSource = await serialize(content, {
@@ -29,7 +35,11 @@ export const processMDX = cache(async (content) => {
   }
 });
 
-// Cache the blog data
+/**
+ * Get a single blog post's data by slug.
+ * @param {string} slug
+ * @returns {Promise<{slug: string, frontmatter: any, content: string}>}
+ */
 export const getBlogData = cache(async (slug) => {
   try {
     const fullPath = path.join(blogsDirectory, `${slug}.mdx`);
@@ -45,7 +55,10 @@ export const getBlogData = cache(async (slug) => {
   }
 });
 
-// Cache the blog list
+/**
+ * Get all blog posts, sorted by date descending.
+ * @returns {Promise<Array<{slug: string, frontmatter: any, content: string}>>}
+ */
 export const getAllBlogs = cache(async () => {
   try {
     const files = fs.readdirSync(blogsDirectory);
@@ -66,7 +79,10 @@ export const getAllBlogs = cache(async () => {
   }
 });
 
-// Cache the category list
+/**
+ * Get all unique blog categories.
+ * @returns {Promise<string[]>}
+ */
 export const getCategories = cache(async () => {
   try {
     const blogs = await getAllBlogs();
@@ -77,16 +93,23 @@ export const getCategories = cache(async () => {
   }
 });
 
+/**
+ * Get all blog slugs (filenames without .mdx).
+ * @returns {string[]}
+ */
 export function getBlogSlugs() {
   return fs.readdirSync(blogsDirectory);
 }
 
-export function getBlogsByCategory(category) {
-  const allBlogs = getAllBlogs();
-  
+/**
+ * Get all blogs in a category (async, consistent with getAllBlogs).
+ * @param {string} category
+ * @returns {Promise<Array<{slug: string, frontmatter: any, content: string}>>}
+ */
+export async function getBlogsByCategory(category) {
+  const allBlogs = await getAllBlogs();
   if (category === 'All') {
     return allBlogs;
   }
-  
   return allBlogs.filter(blog => blog.frontmatter.category === category);
 }

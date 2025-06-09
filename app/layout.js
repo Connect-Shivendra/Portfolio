@@ -1,5 +1,6 @@
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
+import { ErrorBoundary } from "@/app/components/ErrorBoundary";
 
 // Configure Inter font for body text
 const inter = Inter({
@@ -74,7 +75,9 @@ export default function RootLayout({ children }) {
         overflow-x-hidden 
         dark:text-white`}
       >
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </body>
     </html>
   );
