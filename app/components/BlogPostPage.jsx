@@ -46,10 +46,10 @@ export default function BlogPostPage({ blog, error }) {
       <main className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 pt-32 pb-16">
         <div>
           <nav className="mb-6" aria-label="Blog navigation">
-            <a 
-              href="/#blogs" 
+            <button 
+              onClick={() => window.history.back()}
               className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-4 py-2 rounded-md inline-flex items-center gap-2 hover:opacity-80 transition-opacity text-sm"
-              aria-label="Return to blog list"
+              aria-label="Go back to previous page"
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -62,8 +62,8 @@ export default function BlogPostPage({ blog, error }) {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Back to blogs
-            </a>
+              Back
+            </button>
           </nav>
           <article>
             <header>

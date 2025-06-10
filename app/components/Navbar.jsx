@@ -37,32 +37,17 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
     const handleNavClick = (sectionId) => {
       closeMenu(); // Close mobile menu if open, do this first
 
-      // For all section navigation, ensure consistent behavior across all pages
       if (sectionId === 'top') {
-        // Special case for home/top - just go to homepage
-        router.push('/');
+        if (pathname === '/') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          router.replace('/');
+        } else {
+          router.push('/');
+        }
         return;
       }
-      
-      // For all other sections (including 'work'), always use the hash navigation
-      // This ensures consistent behavior regardless of current page
-      
-      if (pathname === '/') {
-        // If already on homepage, update active section and scroll
-        if (typeof setActiveSection === 'function') {
-          setActiveSection(sectionId);
-        }
-        // Use router.replace to update the hash without full reload
-        router.replace(`/#${sectionId}`);
-        // Manually scroll to the section
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      } else {
-        // If on another page, navigate to homepage with the section anchor
-        router.push(`/#${sectionId}`);
-      }
+      // For all other sections, navigate to /#sectionId
+      router.push(`/#${sectionId}`);
     };
 
   return (

@@ -8,26 +8,25 @@ import Navbar from "./components/Navbar";
 import Services from "./components/Services";
 import Work from "./components/Work";
 import Blogs from "./components/Blogs";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [blogs, setBlogs] = useState([]);
-  // Default to 'top' to show all sections initially
-  const [activeSection, setActiveSection] = useState('top'); 
+  const [activeSection, setActiveSection] = useState('top');
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Check URL hash on initial load and set active section accordingly
   useEffect(() => {
-    // Get the hash from the URL (e.g., #work)
+    if (typeof window === "undefined") return;
     const hash = window.location.hash.replace('#', '');
-    
-    // If hash exists and is a valid section, set it as active
-    if (hash && ['about', 'services', 'blogs', 'work', 'contact'].includes(hash)) {
+    if (pathname === '/' && !hash) {
+      setActiveSection('top');
+    } else if (hash && ['about', 'services', 'blogs', 'work', 'contact'].includes(hash)) {
       setActiveSection(hash);
-      
-      // Scroll to top of the page when loading with a hash
       window.scrollTo(0, 0);
     }
-  }, []);
+  }, [pathname, searchParams]);
   
   // Scroll to top whenever active section changes
   useEffect(() => {

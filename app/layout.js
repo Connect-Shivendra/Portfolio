@@ -1,6 +1,7 @@
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { ErrorBoundary } from "@/app/components/ErrorBoundary";
+import ScrollToTop from "@/app/components/ScrollToTop";
 
 // Configure Inter font for body text
 const inter = Inter({
@@ -76,6 +77,7 @@ export default function RootLayout({ children }) {
         dark:text-white`}
       >
         <ErrorBoundary>
+          <ScrollToTop />
           {children}
         </ErrorBoundary>
       </body>
