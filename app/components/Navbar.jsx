@@ -46,7 +46,22 @@ const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSecti
         }
         return;
       }
-      // For all other sections, navigate to /#sectionId
+      
+      // Special case for services - update activeSection AND navigate to dedicated services page
+      if (sectionId === 'services') {
+        // Update activeSection state if we're on the homepage
+        if (setActiveSection && pathname === '/') {
+          setActiveSection('services');
+        }
+        // Navigate to dedicated services page
+        router.push('/services');
+        return;
+      }
+      
+      // For all other sections, update activeSection if provided and navigate to /#sectionId
+      if (setActiveSection && pathname === '/') {
+        setActiveSection(sectionId);
+      }
       router.push(`/#${sectionId}`);
     };
 
