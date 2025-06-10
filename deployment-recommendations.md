@@ -33,56 +33,7 @@ vercel login
 vercel
 ```
 
-### 2. Netlify
 
-Netlify is another excellent option for hosting static websites and Next.js applications.
-
-**Benefits:**
-- Simple deployment process
-- Free tier available
-- Built-in CI/CD
-- Global CDN
-- Automatic HTTPS
-- Form handling
-
-**Steps to deploy:**
-1. Create a Netlify account at https://netlify.com
-2. Connect your GitHub repository
-3. Configure build settings:
-   - Build command: `npm run build`
-   - Publish directory: `.next`
-4. Deploy
-
-### 3. GitHub Pages with GitHub Actions
-
-GitHub Pages can host static websites for free, but requires additional configuration for Next.js.
-
-**Benefits:**
-- Free hosting
-- Integrated with GitHub repository
-- Custom domain support
-
-**Limitations:**
-- Requires additional configuration for Next.js
-- Limited to static export
-
-### 4. AWS Amplify
-
-AWS Amplify provides a set of tools and services for building full-stack applications.
-
-**Benefits:**
-- Scalable infrastructure
-- Integration with other AWS services
-- Global CDN
-- Built-in CI/CD
-
-**Considerations:**
-- More complex setup
-- Potential costs depending on usage
-
-## Recommended Approach
-
-For your portfolio website with blog functionality, **Vercel** is the recommended deployment platform due to its seamless integration with Next.js and straightforward deployment process.
 
 ## Pre-Deployment Checklist
 
