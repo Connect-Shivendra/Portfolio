@@ -17,7 +17,7 @@ const Work = ({isDarkMode}) => {
           initial={{opacity: 0, y: -20}}
           whileInView={{opacity: 1, y:0}}
           transition={{duration: 0.3, delay: 0.5}}
-          className='text-center mb-2 text-lg font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>Work Timeline</motion.h4>
+          className='text-center mb-2 text-lg font-Ovo text-[var(--accent-color)] dark:text-[var(--accent-color)]'>Work Timeline</motion.h4>
         <motion.h2 
           initial={{opacity: 0, y: -20}}
           whileInView={{opacity: 1, y:0}}
@@ -44,12 +44,12 @@ const Work = ({isDarkMode}) => {
                     transition={{duration: 0.3}}
                     className='aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group'
                     style={{backgroundImage: `url(${project.bgImage})`}}>
-                      <div className='bg-white dark:bg-darkHover w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-2 px-3 flex items-center justify-between duration-500 group-hover:bottom-7'>
+                      <div className='bg-[var(--card-bg)] dark:bg-[var(--card-bg)] w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-2 px-3 flex items-center justify-between duration-500 group-hover:bottom-7'>
                           <div className="flex-1 min-w-0">
-                              <h2 className='font-semibold text-xs truncate dark:text-white'>{project.title}</h2>
-                              <p className='text-[10px] text-gray-700 truncate dark:text-white/90'>{project.description}</p>
+                              <h2 className='font-semibold text-xs truncate text-[var(--foreground)] dark:text-[var(--foreground)]'>{project.title}</h2>
+                              <p className='text-[10px] text-[var(--foreground)]/80 truncate dark:text-[var(--foreground)]/80'>{project.description}</p>
                           </div>
-                          <div className='border rounded-full border-black dark:border-white w-6 aspect-square flex-shrink-0 flex items-center justify-center shadow-[1px_1px_0_#000] dark:shadow-[1px_1px_0_#fff] group-hover:bg-lime-300 dark:group-hover:bg-lime-500 transition ml-1'>
+                          <div className='border rounded-full border-[var(--foreground)] dark:border-[var(--foreground)] w-6 aspect-square flex-shrink-0 flex items-center justify-center shadow-[1px_1px_0_var(--foreground)] dark:shadow-[1px_1px_0_var(--foreground)] group-hover:bg-[var(--accent-color)] dark:group-hover:bg-[var(--accent-color)] transition ml-1'>
                               <Image src={assets.send_icon} alt='send icon' className='w-3' />
                           </div>
                       </div>

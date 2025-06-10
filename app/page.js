@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -10,7 +10,8 @@ import Work from "./components/Work";
 import Blogs from "./components/Blogs";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function Home() {
+// Create a separate component for the search params logic
+function HomeContent() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [activeSection, setActiveSection] = useState('top');
@@ -108,6 +109,23 @@ export default function Home() {
       {/* Footer is always rendered, pushed down by flex-grow on main */}
       <Footer isDarkMode={isDarkMode} />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-col min-h-screen bg-[var(--background)]">
+        <div className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   );
 }
 

@@ -56,7 +56,7 @@ const Services = () => {
       initial={{opacity: 0}}
       whileInView={{opacity: 1}}
       transition={{duration: 1}}
-      id="services" className='w-full px-[8%] py-12 bg-gradient-to-br from-[var(--background)] to-[var(--accent-bg)] dark:from-[var(--background)] dark:to-[var(--accent-bg-dark)]'>
+      id="services" className='w-full px-[8%] py-12 bg-gradient-to-br from-[var(--background)] to-[var(--background)] dark:from-[var(--background)] dark:to-[var(--background)]'>
         {/* Section Header */}
         <div className="text-center mb-10">
           <motion.h4
@@ -88,7 +88,7 @@ const Services = () => {
               <Link href={link} key={index} className="group" tabIndex={0} role="link">
                 <motion.div
                   whileHover={{scale: 1.01}}
-                  className='relative border border-[var(--accent-color)] rounded-none cursor-pointer bg-white/60 dark:bg-darkHover/60 transition-all duration-300 h-full flex flex-col aspect-square overflow-hidden group focus:ring-2 focus:ring-[var(--accent-color)] outline-none min-h-[220px] max-h-[320px] p-0 m-0 shadow-none'>
+                  className='relative border border-[var(--accent-color)] rounded-none cursor-pointer bg-[var(--card-bg)]/60 dark:bg-[var(--card-bg)]/60 transition-all duration-300 h-full flex flex-col aspect-square overflow-hidden group focus:ring-2 focus:ring-[var(--accent-color)] outline-none min-h-[220px] max-h-[320px] p-0 m-0 shadow-none hover:shadow-[2px_2px_0px_var(--accent-color)] dark:hover:shadow-[2px_2px_0px_var(--accent-color)]'>
                     {/* Gradient overlay on image */}
                     <div className="w-full h-1/2 rounded-none bg-cover bg-center relative flex items-center justify-center p-0 m-0">
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent-color)]/60 to-transparent z-10 rounded-none"></div>
@@ -96,7 +96,7 @@ const Services = () => {
                     </div>
                     <div className="flex flex-col flex-grow z-20 justify-center items-center p-2 text-center">
                       <h3 className='text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--accent-color)] transition-colors mb-1'>{title}</h3>
-                      <p className='text-gray-700 dark:text-white/90 font-Ovo opacity-90 text-xs'>{description}</p>
+                      <p className='text-[var(--foreground)]/90 font-Ovo opacity-90 text-xs'>{description}</p>
                     </div>
                 </motion.div>
               </Link>

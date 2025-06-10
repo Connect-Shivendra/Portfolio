@@ -11,14 +11,14 @@ const Header = () => {
          whileInView={{scale:1}}
          transition={{duration: 0.8, type: 'spring', stiffness: 100}}
       >
-        <Image src={assets.profile_img} alt='' className='rounded-full w-33'/>
+        <Image src={assets.profile_img} alt='' className='rounded-full w-40 border-2 border-[var(--accent-color)]/30'/>
       </motion.div>
       <motion.h3
       initial={{y: -20, opacity: 0}}
       whileInView={{y: 0, opacity: 1}}
       transition={{duration: 0.6, delay: 0.3}}
       className='flex items-end gap-2 text-xm md:text-2xl mb-2
-        font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>
+        font-Ovo text-[var(--accent-color)] dark:text-[var(--accent-color)]'>
             Hi! I'm Shivendra Singh <Image src={assets.hand_icon} alt='' 
             className='w-6'/></motion.h3>
         <motion.h1
@@ -41,7 +41,7 @@ const Header = () => {
             whileInView={{y: 0, opacity: 1}}
             transition={{duration: 0.6, delay: 1}}
             href="#contact" className='px-10 py-3 items-center gap-2 rounded-full 
-            border border-white bg-black text-white flex dark:bg-darkHover'>Say Hello<Image src=
+            border border-[var(--accent-color)] bg-[var(--accent-color)] text-white flex dark:bg-[var(--accent-color)] dark:text-white dark:border-[var(--accent-color)] hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-dark)] transition-colors'>Say Hello<Image src=
             {assets.right_arrow_white} alt='' className='w-4'/></motion.a>
             <motion.a 
             initial={{y: 30, opacity: 0}}
@@ -49,7 +49,7 @@ const Header = () => {
             transition={{duration: 0.6, delay: 1}}
             href="Shivendra-Singh-HoData-CV.pdf" download 
             className='items-center gap-2 px-10 
-            py-3 border border-gray-500 flex rounded-full bg-white dark:text-black'>Download CV<Image 
+            py-3 border border-[var(--accent-color)]/50 flex rounded-full bg-[var(--card-bg)] text-[var(--foreground)] dark:bg-[var(--card-bg)] dark:text-[var(--foreground)] dark:border-[var(--accent-color)]/50 hover:bg-[var(--accent-color)]/10 dark:hover:bg-[var(--accent-color)]/20 transition-colors'>Download CV<Image 
             src={assets.download_icon} alt='' className='w-4'/></motion.a>
         </div>
     </div>
