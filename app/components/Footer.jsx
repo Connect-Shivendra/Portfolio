@@ -14,7 +14,7 @@ const Footer = ({isDarkMode}) => {
       </div>
 
       {/* Removed mx-[10%] and added px-[10%] for padding */}
-      <div className='text-center sm:flex items-center justify-between border-t border-gray-400 px-[10%] mt-12 py-6'>
+      <div className='text-center sm:flex items-center justify-between border-t border-[var(--border-color)] px-[10%] mt-12 py-6'>
         <p>© 2025 Shivendra Singh is licensed under CC BY-NC-ND 4.0</p>
         <ul className='flex items-center gap-10 justify-center mt-4 sm:mt-0'>
             <li><a target='_blank' rel="noopener noreferrer" href="https://www.linkedin.com/in/connectshivendra/" aria-label="LinkedIn profile">LinkedIn</a></li>

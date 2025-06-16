@@ -5,13 +5,15 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'; // Import Link for internal navigation
 import { useRouter, usePathname } from 'next/navigation'; // Import router for programmatic navigation
+import { useDarkMode } from '@/app/context/DarkModeContext';
 
 // Accept setActiveSection prop to handle clicks directly
-const Navbar = ({isDarkMode, setIsDarkMode, isOnBlogPage = false, setActiveSection}) => {
+const Navbar = ({isOnBlogPage = false, setActiveSection}) => {
     const router = useRouter();
     const pathname = usePathname();
     const [isScroll, setIsScroll] = useState(false)
     const sideMenuRef = useRef();
+    const { isDarkMode, setIsDarkMode } = useDarkMode();
     const openMenu = ()=>{
         sideMenuRef.current.style.transform = 'translateX(-16rem)'
     } 

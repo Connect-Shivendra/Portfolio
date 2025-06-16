@@ -2,6 +2,7 @@ import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { ErrorBoundary } from "@/app/components/ErrorBoundary";
 import ScrollToTopWrapper from "@/app/components/ScrollToTopWrapper";
+import { DarkModeProvider } from './context/DarkModeContext';
 
 // Configure Inter font for body text
 const inter = Inter({
@@ -76,10 +77,12 @@ export default function RootLayout({ children }) {
         overflow-x-hidden 
         dark:text-white`}
       >
-        <ErrorBoundary>
-          <ScrollToTopWrapper />
-          {children}
-        </ErrorBoundary>
+        <DarkModeProvider>
+          <ErrorBoundary>
+            <ScrollToTopWrapper />
+            {children}
+          </ErrorBoundary>
+        </DarkModeProvider>
       </body>
     </html>
   );

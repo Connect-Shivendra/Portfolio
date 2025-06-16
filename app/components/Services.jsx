@@ -87,17 +87,19 @@ const Services = () => {
             {conciseServiceData.map(({title, description, link, bgImage}, index) => (
               <Link href={link} key={index} className="group" tabIndex={0} role="link">
                 <motion.div
-                  whileHover={{scale: 1.01}}
-                  className='relative border border-[var(--accent-color)] rounded-none cursor-pointer bg-[var(--card-bg)]/60 dark:bg-[var(--card-bg)]/60 transition-all duration-300 h-full flex flex-col aspect-square overflow-hidden group focus:ring-2 focus:ring-[var(--accent-color)] outline-none min-h-[220px] max-h-[320px] p-0 m-0 shadow-none hover:shadow-[2px_2px_0px_var(--accent-color)] dark:hover:shadow-[2px_2px_0px_var(--accent-color)]'>
+                  whileHover={{scale: 1.02}}
+                  className='relative border border-[var(--border-color)] rounded-lg cursor-pointer bg-[var(--card-bg)] dark:bg-[var(--card-bg)] backdrop-blur-lg shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-[var(--transition-duration)] h-full flex flex-col aspect-square overflow-hidden group focus:ring-2 focus:ring-[var(--accent-color)] outline-none min-h-[220px] max-h-[320px]'>
                     {/* Gradient overlay on image */}
-                    <div className="w-full h-1/2 rounded-none bg-cover bg-center relative flex items-center justify-center p-0 m-0">
-                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent-color)]/60 to-transparent z-10 rounded-none"></div>
-                      <img src={bgImage} alt="" className="w-full h-full object-cover rounded-none" />
+                    <div className="w-full h-1/2 rounded-t-lg bg-cover bg-center relative flex items-center justify-center">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent-color)]/60 to-transparent z-10 rounded-t-lg"></div>
+                      <img src={bgImage} alt="" className="w-full h-full object-cover rounded-t-lg" />
                     </div>
-                    <div className="flex flex-col flex-grow z-20 justify-center items-center p-2 text-center">
-                      <h3 className='text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--accent-color)] transition-colors mb-1'>{title}</h3>
-                      <p className='text-[var(--foreground)]/90 font-Ovo opacity-90 text-xs'>{description}</p>
+                    <div className="flex flex-col flex-grow z-20 justify-center items-center p-6 text-center">
+                      <h3 className='text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors mb-2'>{title}</h3>
+                      <p className='text-[var(--text-secondary)] font-Ovo opacity-90 text-sm leading-relaxed'>{description}</p>
                     </div>
+                    {/* Card hover effect */}
+                    <span className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-[var(--accent-color)] transition-all pointer-events-none"></span>
                 </motion.div>
               </Link>
             ))}

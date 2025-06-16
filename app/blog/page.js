@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -16,27 +15,6 @@ export default function BlogPost({ params }) {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
-  // Dark mode effect
-  useEffect(() => {
-    if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.
-    matchMedia('(prefers-color-scheme: dark)').matches)){
-      setIsDarkMode(true)
-    }else{
-      setIsDarkMode(false)
-    }
-  },[])
-
-  useEffect(() => {
-    if(isDarkMode){
-      document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
-    }else{
-      document.documentElement.classList.remove('dark');
-      localStorage.theme = '';
-    }
-  },[isDarkMode])
 
   // Fetch blog post data
   useEffect(() => {
@@ -60,13 +38,12 @@ export default function BlogPost({ params }) {
     if (slug) {
         fetchBlog();
     }
-
   }, [slug]);
 
   // Common wrapper for Loading and Error states
   const renderStatusPage = (content) => (
     <>
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
+      <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -76,7 +53,7 @@ export default function BlogPost({ params }) {
           {content}
         </div>
       </motion.div>
-      <Footer isDarkMode={isDarkMode}/>
+      <Footer />
     </>
   );
 
@@ -123,7 +100,7 @@ export default function BlogPost({ params }) {
   // Blog post content
   return (
     <>
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
+      <Navbar />
       {/* Removed max-w-4xl from container, adjusted padding */}
       <motion.div 
         {...fadeIn}
@@ -143,19 +120,18 @@ export default function BlogPost({ params }) {
              Back to home
           </Link>
         </motion.div>
-        
         <motion.article 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="max-w-none" // Keep max-w-none here
+          className="max-w-none"
         >
           {/* Blog Header Section */}
           <motion.div 
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-6" // Added bottom border
+            className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-6"
           >
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 font-Ovo">{blog.frontmatter.title}</h1>
             <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-4 gap-x-4 gap-y-2">
@@ -165,7 +141,6 @@ export default function BlogPost({ params }) {
                 {blog.frontmatter.category}
               </span>
             </div>
-            
             {blog.frontmatter.coverImage && (
               <motion.div 
                 initial={{ scale: 0.98, opacity: 0 }}
@@ -177,19 +152,17 @@ export default function BlogPost({ params }) {
               </motion.div>
             )}
           </motion.div>
-          
           {/* Blog Content Section - relies on prose for styling */} 
           <motion.div 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            // Added prose classes back for typography styling, max-w-none allows it to expand
             className="prose dark:prose-invert lg:prose-xl max-w-none blog-content mt-8" 
             dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
           />
         </motion.article>
       </motion.div>
-      <Footer isDarkMode={isDarkMode}/>
+      <Footer />
     </>
   );
 }

@@ -5,6 +5,7 @@ import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp, staggerContainer } from '../../utils/animations'; // Adjusted path
+import Link from 'next/link';
 
 const AiMlSolutionsPage = () => {
   const serviceTitle = "AI & Machine Learning Solutions";
@@ -98,18 +99,133 @@ const AiMlSolutionsPage = () => {
           </ul>
         </motion.section>
 
-        <motion.section className="text-center py-8 bg-gray-100 dark:bg-gray-700 rounded-lg" variants={fadeIn}>
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Ready to Unlock the Power of AI & ML?</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-xl mx-auto">
-            Contact us today to learn more about how we can help you innovate and grow your business with our AI and Machine Learning solutions.
+        <motion.section
+          className="mb-16"
+          variants={slideUp}
+        >
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our AI/ML Approach</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
+            We believe in a practical, business-focused approach to AI and machine learning. Our solutions are designed to deliver real value, not just technical complexity. We combine cutting-edge technology with deep business understanding to create solutions that drive measurable results.
           </p>
-          <motion.button 
-            className="bg-[var(--accent-color)] text-[var(--background)] font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 hover:brightness-95 dark:hover:brightness-110"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Discuss Your AI/ML Project
-          </motion.button>
+          <p className="text-[var(--text-secondary)] leading-relaxed">
+            Whether you're looking to automate processes, gain deeper insights from your data, or create new AI-powered products, we have the expertise to help you succeed.
+          </p>
+        </motion.section>
+
+        <motion.section
+          className="mb-16"
+          variants={slideUp}
+        >
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our AI/ML Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              className="bg-[var(--card-bg)] p-6 rounded-lg shadow-sm text-[var(--text-primary)]"
+              variants={fadeIn}
+            >
+              <div className="flex items-center justify-center h-16 w-16 rounded-full bg-[var(--accent-color)]/10 text-[var(--accent-color)] mb-4 mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2 text-center">Predictive Analytics</h3>
+              <p className="text-[var(--text-secondary)] text-center">
+                Leverage machine learning to forecast trends, identify patterns, and make data-driven predictions.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              className="bg-[var(--card-bg)] p-6 rounded-lg shadow-sm text-[var(--text-primary)]"
+              variants={fadeIn}
+            >
+              <div className="flex items-center justify-center h-16 w-16 rounded-full bg-[var(--accent-color)]/10 text-[var(--accent-color)] mb-4 mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2 text-center">Natural Language Processing</h3>
+              <p className="text-[var(--text-secondary)] text-center">
+                Extract insights from text data and build intelligent text processing systems.
+              </p>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        <motion.section
+          className="mb-16"
+          variants={slideUp}
+        >
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Methodology</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              className="flex items-start"
+              variants={fadeIn}
+            >
+              <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[var(--accent-color)]/10 flex items-center justify-center text-[var(--accent-color)] mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Problem Definition</h3>
+                <p className="text-[var(--text-secondary)]">
+                  We work with you to clearly define the business problem and success metrics.
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="flex items-start"
+              variants={fadeIn}
+            >
+              <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[var(--accent-color)]/10 flex items-center justify-center text-[var(--accent-color)] mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Solution Development</h3>
+                <p className="text-[var(--text-secondary)]">
+                  We develop and test AI/ML solutions using best practices and modern tools.
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="flex items-start"
+              variants={fadeIn}
+            >
+              <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[var(--accent-color)]/10 flex items-center justify-center text-[var(--accent-color)] mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Deployment & Monitoring</h3>
+                <p className="text-[var(--text-secondary)]">
+                  We deploy solutions to production and provide ongoing monitoring and support.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* Call to Action Section */}
+        <motion.section
+          className="mb-16 text-center"
+          variants={fadeIn}
+        >
+          <div className="bg-[var(--accent-color)]/10 p-8 rounded-lg text-[var(--text-primary)]">
+            <h2 className="text-3xl font-bold text-[var(--accent-color)] mb-4">Ready to Harness the Power of AI/ML?</h2>
+            <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
+              Let's discuss how our AI/ML solutions can help you transform your business and stay ahead of the competition.
+            </p>
+            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
+              Schedule a Consultation
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </Link>
+          </div>
         </motion.section>
       </motion.div>
       <Footer />

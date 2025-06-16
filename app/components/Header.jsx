@@ -17,8 +17,7 @@ const Header = () => {
       initial={{y: -20, opacity: 0}}
       whileInView={{y: 0, opacity: 1}}
       transition={{duration: 0.6, delay: 0.3}}
-      className='flex items-end gap-2 text-xm md:text-2xl mb-2
-        font-Ovo text-[var(--accent-color)] dark:text-[var(--accent-color)]'>
+      className='flex items-end gap-2 text-xm md:text-2xl mb-2 font-Ovo text-[var(--text-secondary)]'>
             Hi! I'm Shivendra Singh <Image src={assets.hand_icon} alt='' 
             className='w-6'/></motion.h3>
         <motion.h1

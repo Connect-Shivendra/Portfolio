@@ -158,7 +158,7 @@ const CamdenCouncilPage = () => {
         </motion.section>
 
         <motion.section
-          className="text-center py-8 bg-gray-100 dark:bg-gray-700 rounded-lg"
+          className="text-center py-8 bg-[var(--card-bg)] dark:bg-gray-700 rounded-lg"
           variants={fadeIn}
         >
           <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Interested in Similar Solutions?</h2>

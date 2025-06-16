@@ -12,7 +12,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 // Create a separate component for the search params logic
 function HomeContent() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [activeSection, setActiveSection] = useState('top');
   const pathname = usePathname();
@@ -31,7 +30,6 @@ function HomeContent() {
   
   // Scroll to top whenever active section changes
   useEffect(() => {
-    // Scroll to top of the page when active section changes
     window.scrollTo(0, 0);
   }, [activeSection]);
 
@@ -41,7 +39,6 @@ function HomeContent() {
       try {
         const response = await fetch('/api/blogs');
         const data = await response.json();
-        console.log('Fetched blogs:', data.blogs); // Debug log
         setBlogs(data.blogs);
       } catch (error) {
         console.error("Error loading blogs:", error);
@@ -50,64 +47,32 @@ function HomeContent() {
     loadBlogs();
   }, []);
 
-  // Dark mode initialization
-  useEffect(() => {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-      setIsDarkMode(true);
-    } else {
-      setIsDarkMode(false);
-    }
-  }, []);
-
-  // Apply dark mode
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
-
   return (
-    // Wrap everything in a flex container, ensure min height, AND apply background color directly
-    <div className="flex flex-col min-h-screen bg-[var(--background)]"> {/* Added bg-[var(--background)] here */}
-      {/* Pass setActiveSection state setter to Navbar */}
-      <Navbar 
-        isDarkMode={isDarkMode} 
-        setIsDarkMode={setIsDarkMode} 
-        isOnBlogPage={false} 
-        setActiveSection={setActiveSection} // Pass the setter function
-      />
+    <div className="flex flex-col min-h-screen bg-[var(--background)]">
+      <Navbar isOnBlogPage={false} setActiveSection={setActiveSection} />
       
-      {/* Add flex-grow to main container to make it fill available space */}
-      <main className="pt-28 flex-grow"> {/* Added flex-grow */}
-        {/* Conditionally render sections based on activeSection state */}
+      <main className="pt-28 flex-grow">
         {activeSection === 'top' ? (
-            <> {/* Render all sections when 'top' is active */}
-              <Header isDarkMode={isDarkMode} />
-              <About isDarkMode={isDarkMode} />
-              <Services isDarkMode={isDarkMode} />
-              <Blogs isDarkMode={isDarkMode} blogs={blogs} />
-              <Work isDarkMode={isDarkMode} />
-              <Contact isDarkMode={isDarkMode} />
+            <>
+              <Header />
+              <About />
+              <Services />
+              <Blogs blogs={blogs} />
+              <Work />
+              <Contact />
             </>
           ) : (
-            <> {/* Render only the active section otherwise */}
-              {activeSection === 'about' && <About isDarkMode={isDarkMode} />} 
-              {activeSection === 'services' && <Services isDarkMode={isDarkMode} />} 
-              {activeSection === 'blogs' && <Blogs isDarkMode={isDarkMode} blogs={blogs} />} 
-              {activeSection === 'work' && <Work isDarkMode={isDarkMode} />} 
-              {activeSection === 'contact' && <Contact isDarkMode={isDarkMode} />} 
+            <>
+              {activeSection === 'about' && <About />} 
+              {activeSection === 'services' && <Services />} 
+              {activeSection === 'blogs' && <Blogs blogs={blogs} />} 
+              {activeSection === 'work' && <Work />} 
+              {activeSection === 'contact' && <Contact />} 
             </>
           )}
       </main>
       
-      {/* Footer is always rendered, pushed down by flex-grow on main */}
-      <Footer isDarkMode={isDarkMode} />
+      <Footer />
     </div>
   );
 }

@@ -5,42 +5,63 @@
 
 
 :root {
-  /* Forest Theme - Light Mode */
-  --background: #F5FFF7; /* Very Light Green background */
-  --foreground: #333333; /* Darker Gray text for better contrast */
-  --hover-bg: #EAEAEA; /* Light Gray hover/secondary */
-  --accent-color: #267355; /* Salem - user specified */
-  --accent-dark: #1A5A40; /* Darker version of Salem */
-  --transition-duration: 0.5s;
-  --card-bg: #FFFFFF; /* Card background for light mode */
-  --section-bg: transparent; /* Section background for light mode */
+  /* Light Mode */
+  --background: #245C3A;
+  --foreground: #FFFFFF;
+  --hover-bg: #1F4A3A;
+  --accent-color: #267355;
+  --accent-dark: #1A5A40;
+  --accent-light: #4A9D7A;
+  --card-bg: #000000;
+  --section-bg: #000000;
+  --text-primary: #FFFFFF;
+  --text-secondary: #EAEAEA;
+  --border-color: rgba(38, 115, 85, 0.1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --transition-duration: 0.3s;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Forest Theme - Dark Mode - Using Rich Black FOGRA29 */
-    --background: #051912; /* Rich Black FOGRA29 - user specified */
-    --foreground: #FFFFFF; /* Pure White text for maximum contrast */
-    --hover-bg: #0A2920; /* Slightly lighter than background */
-    --accent-color: #267355; /* Salem - user specified */
-    --accent-dark: #1A5A40; /* Darker version of Salem */
-    --card-bg: #0A2920; /* Slightly lighter than background for cards */
-    --section-bg: #041510; /* Slightly darker than background for sections */
-  }
+.dark {
+  --background: #0A1F1A;
+  --foreground: #FFFFFF;
+  --hover-bg: #0F2A24;
+  --accent-color: #4A9D7A;
+  --accent-dark: #267355;
+  --accent-light: #6BBF9A;
+  --card-bg: #0F2A24;
+  --section-bg: #051912;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --border-color: rgba(74, 157, 122, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Base text styles for dark mode */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
-    @apply text-[var(--foreground)] dark:text-[var(--foreground)];
+    @apply text-[var(--text-primary)] font-Sora tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl font-bold leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl font-medium leading-snug;
   }
   
   p {
-    @apply text-[var(--foreground)] dark:text-[var(--foreground)];
+    @apply text-[var(--text-secondary)] leading-relaxed;
   }
   
-  /* Ensure all text containers have proper dark mode background */
-  section, header, footer, main, .text-container {
+  section, header, footer, main {
     @apply dark:bg-[var(--background)];
   }
 }
@@ -57,75 +78,82 @@ body {
 
 @layer components {
   .section-container {
-    @apply w-full px-[12%] py-10 scroll-mt-20;
+    @apply w-full px-[12%] py-16 scroll-mt-20;
   }
   
   .heading-primary {
-    /* Changed font to Sora and size to 4xl */
-    @apply text-center text-4xl font-Sora text-[var(--foreground)] dark:text-[var(--foreground)];
+    @apply text-center text-4xl md:text-5xl font-Sora font-bold text-[var(--text-primary)] mb-8;
   }
   
   .heading-secondary {
-    /* Changed font to Sora */
-    @apply text-center text-2xl font-Sora mb-6 text-[var(--foreground)] dark:text-[var(--foreground)];
+    @apply text-center text-2xl md:text-3xl font-Sora font-semibold mb-8 text-[var(--text-primary)];
   }
   
-  /* Updated to use CSS variables */
   .card-hover {
-    @apply hover:bg-[var(--hover-bg)] transition-all duration-500;
-  }
-  
-  .custom-shadow {
-    @apply shadow-black dark:shadow-white;
+    @apply hover:bg-[var(--hover-bg)] transition-all duration-[var(--transition-duration)] hover:shadow-lg;
   }
   
   .button-primary {
-    @apply px-3 py-1 rounded-full text-sm transition-colors duration-300;
+    @apply px-6 py-3 rounded-lg text-sm font-medium transition-all duration-[var(--transition-duration)]
+    bg-[var(--accent-color)] text-white hover:bg-[var(--accent-dark)] 
+    dark:bg-[var(--accent-color)] dark:hover:bg-[var(--accent-dark)]
+    shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)];
   }
   
-  /* Updated for Forest theme with better contrast */
-  .button-active {
-    @apply bg-[var(--accent-color)] text-white dark:bg-[var(--accent-color)] dark:text-white;
+  .button-secondary {
+    @apply px-6 py-3 rounded-lg text-sm font-medium transition-all duration-[var(--transition-duration)]
+    bg-transparent border border-[var(--accent-color)] text-[var(--accent-color)]
+    hover:bg-[var(--accent-color)]/10 dark:hover:bg-[var(--accent-color)]/20;
   }
   
-  .button-inactive {
-    @apply bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-[var(--hover-bg)] dark:hover:bg-[var(--hover-bg)];
-  }
-  
-  .link-with-icon {
-    @apply flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent-color)] dark:text-[var(--foreground)] dark:hover:text-[var(--accent-color)] hover:underline;
-  }
-  
-  /* Updated card component class to use CSS variables with better contrast */
   .card-component {
-    @apply bg-[var(--card-bg)] dark:bg-[var(--card-bg)] border-[0.5px] border-gray-400 dark:border-gray-600 
-    rounded-xl p-6 hover:bg-[var(--hover-bg)] dark:hover:bg-[var(--hover-bg)] 
-    hover:-translate-x-1 duration-500 hover:shadow-black dark:hover:shadow-white;
+    @apply bg-[var(--card-bg)] dark:bg-[var(--card-bg)] 
+    border border-[var(--border-color)] rounded-xl p-6 
+    hover:bg-[var(--hover-bg)] dark:hover:bg-[var(--hover-bg)] 
+    transition-all duration-[var(--transition-duration)]
+    shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)];
   }
   
-  /* Updated text container class */
   .text-container {
-    @apply bg-transparent dark:bg-[var(--card-bg)] p-4 rounded-lg;
+    @apply bg-transparent dark:bg-[var(--card-bg)] p-6 rounded-lg;
   }
   
   .blog-card {
-    /* Base styles for light mode */
-    @apply bg-[var(--card-bg)] rounded-lg shadow-lg overflow-hidden h-full transition-colors duration-300 hover:bg-[var(--hover-bg)];
-  }
-  
-  /* Explicit dark mode styles for .blog-card - PRODUCTION */
-  html.dark .blog-card {
-    background-color: var(--card-bg);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  }
-
-  html.dark .blog-card:hover {
-    background-color: var(--hover-bg);
+    @apply bg-[var(--card-bg)] rounded-lg shadow-[var(--shadow-sm)] 
+    overflow-hidden h-full transition-all duration-[var(--transition-duration)] 
+    hover:shadow-[var(--shadow-md)] hover:bg-[var(--hover-bg)];
   }
   
   .blog-category-tag {
-    @apply bg-[var(--accent-color)] text-white dark:bg-[var(--accent-color)] dark:text-white text-xs px-2 py-1;
+    @apply bg-[var(--accent-color)] text-white dark:bg-[var(--accent-color)] 
+    dark:text-white text-xs px-3 py-1.5 rounded-full font-medium;
   }
+  
+  .summary-card {
+    background: #F5F7FA;
+  }
+  
+  .dark .summary-card {
+    background: var(--card-bg);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dark);
 }
 
 /* Updated Forest theme colors (for reference):

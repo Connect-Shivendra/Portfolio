@@ -37,7 +37,7 @@ const TimelineItem = ({ date, title, description, isLeft = true, index }) => {
         initial="hidden"
         animate="visible"
       >
-        <div className={`p-4 rounded-lg shadow-md bg-gray-50 dark:bg-gray-800 border-l-4 border-[var(--accent-color)] transition-all duration-300 hover:shadow-lg`}>
+        <div className={`p-4 rounded-lg shadow-md bg-[var(--card-bg)] dark:bg-gray-800 border-l-4 border-[var(--accent-color)] transition-all duration-300 hover:shadow-lg`}>
           <span className="text-sm font-semibold text-[var(--accent-color)]">{date}</span>
           <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{title}</h3>
           <p className="text-gray-600 dark:text-gray-400 mt-2">{description}</p>
