@@ -39,12 +39,6 @@ export const metadata = {
     description: 'Share Data Knowledge to the world #Free',
     siteName: 'Portfolio',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Portfolio - Data & Analytics',
-    description: 'Share Data Knowledge to the world #Free',
-    creator: '@your-twitter-handle',
-  },
   robots: {
     index: true,
     follow: true,
@@ -90,15 +84,4 @@ export default function RootLayout({ children }) {
   );
 }
 
-/*
-Original font imports:
-import {Outfit, Ovo} from "next/font/google";
-const outfit = Outfit({
-  subsets: ["latin"], weight: ["400","500","600","700"]
-});
-const ovo = Ovo({
-  subsets: ["latin"], weight: ["400"]
-});
-Applied to body: className={`${outfit.className} ${ovo.className} ...`}
-*/
 

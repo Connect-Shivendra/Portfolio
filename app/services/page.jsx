@@ -7,8 +7,53 @@ import { motion } from 'framer-motion';
 import { fadeIn, slideUp, staggerContainer } from '../utils/animations';
 import Link from 'next/link';
 import { serviceData } from '@/assets/assets';
+import Image from 'next/image';
 
 const ServicesPage = () => {
+  // Add conciseServiceData for card content
+  const conciseServiceData = [
+    {
+      ...serviceData[0],
+      title: 'Data Strategy & Roadmap',
+      description: 'Shape your data vision and build a clear path to business value.'
+    },
+    {
+      ...serviceData[1],
+      title: 'Data Governance & Compliance',
+      description: 'Ensure data quality, security, and regulatory compliance.'
+    },
+    {
+      ...serviceData[2],
+      title: 'Advanced Analytics & Insights',
+      description: 'Unlock actionable insights and predict trends with advanced analytics.'
+    },
+    {
+      ...serviceData[3],
+      title: 'Data Platform Modernization',
+      description: 'Modernize your data infrastructure for scalability and reliability.'
+    },
+    {
+      ...serviceData[4],
+      title: 'Business Intelligence',
+      description: 'Empower teams with interactive dashboards and self-service analytics.'
+    },
+    {
+      ...serviceData[5],
+      title: 'Data-Driven Product Development',
+      description: 'Infuse analytics into products for customer-centric innovation.'
+    },
+    {
+      ...serviceData[6],
+      title: 'AI & Machine Learning',
+      description: 'Deploy custom AI solutions for smarter business outcomes.'
+    },
+    {
+      ...serviceData[7],
+      title: 'Data Literacy & Upskilling',
+      description: 'Build a data-driven culture with tailored training and workshops.'
+    },
+  ];
+
   return (
     <>
       <Navbar />
@@ -68,28 +113,25 @@ const ServicesPage = () => {
             variants={slideUp}
           >
             <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Services</h2>
-            
             <motion.div
               initial={{opacity: 0}}
               whileInView={{opacity: 1}}
               transition={{duration: 0.6, delay: 0.9}}
-              className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-0 gap-y-10 my-6 auto-rows-fr'
-            >
-              {serviceData.map((service, index) => (
-                <Link href={service.link} key={index} className="group" tabIndex={0} role="link">
+              className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-0 gap-y-10 my-6 auto-rows-fr'>
+              {conciseServiceData.map(({title, description, link, bgImage}, index) => (
+                <Link href={link} key={index} className="group" tabIndex={0} role="link">
                   <motion.div
-                    whileHover={{scale: 1.01}}
-                    className='relative border border-[var(--accent-color)] rounded-none cursor-pointer bg-[var(--card-bg)]/60 transition-all duration-300 h-full flex flex-col aspect-square overflow-hidden group focus:ring-2 focus:ring-[var(--accent-color)] outline-none min-h-[220px] max-h-[320px] p-0 m-0 shadow-none text-[var(--text-primary)]'
-                  >
-                    {/* Gradient overlay on image */}
-                    <div className="w-full h-1/2 rounded-none bg-cover bg-center relative flex items-center justify-center p-0 m-0">
-                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent-color)]/60 to-transparent z-10 rounded-none"></div>
-                      <img src={service.bgImage} alt="" className="w-full h-full object-cover rounded-none" />
-                    </div>
-                    <div className="flex flex-col flex-grow z-20 justify-center items-center p-2 text-center">
-                      <h3 className='text-base font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors mb-1'>{service.title}</h3>
-                      <p className='text-[var(--text-secondary)] font-Ovo opacity-90 text-xs'>{service.description}</p>
-                    </div>
+                    whileHover={{scale: 1.02}}
+                    className='relative border border-[var(--border-color)] rounded-lg cursor-pointer bg-[var(--card-bg)] dark:bg-[var(--card-bg)] backdrop-blur-lg shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all duration-[var(--transition-duration)] h-full flex flex-col aspect-square overflow-hidden group focus:ring-2 focus:ring-[var(--accent-color)] outline-none min-h-[220px] max-h-[320px]'>
+                      <div className="w-full h-1/2 rounded-t-lg bg-cover bg-center relative flex items-center justify-center">
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent-color)]/60 to-transparent z-10 rounded-t-lg"></div>
+                        <img src={bgImage} alt="" className="w-full h-full object-cover rounded-t-lg" />
+                      </div>
+                      <div className="flex flex-col flex-grow z-20 justify-center items-center p-6 text-center">
+                        <h3 className='text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors mb-2'>{title}</h3>
+                        <p className='text-[var(--text-secondary)] font-Ovo opacity-90 text-sm leading-relaxed'>{description}</p>
+                      </div>
+                      <span className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-[var(--accent-color)] transition-all pointer-events-none"></span>
                   </motion.div>
                 </Link>
               ))}
@@ -235,7 +277,7 @@ const ServicesPage = () => {
               <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
                 Let's discuss how our data advisory services can help you unlock the full potential of your data assets and drive business growth.
               </p>
-              <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
+              <Link href="/#contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
                 Schedule a Consultation
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

@@ -69,12 +69,14 @@ const Navbar = ({isOnBlogPage = false, setActiveSection}) => {
 
   return (
     <>
-    {/* Background Image */}
-    <div className='fixed top-0 right-0 w-11/12 -z-10 translate-y-[80%] dark:hidden'>
+    {/* Background Image - Only show on homepage */}
+    {pathname === '/' && (
+      <div className='fixed top-0 right-0 w-11/12 -z-10 translate-y-[80%] dark:hidden'>
         {assets.header_bg_color && 
           <Image src={assets.header_bg_color} alt='' className='w-screen h-screen object-cover' priority />
         }
-    </div>
+      </div>
+    )}
 
       <nav className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex 
         items-center justify-between z-50 ${isScroll ? "bg-[var(--card-bg)] bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-[var(--background)] dark:shadow-[var(--accent-color)]/20" : ""}`}>

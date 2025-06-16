@@ -22,17 +22,17 @@ const AiMlSolutionsPage = () => {
       >
         <motion.header className="mb-12 text-center" variants={fadeIn}>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-4">{serviceTitle}: Transform Your Business with Intelligent Automation</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
             In an era of unprecedented data growth, Artificial Intelligence (AI) and Machine Learning (ML) offer transformative potential for businesses. Our AI & ML Solutions are designed to help you harness this power, turning complex data into actionable insights, automating processes, and creating innovative products and services.
           </p>
         </motion.header>
 
         <motion.section className="mb-12" variants={slideUp}>
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Our Expertise</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Expertise</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
             We offer end-to-end AI and ML services, from strategy and development to deployment and management. Our key areas of expertise include:
           </p>
-          <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 leading-relaxed space-y-3 pl-4">
+          <ul className="list-disc list-inside text-[var(--text-secondary)] leading-relaxed space-y-3 pl-4">
             {[{
               title: "Custom AI/ML Model Development:",
               text: "We design and build bespoke AI/ML models tailored to your specific business needs and data. Whether it's predictive maintenance, fraud detection, natural language processing, or computer vision, we create solutions that deliver measurable results."
@@ -57,11 +57,11 @@ const AiMlSolutionsPage = () => {
         </motion.section>
 
         <motion.section className="mb-12" variants={slideUp}>
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Our Approach</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Approach</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
             We believe in a collaborative and iterative approach to AI and ML development. We work closely with your team to understand your business challenges, identify potential use cases, and develop solutions that deliver tangible value. Our process typically involves:
           </p>
-          <ol className="list-decimal list-inside text-gray-600 dark:text-gray-400 leading-relaxed space-y-3 pl-4">
+          <ol className="list-decimal list-inside text-[var(--text-secondary)] leading-relaxed space-y-3 pl-4">
             {[{
               text: "Discovery and Use Case Definition: We start by understanding your business objectives and identifying areas where AI/ML can make a significant impact."
             }, {
@@ -83,8 +83,8 @@ const AiMlSolutionsPage = () => {
         </motion.section>
 
         <motion.section className="mb-12" variants={slideUp}>
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Why Choose Us?</h2>
-          <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 leading-relaxed space-y-3 pl-4">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Why Choose Us?</h2>
+          <ul className="list-disc list-inside text-[var(--text-secondary)] leading-relaxed space-y-3 pl-4">
             {[{
               text: "Deep Technical Expertise: Our team comprises experienced data scientists, machine learning engineers, and AI specialists with a proven track record of delivering successful AI/ML solutions."
             }, {
@@ -219,7 +219,7 @@ const AiMlSolutionsPage = () => {
             <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
               Let's discuss how our AI/ML solutions can help you transform your business and stay ahead of the competition.
             </p>
-            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
+            <Link href="/#contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
               Schedule a Consultation
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

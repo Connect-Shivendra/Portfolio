@@ -71,18 +71,18 @@ const DataLiteracyPage = () => {
         viewport={{ once: false, amount: 0.1 }}
       >
         <motion.header className="mb-12 text-center" variants={fadeIn}>
-          <h1 className="text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-4">{serviceTitle}: Empowering Your Workforce for a Data-Driven Future</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[var(--text-primary)] mb-4">{serviceTitle}: Empowering Your Workforce for a Data-Driven Future</h1>
+          <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
             In today's data-rich environment, the ability to understand, interpret, and communicate data-driven insights is no longer a niche skill but a fundamental requirement for success. Our Data Literacy & Upskilling Programs are designed to equip your workforce with the knowledge and tools necessary to thrive in this new era.
           </p>
         </motion.header>
 
         <motion.section className="mb-12" variants={slideUp}>
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Why Invest in Data Literacy?</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Why Invest in Data Literacy?</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
             Data literacy is the ability to read, work with, analyze, and communicate data. It empowers individuals at all levels of an organization to:
           </p>
-          <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 leading-relaxed space-y-3 pl-4">
+          <ul className="list-disc list-inside text-[var(--text-secondary)] leading-relaxed space-y-3 pl-4">
             {whyInvestItems.map((item, index) => (
               <motion.li key={index} variants={fadeIn}>
                 <strong>{item.title}</strong> {item.text}
@@ -92,11 +92,11 @@ const DataLiteracyPage = () => {
         </motion.section>
 
         <motion.section className="mb-12" variants={slideUp}>
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Our Data Literacy & Upskilling Programs</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Data Literacy & Upskilling Programs</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
             We offer a variety of programs tailored to different needs and skill levels:
           </p>
-          <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 leading-relaxed space-y-3 pl-4">
+          <ul className="list-disc list-inside text-[var(--text-secondary)] leading-relaxed space-y-3 pl-4">
             {programsItems.map((item, index) => (
               <motion.li key={index} variants={fadeIn}>
                 <strong>{item.title}</strong> {item.text}
@@ -105,10 +105,7 @@ const DataLiteracyPage = () => {
           </ul>
         </motion.section>
 
-        <motion.section
-          className="mb-16"
-          variants={slideUp}
-        >
+        <motion.section className="mb-16" variants={slideUp}>
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Data Literacy Approach</h2>
           <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
             We believe that data literacy is not just about understanding data - it's about creating a culture where data-driven decision making becomes second nature. Our approach combines practical training with real-world applications to ensure lasting impact.
@@ -118,10 +115,7 @@ const DataLiteracyPage = () => {
           </p>
         </motion.section>
 
-        <motion.section
-          className="mb-16"
-          variants={slideUp}
-        >
+        <motion.section className="mb-16" variants={slideUp}>
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Data Literacy Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
@@ -138,7 +132,6 @@ const DataLiteracyPage = () => {
                 Comprehensive training programs covering data fundamentals, analysis techniques, and data-driven decision making.
               </p>
             </motion.div>
-            
             <motion.div
               className="bg-[var(--card-bg)] p-6 rounded-lg shadow-sm text-[var(--text-primary)]"
               variants={fadeIn}
@@ -156,10 +149,7 @@ const DataLiteracyPage = () => {
           </div>
         </motion.section>
 
-        <motion.section
-          className="mb-16"
-          variants={slideUp}
-        >
+        <motion.section className="mb-16" variants={slideUp}>
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Our Methodology</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div
@@ -178,7 +168,6 @@ const DataLiteracyPage = () => {
                 </p>
               </div>
             </motion.div>
-            
             <motion.div
               className="flex items-start"
               variants={fadeIn}
@@ -195,7 +184,6 @@ const DataLiteracyPage = () => {
                 </p>
               </div>
             </motion.div>
-            
             <motion.div
               className="flex items-start"
               variants={fadeIn}
@@ -215,16 +203,13 @@ const DataLiteracyPage = () => {
           </div>
         </motion.section>
 
-        <motion.section
-          className="mb-16 text-center"
-          variants={fadeIn}
-        >
+        <motion.section className="mb-16 text-center" variants={fadeIn}>
           <div className="bg-[var(--accent-color)]/10 p-8 rounded-lg text-[var(--text-primary)]">
             <h2 className="text-3xl font-bold text-[var(--accent-color)] mb-4">Ready to Build a Data-Literate Organization?</h2>
             <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
               Let's discuss how our data literacy programs can help your organization make better decisions with data.
             </p>
-            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
+            <Link href="/#contact" className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent-color)] text-white font-medium rounded-full hover:bg-[var(--accent-color)]/80 transition-colors">
               Schedule a Consultation
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

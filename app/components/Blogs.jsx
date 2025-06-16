@@ -9,7 +9,7 @@ const BLOGS_PER_PAGE = 9;
 
 const BlogCard = ({ blog, index }) => {
   return (
-    <article className="blog-card bg-white dark:bg-darkHover shadow-lg rounded-lg overflow-hidden h-full transition-colors duration-300 hover:shadow-xl flex flex-col" aria-label={`Blog post: ${blog.frontmatter.title}`}> 
+    <article className="blog-card bg-[var(--card-bg)] dark:bg-darkHover shadow-lg rounded-lg overflow-hidden h-full transition-colors duration-300 hover:shadow-xl flex flex-col" aria-label={`Blog post: ${blog.frontmatter.title}`}> 
       <Link href={`/blog/${blog.slug}`} className="block focus:outline-none focus:ring-2 focus:ring-accent-500 rounded-lg">
         <div className="h-48 bg-gray-200 dark:bg-gray-700 relative">
           {blog.frontmatter.coverImage ? (

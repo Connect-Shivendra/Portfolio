@@ -45,7 +45,7 @@ const OptusPage = () => {
           variants={fadeIn}
         >
           <Link href="/#work">
-            <button className="flex items-center text-[var(--accent-color)] hover:underline transition-all">
+            <button className="flex items-center text-[var(--text-primary)] font-bold hover:underline transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
@@ -59,7 +59,7 @@ const OptusPage = () => {
           variants={fadeIn}
         >
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-4">{workTitle}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
             {workDescription}
           </p>
         </motion.header>
@@ -71,11 +71,11 @@ const OptusPage = () => {
           className="mb-12"
           variants={slideUp}
         >
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Project Overview</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Project Overview</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
             At Optus, I served as a Solution Designer for Data Migration, focusing on Project Spring - a large-scale initiative to consolidate 12 legacy systems into a single integrated platform provided by Amdocs. This ambitious project targeted the migration of 10 million subscribers across mobile (prepaid and post-paid), fixed line telephony, and enterprise customers.
           </p>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             My role involved designing and developing comprehensive data migration solutions, from requirement gathering and analysis to implementation and quality assurance, ensuring seamless transition with minimal disruption to business operations.
           </p>
         </motion.section>
@@ -84,8 +84,8 @@ const OptusPage = () => {
           className="mb-12"
           variants={slideUp}
         >
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Key Achievements</h2>
-          <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 leading-relaxed space-y-2">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Key Achievements</h2>
+          <ul className="list-disc list-inside text-[var(--text-secondary)] leading-relaxed space-y-2">
             <motion.li variants={fadeIn}>
               Successfully migrated 10 million subscribers from legacy systems to the Amdocs billing platform
             </motion.li>
@@ -108,8 +108,8 @@ const OptusPage = () => {
           className="mb-12"
           variants={slideUp}
         >
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Technologies Used</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Technologies Used</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             Informatica PowerCenter, Data profiling and quality assessment tools, Data masking and privacy protection solutions, Amdocs Billing and Customer Care (BCC) platform, Net-cracker OSS platform, Staging environment design and management tools.
           </p>
         </motion.section>
@@ -118,18 +118,18 @@ const OptusPage = () => {
           className="mb-12"
           variants={slideUp}
         >
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Results & Impact</h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Results & Impact</h2>
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             The successful migration of customer data from legacy systems to the Amdocs billing platform streamlined Optus's billing operations by consolidating multiple legacy systems. This transformation improved data quality and consistency across systems, enhanced data security through proper masking and privacy controls, and provided a more integrated view of customer information. The project laid the foundation for improved customer service and more efficient billing operations, supporting Optus's strategic objectives for digital transformation.
           </p>
         </motion.section>
 
         <motion.section
-          className="text-center py-8 bg-gray-100 dark:bg-gray-700 rounded-lg"
+          className="text-center py-8 bg-[var(--card-bg)] rounded-lg"
           variants={fadeIn}
         >
-          <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Interested in Similar Solutions?</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-xl mx-auto">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-4">Interested in Similar Solutions?</h2>
+          <p className="text-[var(--text-secondary)] mb-6 max-w-xl mx-auto">
             Need help with large-scale data migration or system consolidation? I can design and implement solutions that ensure seamless transitions while maintaining data integrity, security, and compliance with privacy regulations.
           </p>
           <motion.button

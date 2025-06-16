@@ -81,7 +81,7 @@ const About = () => {
                   whileHover={{scale: 1.05}}
                   className='flex items-center justify-center w-full aspect-square border
                   border-gray-400 rounded-lg cursor-pointer hover:-translate-x-1 p-4
-                       duration-500 bg-white hover:bg-lightHover dark:border-white dark:bg-darkTheme dark:shadow-[0_0_5px_rgba(255,255,255,0.5)]' 
+                       duration-500 bg-[var(--card-bg)] hover:bg-lightHover dark:border-white dark:bg-darkTheme dark:shadow-[0_0_5px_rgba(255,255,255,0.5)]' 
                   key={index}>
                     <a href={tool.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full h-full">
                       <Image 
@@ -89,7 +89,7 @@ const About = () => {
                         alt={tool.name} 
                         width={56} 
                         height={56} 
-                        className='w-12 sm:w-16 md:w-20 dark:bg-white dark:p-2 dark:rounded-md' 
+                        className='w-12 sm:w-16 md:w-20 bg-[var(--card-bg)] dark:bg-darkTheme dark:p-2 dark:rounded-md' 
                       />
                     </a>
                 </motion.li>
