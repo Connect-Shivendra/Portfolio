@@ -115,7 +115,7 @@ const Contact = () => {
           {/* Captcha widget */}
           <div className='my-4'>
             <ReCAPTCHA
-              sitekey='6LcWZIrAAAAAB5Ck9XLBN1lDhNElSb2xSYyJ5IlI'
+              sitekey='6LdZamlrAAAAAAJN_G91ZV6ecoVf8HTHJdFe3oXHk'
               onChange={token => setCaptchaToken(token)}
               theme='dark'
             />
