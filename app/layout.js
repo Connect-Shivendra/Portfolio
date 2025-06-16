@@ -3,6 +3,7 @@ import "./globals.css";
 import { ErrorBoundary } from "@/app/components/ErrorBoundary";
 import ScrollToTopWrapper from "@/app/components/ScrollToTopWrapper";
 import { DarkModeProvider } from './context/DarkModeContext';
+import { Analytics } from '@vercel/analytics/react';
 
 // Configure Inter font for body text
 const inter = Inter({
@@ -21,7 +22,7 @@ const sora = Sora({
 
 // This is the Title on the browser Tab
 export const metadata = {
-  metadataBase: new URL('https://your-domain.com'),
+  metadataBase: new URL('https://shivendra.io'),
   title: {
     default: "Portfolio - Data & Analytics",
     template: "%s | Portfolio"
@@ -33,7 +34,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_AU',
-    url: 'https://your-domain.com',
+    url: 'https://shivendra.io',
     title: 'Portfolio - Data & Analytics',
     description: 'Share Data Knowledge to the world #Free',
     siteName: 'Portfolio',
@@ -83,6 +84,7 @@ export default function RootLayout({ children }) {
             {children}
           </ErrorBoundary>
         </DarkModeProvider>
+        <Analytics />
       </body>
     </html>
   );

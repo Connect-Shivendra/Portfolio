@@ -80,7 +80,7 @@ const Navbar = ({isOnBlogPage = false, setActiveSection}) => {
         items-center justify-between z-50 ${isScroll ? "bg-[var(--card-bg)] bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-[var(--background)] dark:shadow-[var(--accent-color)]/20" : ""}`}>
         
         {/* Logo Link - Use onClick to set state to 'top' */}
-        <button onClick={() => handleNavClick('top')} className='cursor-pointer mr-14' aria-label="Go to Home"> 
+        <button onClick={() => handleNavClick('top')} className='cursor-pointer' aria-label="Go to Home"> 
             <Image src={isDarkMode ? assets.logo_dark : assets.logo} className='w-28' alt='Logo' priority />
         </button>
 
