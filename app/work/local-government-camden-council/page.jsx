@@ -1,20 +1,16 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React from 'react';
 import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import Timeline from '@/app/components/Timeline';
-import { motion } from 'framer-motion';
-import { fadeIn, slideUp, staggerContainer } from '@/app/utils/animations';
+import { motion } from 'motion/react';
 
 const CamdenCouncilPage = () => {
-  const router = useRouter();
   const workTitle = "Local Government: Camden Council";
   const workDescription = "Data Strategy, Azure-Databricks-PowerBI Data Platform, Information management, etc.";
-  
-  // Timeline events data
+
   const timelineEvents = [
     {
       date: "June 2024",
@@ -48,38 +44,20 @@ const CamdenCouncilPage = () => {
     }
   ];
 
-  useEffect(() => {
-    // Handle back button press
-    const handleBackButton = (e) => {
-      e.preventDefault();
-      router.push('/#work');
-    };
-
-    window.addEventListener('popstate', handleBackButton);
-
-    return () => {
-      window.removeEventListener('popstate', handleBackButton);
-    };
-  }, [router]);
-
   return (
     <>
       <Navbar />
-      <motion.div
-        className="container mx-auto px-4 py-8 pt-24 lg:pt-32 bg-[var(--background)] text-[var(--foreground)]"
-        variants={staggerContainer(0.1, 0.1)}
-        initial="initial"
-        animate="whileInView"
-        viewport={{ once: false, amount: 0.1 }}
-      >
-        {/* Back to Work button */}
-        <motion.div 
+      <div className="container mx-auto px-4 py-8 pt-24 lg:pt-32 bg-[var(--background)] text-[var(--foreground)]">
+        <motion.div
           className="mb-8"
-          variants={fadeIn}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
         >
           <Link href="/#work">
-            <button className="flex items-center text-[var(--text-primary)] font-bold hover:underline transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button className="flex items-center gap-2 text-[var(--accent-color)] font-semibold hover:opacity-80 transition-opacity">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
               Back to Work
@@ -89,24 +67,30 @@ const CamdenCouncilPage = () => {
 
         <motion.header
           className="mb-12 text-center"
-          variants={fadeIn}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
         >
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-4">{workTitle}</h1>
+          <div className="gold-divider mx-auto mt-2 mb-6" />
           <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
             {workDescription}
           </p>
         </motion.header>
 
-        {/* Timeline Section */}
         <Timeline events={timelineEvents} />
 
         <motion.section
           className="mb-12"
-          variants={slideUp}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
         >
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Project Overview</h2>
           <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-            As Head of Information & BI Services at Camden Council, I spearhead Data & Insights (D&I), Enterprise Information Management (EIM - EDMS), and Spatial Information Services (SIS - QGIS) functions within the DTI (IT) branch. My role focuses on implementing data-driven strategies and solutions to enhance decision-making across the organization.
+            As Head of Information &amp; BI Services at Camden Council, I spearhead Data &amp; Insights (D&amp;I), Enterprise Information Management (EIM - EDMS), and Spatial Information Services (SIS - QGIS) functions within the DTI (IT) branch. My role focuses on implementing data-driven strategies and solutions to enhance decision-making across the organization.
           </p>
           <p className="text-[var(--text-secondary)] leading-relaxed">
             A key achievement has been the development and approval of the Enterprise Data Strategy, which outlines a comprehensive approach to improving data maturity, delivering high-value use cases, and implementing robust governance frameworks.
@@ -115,31 +99,27 @@ const CamdenCouncilPage = () => {
 
         <motion.section
           className="mb-12"
-          variants={slideUp}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
         >
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Key Achievements</h2>
           <ul className="list-disc list-inside text-[var(--text-secondary)] leading-relaxed space-y-2">
-            <motion.li variants={fadeIn}>
-              Developed and received approval for comprehensive Enterprise Data Strategy aligned with organizational goals
-            </motion.li>
-            <motion.li variants={fadeIn}>
-              Designed and implemented operational dashboards in PowerBI covering Sustainability, Performance, Employee Satisfaction, and Risk Management
-            </motion.li>
-            <motion.li variants={fadeIn}>
-              Led the planning and architecture selection for a greenfield Azure Databricks-based Enterprise Data Lakehouse
-            </motion.li>
-            <motion.li variants={fadeIn}>
-              Launched innovative open data initiatives to foster transparency and community engagement
-            </motion.li>
-            <motion.li variants={fadeIn}>
-              Implemented NSW Information Classification and Labelling using MS Purview on M365 products
-            </motion.li>
+            <li>Developed and received approval for comprehensive Enterprise Data Strategy aligned with organizational goals</li>
+            <li>Designed and implemented operational dashboards in PowerBI covering Sustainability, Performance, Employee Satisfaction, and Risk Management</li>
+            <li>Led the planning and architecture selection for a greenfield Azure Databricks-based Enterprise Data Lakehouse</li>
+            <li>Launched innovative open data initiatives to foster transparency and community engagement</li>
+            <li>Implemented NSW Information Classification and Labelling using MS Purview on M365 products</li>
           </ul>
         </motion.section>
 
         <motion.section
           className="mb-12"
-          variants={slideUp}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
         >
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Technologies Used</h2>
           <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -149,31 +129,33 @@ const CamdenCouncilPage = () => {
 
         <motion.section
           className="mb-12"
-          variants={slideUp}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Results & Impact</h2>
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-6">Results &amp; Impact</h2>
           <p className="text-[var(--text-secondary)] leading-relaxed">
             The implementation of the Enterprise Data Strategy and associated initiatives has positioned Camden Council to make more informed, data-driven decisions. The planned Enterprise Data Lakehouse will create a single source of truth, eliminating siloed information and enabling cross-functional insights. Open data initiatives have enhanced community engagement and transparency, while improved governance frameworks have strengthened data security and compliance.
           </p>
         </motion.section>
 
         <motion.section
-          className="text-center py-8 bg-[var(--card-bg)] dark:bg-gray-700 rounded-lg"
-          variants={fadeIn}
+          className="text-center py-8 bg-[var(--card-bg)] border border-[var(--border-color)] rounded-lg"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
         >
           <h2 className="text-3xl font-semibold text-[var(--text-primary)] mb-4">Interested in Similar Solutions?</h2>
           <p className="text-[var(--text-secondary)] mb-6 max-w-xl mx-auto">
-            Looking to transform your organization's data landscape? I can help you develop and implement comprehensive data strategies, build robust data platforms, and create insightful visualizations that drive better decision-making.
+            Looking to transform your organization&apos;s data landscape? I can help you develop and implement comprehensive data strategies, build robust data platforms, and create insightful visualizations that drive better decision-making.
           </p>
-          <motion.button
-            className="bg-[var(--accent-color)] text-[var(--background)] font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 hover:brightness-95 dark:hover:brightness-110"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contact Me Today
-          </motion.button>
+          <Link href="/#contact">
+            <button className="button-primary">Contact Me Today</button>
+          </Link>
         </motion.section>
-      </motion.div>
+      </div>
       <Footer />
     </>
   );

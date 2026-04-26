@@ -1,4 +1,4 @@
-import { getBlogData } from '@/app/utils/mdx-utils';
+import { getBlogData, getAllBlogs } from '@/app/utils/mdx-utils';
 import BlogPostPage from '@/app/components/BlogPostPage';
 
 export async function generateMetadata({ params }) {
@@ -45,10 +45,21 @@ export default async function BlogPost({ params }) {
   const { slug } = await params;
   let blog = null;
   let error = null;
+  let relatedPosts = [];
   try {
     blog = await getBlogData(slug);
+    if (blog) {
+      const allBlogs = await getAllBlogs();
+      const sameCategory = allBlogs.filter(
+        b => b.slug !== slug && b.frontmatter.category === blog.frontmatter.category
+      );
+      const others = allBlogs.filter(
+        b => b.slug !== slug && b.frontmatter.category !== blog.frontmatter.category
+      );
+      relatedPosts = [...sameCategory, ...others].slice(0, 3);
+    }
   } catch (err) {
     error = err;
   }
-  return <BlogPostPage blog={blog} error={error} />;
+  return <BlogPostPage blog={blog} error={error} relatedPosts={relatedPosts} />;
 }

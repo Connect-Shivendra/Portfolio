@@ -4,7 +4,7 @@ import BlogPostClient from '@/app/components/BlogPostClient';
 import MDXContentServer from '@/app/components/MDXContentServer';
 import Link from 'next/link';
 
-export default function BlogPostPage({ blog, error }) {
+export default function BlogPostPage({ blog, error, relatedPosts = [] }) {
   if (!blog) {
     return (
       <>
@@ -60,6 +60,7 @@ export default function BlogPostPage({ blog, error }) {
           <BlogPostClient
             blog={blog}
             renderedContent={renderedContent}
+            relatedPosts={relatedPosts}
           />
         </div>
       </main>

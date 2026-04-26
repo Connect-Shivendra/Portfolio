@@ -1,6 +1,6 @@
 # SKILL: shivendra.io — Project Context & Knowledge Base
 > Read this at the start of every session. Saves reading 50+ files.
-> Last updated: 2026-04-27 (End of Session 4 — cleanup, accessibility 100, Lighthouse)
+> Last updated: 2026-04-27 (End of Session 5 — work sub-pages themed, reading progress bar, related posts)
 
 ---
 
@@ -107,10 +107,10 @@ Portfolio-main\
       Work.jsx                  Gold arrow buttons on cards
       Contact.jsx               Env vars, gold theme
       Footer.jsx                Column layout, gold bar, 2026 copyright
-      BlogPostPage.jsx          Gold 404, button-primary, clean errors
-      BlogPostClient.jsx        Gold/navy theme, formatted date
+      BlogPostPage.jsx          Gold 404, button-primary, clean errors. Passes relatedPosts prop
+      BlogPostClient.jsx        Progress bar (useScroll+useSpring), related posts section (3 cards)
       MDXContentServer.jsx      @mdx-js/mdx evaluate() — no next-mdx-remote
-      Timeline.jsx              Used in work sub-pages (unchanged)
+      Timeline.jsx              motion/react, all colors use CSS vars (no Tailwind dark: classes)
       ErrorBoundary.jsx         Unchanged
       ScrollToTopWrapper.jsx    Unchanged
 
@@ -123,13 +123,14 @@ Portfolio-main\
 
     blog\
       page.js                   motion/react (was framer-motion), gold spinner, gold theme
-      [slug]\page.js            Uses BlogPostPage server component
+      [slug]\page.js            Fetches blog + relatedPosts (same category first, fills to 3)
 
     services\
       page.jsx                  Redirects → /#thought-leadership
       [8 sub-pages]             All redirect → /#thought-leadership (cleaned up S4)
 
-    work\ [6 company pages]     Unchanged — need gold/navy update next session
+    work\ [6 company pages]     motion/react, whileInView scroll reveal, gold back btn, gold-divider,
+                                card-bg CTA, button-primary → /#contact. No framer-motion, no useEffect
 
   content\blogs\                42 .mdx posts (39 original + 3 new)
     agentic-ai-data-leaders.mdx         NEW 2026-04-20
@@ -282,10 +283,10 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 ## 11. Remaining Work (priority order)
 
 **Design:**
-1. [ ] Update work sub-pages (`app/work/*.jsx`) — gold/navy tokens (still old theme)
-2. [ ] Add reading progress bar on blog posts
-3. [ ] Add related posts at bottom of each blog post
-4. [ ] Build `/impact` or Case Studies section
+1. [x] Update work sub-pages (`app/work/*.jsx`) — gold/navy tokens ✅ S5
+2. [x] Add reading progress bar on blog posts ✅ S5
+3. [x] Add related posts at bottom of each blog post ✅ S5
+4. [ ] Build `/impact` or Case Studies section — showcase measurable outcomes (Woolworths $200k→$80k, EVT $1.7M, etc.)
 
 **Content:**
 5. [ ] Write 5 more blog posts (see topics in §7)
@@ -320,3 +321,36 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 | 2026-04-26 S2 | Git from zip. npm install. Dev workflow. Security commits. |
 | 2026-04-26 S3 | **Removed next-mdx-remote** (Vercel block). @mdx-js/mdx. Gold/navy live on shivendra.io. CSP. Hero animated (particles/word-reveal/counters/shimmer). Navbar modernised. Thought Leadership section built. Footer redesigned. All components gold/navy. 3 new blog posts. |
 | 2026-04-27 S4 | **Cleanup + Lighthouse.** Deleted Services.jsx. All 8 /services/* sub-pages replaced with server redirects → /#thought-leadership. Removed serviceData + unused icon imports from assets.js. Ran Lighthouse (desktop + mobile). **Accessibility 96→100** via --on-accent token (#1A1A2E on gold, 7.5:1 ratio) applied to button-primary, blog-category-tag, Navbar, Header, Blogs, Footer. Fixed aria-label mismatch on "Get in Touch" button. Added preconnect hints for wikimedia/gstatic/google. npm audit: 7 vulns remain (unfixable without breaking changes). |
+| 2026-04-27 S5 | **Work sub-pages + Blog UX.** All 6 `app/work/*.jsx`: framer-motion→motion/react, removed broken useEffect back-button hook, replaced staggerContainer variant system with per-section `whileInView`, gold back button, gold-divider under h1, card-bg CTA with border, "Contact Me Today" now a working Link→/#contact. Timeline.jsx: motion/react + all CSS vars (no dark: classes). **Reading progress bar**: fixed 4px gold bar via useScroll+useSpring in BlogPostClient. **Related posts**: server-side in blog/[slug]/page.js — same-category first, fills to 3 from recent; rendered as blog-card grid in BlogPostClient below article. |
+
+---
+
+## 14. Next Session Prompt
+
+> Copy-paste this to start the next session:
+
+```
+I'm working on my personal site shivendra.io — read .claude/SKILL.md for full context.
+
+Today I want to build the /impact page (item 4 on the remaining work list).
+
+This is a new route at app/impact/page.jsx — a showcase of measurable career outcomes. Think of it as a "Results" or "Case Studies" page, not a CV. It should feel like a senior data leader's highlight reel.
+
+Key outcomes to feature (from SKILL.md work sub-pages):
+- Woolworths/WooliesX: AWS Redshift $200k→$80k/month, 18% higher email clicks, 3% higher conversion, Apple Wallet integration
+- EVT (Event Hospitality): $1.7M cost savings, 80% faster data processing, 29% reduction in lost sales, 250+ daily self-service users, 36+ dashboards, Business Transformation Runner-Up 2022
+- Optus: 10 million subscriber migration, 12 legacy systems consolidated
+- Amdocs: 250M + 40M subscriber telecom migrations across Asia
+- Fidelity: FATCA compliance, Kimball EDW for UK/Ireland insurance
+- Camden Council: Enterprise Data Strategy (ELG approved), Azure Databricks lakehouse architecture, open data initiatives
+
+Design requirements:
+- Gold/navy theme — use the CSS tokens from SKILL.md §6
+- Animations from motion/react (import from `motion/react`, not framer-motion) — scroll reveal pattern from SKILL.md §9
+- Reuse .card-component, .heading-primary, .gold-divider, .button-primary classes
+- Add a Navbar + Footer (same as every other page)
+- Add a "Get in touch" CTA at the bottom linking to /#contact
+- Mobile-first, accessible
+
+Read SKILL.md first, then read one existing page (e.g. app/work/event-hospitality-entertainment/page.jsx) to match the layout pattern. Propose the structure before writing any code.
+```

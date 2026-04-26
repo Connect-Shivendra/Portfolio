@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const TimelineItem = ({ date, title, description, isLeft = true, index }) => {
   // Simplified animation variants with minimal delay
@@ -37,10 +37,10 @@ const TimelineItem = ({ date, title, description, isLeft = true, index }) => {
         initial="hidden"
         animate="visible"
       >
-        <div className={`p-4 rounded-lg shadow-md bg-[var(--card-bg)] dark:bg-gray-800 border-l-4 border-[var(--accent-color)] transition-all duration-300 hover:shadow-lg`}>
+        <div className={`p-4 rounded-lg shadow-md bg-[var(--card-bg)] border-l-4 border-[var(--accent-color)] transition-all duration-300 hover:shadow-lg`}>
           <span className="text-sm font-semibold text-[var(--accent-color)]">{date}</span>
-          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{title}</h3>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">{description}</p>
+          <h3 className="text-xl font-bold text-[var(--text-primary)] mt-1">{title}</h3>
+          <p className="text-[var(--text-secondary)] mt-2">{description}</p>
         </div>
       </motion.div>
     </div>
@@ -68,7 +68,7 @@ const Timeline = ({ events }) => {
       variants={containerVariants}
     >
       <motion.h2 
-        className="text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-10 text-center"
+        className="text-3xl font-semibold text-[var(--text-primary)] mb-10 text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.1 }}
