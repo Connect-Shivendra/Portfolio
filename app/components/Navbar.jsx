@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: 'Thought Leadership',    id: 'thought-leadership' },
   { label: 'Blog',                  id: 'blogs' },
   { label: 'My Work',               id: 'work' },
+  { label: 'Impact',                id: '/impact' },
   { label: 'Contact',               id: 'contact' },
 ];
 
@@ -32,6 +33,11 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
   const handleNavClick = (sectionId) => {
     setMenuOpen(false);
     setActiveItem(sectionId);
+
+    if (sectionId.startsWith('/')) {
+      router.push(sectionId);
+      return;
+    }
 
     if (sectionId === 'top') {
       if (pathname === '/') {

@@ -131,6 +131,8 @@ Portfolio-main\
 
     work\ [6 company pages]     motion/react, whileInView scroll reveal, gold back btn, gold-divider,
                                 card-bg CTA, button-primary → /#contact. No framer-motion, no useEffect
+    impact\page.jsx             NEW — "Results That Move the Needle". Counter bar + 6 company cards.
+                                Gold left-border cards, stat rows, award badge, CTA → /#contact
 
   content\blogs\                42 .mdx posts (39 original + 3 new)
     agentic-ai-data-leaders.mdx         NEW 2026-04-20
@@ -216,7 +218,7 @@ agentic AI (new), AI governance trust paradox (new), data contracts (new).
 ## 8. Navigation
 
 ```
-Home | About | Thought Leadership | Blog | My Work | Contact
+Home | About | Thought Leadership | Blog | My Work | Impact | Contact
 ```
 
 Section IDs (used in page.js SECTIONS array + hash routing):
@@ -286,7 +288,7 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 1. [x] Update work sub-pages (`app/work/*.jsx`) — gold/navy tokens ✅ S5
 2. [x] Add reading progress bar on blog posts ✅ S5
 3. [x] Add related posts at bottom of each blog post ✅ S5
-4. [ ] Build `/impact` or Case Studies section — showcase measurable outcomes (Woolworths $200k→$80k, EVT $1.7M, etc.)
+4. [x] Build `/impact` — showcase measurable outcomes (Woolworths $200k→$80k, EVT $1.7M, etc.) ✅ S6
 
 **Content:**
 5. [ ] Write 5 more blog posts (see topics in §7)
@@ -322,6 +324,7 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 | 2026-04-26 S3 | **Removed next-mdx-remote** (Vercel block). @mdx-js/mdx. Gold/navy live on shivendra.io. CSP. Hero animated (particles/word-reveal/counters/shimmer). Navbar modernised. Thought Leadership section built. Footer redesigned. All components gold/navy. 3 new blog posts. |
 | 2026-04-27 S4 | **Cleanup + Lighthouse.** Deleted Services.jsx. All 8 /services/* sub-pages replaced with server redirects → /#thought-leadership. Removed serviceData + unused icon imports from assets.js. Ran Lighthouse (desktop + mobile). **Accessibility 96→100** via --on-accent token (#1A1A2E on gold, 7.5:1 ratio) applied to button-primary, blog-category-tag, Navbar, Header, Blogs, Footer. Fixed aria-label mismatch on "Get in Touch" button. Added preconnect hints for wikimedia/gstatic/google. npm audit: 7 vulns remain (unfixable without breaking changes). |
 | 2026-04-27 S5 | **Work sub-pages + Blog UX.** All 6 `app/work/*.jsx`: framer-motion→motion/react, removed broken useEffect back-button hook, replaced staggerContainer variant system with per-section `whileInView`, gold back button, gold-divider under h1, card-bg CTA with border, "Contact Me Today" now a working Link→/#contact. Timeline.jsx: motion/react + all CSS vars (no dark: classes). **Reading progress bar**: fixed 4px gold bar via useScroll+useSpring in BlogPostClient. **Related posts**: server-side in blog/[slug]/page.js — same-category first, fills to 3 from recent; rendered as blog-card grid in BlogPostClient below article. |
+| 2026-04-27 S6 | **Impact page.** Built `app/impact/page.jsx` — standalone "Results That Move the Needle" page. Hero + 3-stat animated counter bar (Counter component from Header pattern) + 6 company impact cards (grid, 2-col desktop/1-col mobile) with gold left-border accent, industry tag pills, stat/milestone metric rows, full-case-study links, award badge for EVT. Get in Touch CTA → /#contact. Added "Impact" to Navbar NAV_ITEMS with route-aware handleNavClick (sectionId.startsWith('/') → router.push directly). |
 
 ---
 
