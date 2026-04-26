@@ -26,8 +26,8 @@ const Footer = () => {
             </p>
             <a
               href="mailto:connect.shivendra@gmail.com"
-              className="inline-flex items-center gap-2 mt-4 text-sm font-medium transition-colors duration-300 hover:opacity-80"
-              style={{ color: 'var(--accent-color)' }}
+              className="inline-flex items-center gap-2 mt-4 text-sm font-medium underline underline-offset-2 transition-colors duration-300 hover:text-[var(--accent-color)]"
+              style={{ color: 'var(--text-primary)', textDecorationColor: 'var(--accent-color)' }}
             >
               connect.shivendra@gmail.com
             </a>

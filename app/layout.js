@@ -89,6 +89,10 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://upload.wikimedia.org" />
+        <link rel="preconnect" href="https://www.gstatic.com" />
+        <link rel="preconnect" href="https://www.google.com" />
       </head>
       <body
         className={`${inter.variable} ${sora.variable} ${inter.className} antialiased leading-relaxed overflow-x-hidden`}

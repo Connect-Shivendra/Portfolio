@@ -16,6 +16,7 @@
   --text-primary:     #1A1A2E;
   --text-secondary:   #5A5A7A;
   --border-color:     rgba(201, 168, 76, 0.2);
+  --on-accent:        #1A1A2E;
   --shadow-sm:        0 2px 4px rgba(26, 26, 46, 0.06);
   --shadow-md:        0 4px 12px rgba(26, 26, 46, 0.1);
   --shadow-lg:        0 10px 30px rgba(26, 26, 46, 0.15);
@@ -35,6 +36,7 @@
   --text-primary:     #E8E8F0;
   --text-secondary:   #8B8BA7;
   --border-color:     rgba(201, 168, 76, 0.15);
+  --on-accent:        #1A1A2E;
   --shadow-sm:        0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md:        0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg:        0 10px 30px rgba(0, 0, 0, 0.5);
@@ -111,7 +113,8 @@
 
   .button-primary {
     background: var(--accent-color);
-    @apply inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300;
+    color: var(--on-accent);
+    @apply inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300;
   }
 
   .button-primary:hover {
@@ -150,7 +153,8 @@
 
   .blog-category-tag {
     background: var(--accent-color);
-    @apply text-white text-xs px-3 py-1 rounded-full font-medium;
+    color: var(--on-accent);
+    @apply text-xs px-3 py-1 rounded-full font-medium;
   }
 
   /* Nav pill */

@@ -1,177 +1,322 @@
 # SKILL: shivendra.io — Project Context & Knowledge Base
-> Last updated: 2026-04-26 (Session 3 — Full modernisation complete)
+> Read this at the start of every session. Saves reading 50+ files.
+> Last updated: 2026-04-27 (End of Session 4 — cleanup, accessibility 100, Lighthouse)
 
 ---
 
 ## 0. How to Use This File
-Upload at the start of each Claude session: "I'm working on shivendra.io — here's my SKILL.md. Today I want to [task]."
-Copy to `.claude\SKILL.md` in project root for Claude Code auto-loading.
+
+**Claude.ai chat:** Upload this file and say:
+> "I'm working on my personal site shivendra.io — read the SKILL.md for context. Today I want to [task]."
+
+**Claude Code (VS Code):** Copy this file to:
+`C:\Users\Shivendra\Desktop\Website\Portfolio-main\.claude\SKILL.md`
+Claude Code auto-loads `.claude\` on project open — no manual add needed.
+
+**Update this file:** At the end of each session ask Claude to update it. Download and replace.
 
 ---
 
-## 1. Project
-- **Owner:** Shivendra Singh — Head of Data / Information / AI, Sydney Australia
-- **Site:** https://shivendra.io | **Repo:** https://github.com/Connect-Shivendra/Portfolio
-- **Local path:** `C:\Users\Shivendra\Desktop\Website\Portfolio-main`
-- **Shell:** PowerShell | **Node:** v20.19.2
-- **Vercel:** Connected but MCP token has 403 (needs reconnect for API access)
-- **Aesthetic:** Dark navy (#0D1117) / warm off-white (#F4F3F0) / gold (#C9A84C) ✅ LIVE
+## 1. Who & What
+
+| Field | Value |
+|---|---|
+| Owner | Shivendra Singh |
+| Role | Head of Data, Information & AI |
+| Location | Sydney, Australia |
+| Site | https://shivendra.io |
+| Repo | https://github.com/Connect-Shivendra/Portfolio (public) |
+| Local path | `C:\Users\Shivendra\Desktop\Website\Portfolio-main` |
+| Shell | PowerShell (Windows 11) |
+| Node | v20.19.2 |
+| Aesthetic | Dark navy (#0D1117) / warm off-white (#F4F3F0) / gold (#C9A84C) |
 
 ---
 
 ## 2. Daily Dev Commands
+
 ```powershell
 cd C:\Users\Shivendra\Desktop\Website\Portfolio-main
-npm run dev                          # localhost:3000
-npm test                             # run jest test suite
-git checkout -b feature/name         # always branch, never commit to main directly
-git add . && git commit -m "msg"
-git push origin feature/name         # creates Vercel preview URL
-# when preview looks good:
-git checkout main && git merge feature/name && git push origin main
+
+npm run dev                    # start dev server → localhost:3000
+npm test                       # run jest tests
+npm test -- --watch            # watch mode
+npm test -- --coverage         # coverage report
+
+# Git — ALWAYS branch, never commit direct to main
+git checkout -b feature/name
+git add .
+git status                     # confirm .env.local NOT listed
+git commit -m "feat: description"
+git push origin feature/name   # creates Vercel preview URL
+
+# When preview looks good
+git checkout main
+git merge feature/name
+git push origin main           # shivendra.io updates in ~1 min
+
+# Rollback
+vercel rollback                # npm i -g vercel first
+# OR: Vercel dashboard → Deployments → find last good → ... → Promote
 ```
 
 ---
 
-## 3. Tech Stack (modernised ✅)
+## 3. Tech Stack
+
 | Layer | Current |
 |---|---|
 | Framework | Next.js 15.5.15 App Router |
 | Language | JavaScript JSX |
 | Styling | Tailwind CSS 3.4 + CSS custom properties |
-| Fonts | Inter (body) + Sora (headings) — loaded via next/font. font-Ovo aliased to Sora in tailwind.config.mjs |
-| Blog | gray-matter + @mdx-js/mdx evaluate() — no next-mdx-remote |
-| Animation | motion (Framer Motion v12) |
-| Forms | Web3Forms + react-google-recaptcha (keys in env vars) |
+| Fonts | Inter (body) + Sora (headings) via next/font. font-Ovo aliased → Sora in tailwind.config |
+| Blog | gray-matter + @mdx-js/mdx evaluate() — next-mdx-remote FULLY REMOVED |
+| Animation | motion v12 — import from `motion/react` NOT `framer-motion` |
+| Forms | Web3Forms + react-google-recaptcha (keys in .env.local) |
 | Analytics | @vercel/analytics |
 | Testing | Jest + @testing-library/react |
 | Deployment | Vercel → shivendra.io |
-| PWA | manifest.json with display:standalone — installs as desktop app from Chrome/Edge |
+| PWA | manifest.json display:standalone — installs as desktop app from Chrome/Edge |
 
 ---
 
-## 4. Key File Locations
+## 4. Complete File Map
+
 ```
 Portfolio-main\
-  package.json                          ✅ next-mdx-remote removed
-  next.config.mjs                       ✅ @next/mdx, CSP header, turbopack root
-  tailwind.config.mjs                   ✅ darkHover/lightHover/darkTheme remapped to navy/gold
-  mdx-components.jsx                    ✅ NEW — required by @next/mdx App Router
-  .env.local                            ✅ API keys (never committed)
-  .claude\SKILL.md                      ✅ auto-loads in Claude Code
+  .env.local                    NEVER committed — API keys
+  .claude\SKILL.md              This file — auto-loads in Claude Code
+  package.json                  @mdx-js/mdx, no next-mdx-remote
+  next.config.mjs               @next/mdx, CSP header, turbopack root
+  tailwind.config.mjs           darkHover/lightHover/darkTheme remapped. font-Ovo aliased
+  mdx-components.jsx            Required by @next/mdx (project root)
+  vercel.json                   installCommand: npm install --legacy-peer-deps
+  manifest.json                 Updated: gold theme-color, correct name/description
 
   app\
-    globals.css                         ✅ gold/navy token system
-    layout.js                           ✅ updated metadata (Shivendra Singh branding)
-    page.js                             ← still needs server component refactor
+    page.js                     HOME — ThoughtLeadership replaces Services
+    layout.js                   Shivendra Singh metadata, data-scroll-behavior
+    globals.css                 Gold/navy token system + all component classes
+
     components\
-      Header.jsx                        ← needs redesign (alt="" on photo, font-Ovo)
-      About.jsx                         ← needs redesign
-      Navbar.jsx                        ← needs redesign
-      Services.jsx                      ← needs redesign
-      Blogs.jsx                         ← working, uses old class names (now remapped)
-      Work.jsx                          ← needs redesign
-      Contact.jsx                       ✅ env vars, gold theme
-      Footer.jsx                        ← needs redesign
-      BlogPostPage.jsx                  ✅ working
-      BlogPostClient.jsx                ✅ gold/navy theme
-      MDXContentServer.jsx              ✅ uses @mdx-js/mdx evaluate()
+      Header.jsx                ANIMATED HERO — particles, word reveal, rotating ring, counters, shimmer
+      Navbar.jsx                Thought Leadership nav item. Gold underline hover. Animated mobile drawer
+      About.jsx                 Gold photo glow, summary-card class, tools grid gold hover
+      ThoughtLeadership.jsx     NEW — 6 POV cards replacing Services
+      Blogs.jsx                 Gold category pills, gold pagination, card lift
+      Work.jsx                  Gold arrow buttons on cards
+      Contact.jsx               Env vars, gold theme
+      Footer.jsx                Column layout, gold bar, 2026 copyright
+      BlogPostPage.jsx          Gold 404, button-primary, clean errors
+      BlogPostClient.jsx        Gold/navy theme, formatted date
+      MDXContentServer.jsx      @mdx-js/mdx evaluate() — no next-mdx-remote
+      Timeline.jsx              Used in work sub-pages (unchanged)
+      ErrorBoundary.jsx         Unchanged
+      ScrollToTopWrapper.jsx    Unchanged
+
     utils\
-      mdx-utils.js                      ✅ no next-mdx-remote
+      mdx-utils.js              No next-mdx-remote. getBlogData/getAllBlogs/getCategories/getBlogSlugs
+
     api\
-      blogs\route.js                    ✅ unchanged, working
-      blogs\[slug]\route.js             ✅ unchanged, working
-  __tests__\
-    site.test.js                        ✅ jest test suite
+      blogs\route.js            Unchanged, working
+      blogs\[slug]\route.js     Unchanged, working
+
+    blog\
+      page.js                   motion/react (was framer-motion), gold spinner, gold theme
+      [slug]\page.js            Uses BlogPostPage server component
+
+    services\
+      page.jsx                  Redirects → /#thought-leadership
+      [8 sub-pages]             All redirect → /#thought-leadership (cleaned up S4)
+
+    work\ [6 company pages]     Unchanged — need gold/navy update next session
+
+  content\blogs\                42 .mdx posts (39 original + 3 new)
+    agentic-ai-data-leaders.mdx         NEW 2026-04-20
+    ai-governance-trust-paradox.mdx     NEW 2026-04-10
+    data-contracts-ai-reliability.mdx   NEW 2026-03-28
+
+  assets\assets.js              serviceData REMOVED (S4). workData links intact. Unused icons removed.
+  __tests__\site.test.js        Jest test suite
 ```
 
 ---
 
 ## 5. Environment Variables
-`.env.local` (never committed):
+
+`.env.local` (project root, never committed):
 ```
 NEXT_PUBLIC_WEB3FORMS_KEY=424597d8-12b9-49ee-ad7d-5917b112e1e0
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6LdZamlrAAAAAAJN_G91ZV6ecoVf8HTHJdFe3oXHk
 ```
-Also set in Vercel dashboard → Portfolio → Settings → Environment Variables.
+Also set in Vercel → Portfolio → Settings → Environment Variables (Production + Preview + Development).
 
 ---
 
-## 6. Theme Tokens (globals.css) ✅
+## 6. Theme Tokens (globals.css)
+
 ```css
 :root {
-  --background: #F4F3F0;   --foreground: #1A1A2E;
-  --accent-color: #C9A84C; --accent-dark: #A8873A;
-  --card-bg: #FFFFFF;      --text-primary: #1A1A2E;
-  --text-secondary: #5A5A7A;
+  --background: #F4F3F0;    --foreground: #1A1A2E;
+  --accent-color: #C9A84C;  --accent-dark: #A8873A;   --accent-light: #E0C070;
+  --on-accent:    #1A1A2E;  /* text ON gold buttons — dark navy for WCAG AA contrast */
+  --card-bg: #FFFFFF;       --section-bg: #F4F3F0;    --hover-bg: #ECEAE5;
+  --text-primary: #1A1A2E;  --text-secondary: #5A5A7A;
+  --border-color: rgba(201,168,76,0.2);
 }
 .dark {
-  --background: #0D1117;   --foreground: #E8E8F0;
-  --accent-color: #C9A84C; --accent-dark: #A8873A;
-  --card-bg: #161B22;      --text-primary: #E8E8F0;
-  --text-secondary: #8B8BA7;
+  --background: #0D1117;    --foreground: #E8E8F0;
+  --accent-color: #C9A84C;  --accent-dark: #A8873A;
+  --on-accent:    #1A1A2E;  /* same in dark — dark text on gold always passes */
+  --card-bg: #161B22;       --section-bg: #0A0F14;    --hover-bg: #1C2230;
+  --text-primary: #E8E8F0;  --text-secondary: #8B8BA7;
+  --border-color: rgba(201,168,76,0.15);
 }
 ```
-Tailwind remaps (tailwind.config.mjs):
-- `darkTheme` → #0D1117 (deep navy)
-- `darkHover` → #1C2230 (navy card hover)
-- `lightHover` → #ECEAE5 (warm off-white hover)
-- `font-Ovo` → Sora (aliased)
+
+**Reusable component classes:**
+`.heading-eyebrow` `.heading-primary` `.gold-divider` `.button-primary` `.button-secondary`
+`.card-component` `.summary-card` `.blog-card` `.blog-prose`
 
 ---
 
-## 7. Blog System ✅
-- 39 MDX posts in `content/blogs/`
-- `mdx-utils.js` → reads files, parses frontmatter with gray-matter
-- `MDXContentServer.jsx` → renders MDX with @mdx-js/mdx evaluate()
-- `BlogPostClient.jsx` → client wrapper with gold/navy styling
-- API routes `/api/blogs` and `/api/blogs/[slug]` unchanged and working
-- Topics: data strategy, governance, mesh, MDM, TOGAF, cloud, AI, Snowflake, etc.
+## 7. Blog System
+
+**Rendering chain:**
+`mdx-utils.js` → `getBlogData()` → `MDXContentServer.jsx` → `@mdx-js/mdx evaluate()` → renders
+
+**Frontmatter format:**
+```yaml
+---
+title: "Post Title"
+date: "2026-04-20"
+category: "Data Governance"
+excerpt: "One sentence summary."
+coverImage: "/blog/image.jpg"
+author: "Shivendra Singh"
+readTime: "8 min read"
+---
+```
+
+**42 posts — topics covered:** data strategy, governance, mesh, MDM, TOGAF, cloud architecture,
+BI vs analytics, CISSP for leaders, ethical AI, predictive analytics, Snowflake, observability,
+quality, sharing, monetisation, ROI, DAMA DMBOK, Australian govt frameworks,
+agentic AI (new), AI governance trust paradox (new), data contracts (new).
+
+**Topics to write next:**
+- GenAI in data pipelines
+- Vector databases and RAG for enterprise
+- AI-ready data foundations
+- Real-time data mesh in practice
+- The CDO's guide to responsible AI
 
 ---
 
-## 8. Work History
-| Company | Role |
+## 8. Navigation
+
+```
+Home | About | Thought Leadership | Blog | My Work | Contact
+```
+
+Section IDs (used in page.js SECTIONS array + hash routing):
+```js
+const SECTIONS = ['about', 'thought-leadership', 'blogs', 'work', 'contact'];
+```
+
+---
+
+## 9. Animation Patterns
+
+```jsx
+// ALWAYS import from motion/react — never framer-motion
+import { motion, useMotionValue, useSpring, AnimatePresence } from 'motion/react'
+
+// Standard scroll reveal (use on every section)
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.1 }}
+  viewport={{ once: true }}
+/>
+
+// Word-by-word text reveal (used in Header)
+words.map((word, i) => (
+  <motion.span
+    initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+    transition={{ duration: 0.5, delay: i * 0.08 }}
+    className="inline-block mr-[0.25em]"
+  />
+))
+
+// Gold button shimmer
+<motion.div
+  animate={{ x: ['-100%', '200%'] }}
+  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+  className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
+/>
+
+// Gold glow hover on cards
+whileHover={{ y: -4, transition: { duration: 0.2 } }}
+// + CSS: hover:border-[var(--accent-color)] hover:shadow-[0_0_20px_rgba(201,168,76,0.15)]
+```
+
+---
+
+## 10. Security Status
+
+| Item | Status |
 |---|---|
-| Woolworths Group | Head of Data (most recent) |
-| Optus Pty Ltd | Senior data role |
-| Amdocs Limited | Data/analytics |
-| Camden Council | Data role |
-| Fidelity International | Data Analyst, Enterprise Data Warehouse |
-| Event Hospitality & Entertainment | Enterprise Data Architect — AWS, Snowflake, Matillion |
+| API keys in env vars | ✅ Done |
+| next-mdx-remote removed | ✅ Done — was Vercel vulnerability |
+| Content Security Policy | ✅ In next.config.mjs |
+| manifest.json updated | ✅ Gold theme-color |
+| Preconnect hints | ✅ Added in layout.js (fonts.gstatic, wikimedia, gstatic, google) |
+| Accessibility (WCAG AA) | ✅ 100/100 — all color contrast fixed via --on-accent token |
+| npm audit | ⚠️ 7 vulns remain: 4 low (jest-jsdom chain, test-only) + 3 moderate (postcss inside Next.js bundle — unfixable without Next.js upstream fix; NOT fixable via npm audit fix --force which would downgrade Next to v9) |
+| Google site verification | ⚠️ Placeholder in layout.js |
+| Contact form rate limiting | ⚠️ Not implemented |
 
 ---
 
-## 9. Services (8 pages)
-data-strategy · data-governance · advanced-analytics · data-platform
-ai-ml-solutions · business-intelligence · data-driven-product-dev · data-literacy
+## 11. Remaining Work (priority order)
+
+**Design:**
+1. [ ] Update work sub-pages (`app/work/*.jsx`) — gold/navy tokens (still old theme)
+2. [ ] Add reading progress bar on blog posts
+3. [ ] Add related posts at bottom of each blog post
+4. [ ] Build `/impact` or Case Studies section
+
+**Content:**
+5. [ ] Write 5 more blog posts (see topics in §7)
+6. [ ] Refresh 5 existing posts — update 2024 stats to 2026, more conversational
+7. [ ] Add Google site verification to layout.js
+
+**Performance / Security:**
+8. [ ] Refactor `page.js` — remove 'use client', make server component
+9. [ ] Add rate limiting to contact form API route
+10. [ ] npm vulns: wait for Next.js to ship patched postcss bundle (DO NOT run npm audit fix --force)
 
 ---
 
-## 10. Remaining Work (priority order)
-1. [ ] Redesign `Header.jsx` — premium hero, fix empty alt on profile photo
-2. [ ] Redesign `About.jsx` — real photo, clean layout
-3. [ ] Redesign `Navbar.jsx` — mobile nav improvements
-4. [ ] Redesign `Work.jsx` — portfolio cards
-5. [ ] Redesign `Footer.jsx`
-6. [ ] Redesign `Services.jsx`
-7. [ ] Build `/speaking` page (missing — important for personal brand)
-8. [ ] Refactor `page.js` → server component (SEO improvement)
-9. [ ] Fix metadata — Google verification placeholder
-10. [ ] `npm audit fix` — 4 vulnerabilities remaining
+## 12. Vercel
+
+| Field | Value |
+|---|---|
+| Team slug | connect-shivendras-projects |
+| Project | portfolio |
+| Install command | npm install --legacy-peer-deps (set in dashboard) |
+| MCP token | 403 — needs reconnect at vercel.com/account/tokens |
+| Production | shivendra.io + www.shivendra.io |
+| Auto-deploy | Push to main → live in ~1 min |
 
 ---
 
-## 11. Git Branch Strategy
-- **Never commit directly to main**
-- Feature branches → Vercel preview URL → review → merge to main → shivendra.io updates
-- Rollback: `vercel rollback` (CLI) or Vercel dashboard → Deployments → ⋯ → Promote
+## 13. Session Log
 
----
-
-## 12. Session Log
 | Date | What was done |
 |---|---|
-| 2026-04-26 S1 | Full audit. Security issues found. SKILL.md created. |
-| 2026-04-26 S2 | Git setup. npm install. Dev workflow established. |
-| 2026-04-26 S3 | Removed next-mdx-remote (Vercel vulnerability block). Replaced with @mdx-js/mdx. Gold/navy theme live on shivendra.io. CSP header. Env vars. Test suite. Tailwind remapped. |
+| 2026-04-26 S1 | Full audit. Security issues. SKILL.md v1. |
+| 2026-04-26 S2 | Git from zip. npm install. Dev workflow. Security commits. |
+| 2026-04-26 S3 | **Removed next-mdx-remote** (Vercel block). @mdx-js/mdx. Gold/navy live on shivendra.io. CSP. Hero animated (particles/word-reveal/counters/shimmer). Navbar modernised. Thought Leadership section built. Footer redesigned. All components gold/navy. 3 new blog posts. |
+| 2026-04-27 S4 | **Cleanup + Lighthouse.** Deleted Services.jsx. All 8 /services/* sub-pages replaced with server redirects → /#thought-leadership. Removed serviceData + unused icon imports from assets.js. Ran Lighthouse (desktop + mobile). **Accessibility 96→100** via --on-accent token (#1A1A2E on gold, 7.5:1 ratio) applied to button-primary, blog-category-tag, Navbar, Header, Blogs, Footer. Fixed aria-label mismatch on "Get in Touch" button. Added preconnect hints for wikimedia/gstatic/google. npm audit: 7 vulns remain (unfixable without breaking changes). |

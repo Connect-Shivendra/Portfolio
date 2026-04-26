@@ -222,7 +222,8 @@ export default function Header() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.4, duration: 0.6 }}
-            className="absolute -right-4 -bottom-2 bg-[var(--accent-color)] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg whitespace-nowrap z-20"
+            className="absolute -right-4 -bottom-2 bg-[var(--accent-color)] text-xs font-semibold px-3 py-1 rounded-full shadow-lg whitespace-nowrap z-20"
+            style={{ color: 'var(--on-accent)' }}
           >
             Sydney, Australia 🇦🇺
           </motion.div>
@@ -284,8 +285,8 @@ export default function Header() {
         >
           <a
             href="#contact"
-            className="group relative px-10 py-3.5 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(201,168,76,0.4)]"
-            style={{ background: 'var(--accent-color)' }}
+            className="group relative px-10 py-3.5 rounded-full font-semibold overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(201,168,76,0.4)]"
+            style={{ background: 'var(--accent-color)', color: 'var(--on-accent)' }}
           >
             {/* Shimmer effect */}
             <motion.div
@@ -295,7 +296,7 @@ export default function Header() {
             />
             <span className="relative flex items-center gap-2">
               Say Hello
-              <Image src={assets.right_arrow_white} alt="" className="w-4 group-hover:translate-x-1 transition-transform" />
+              <Image src={assets.right_arrow_bold} alt="" className="w-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </a>
 

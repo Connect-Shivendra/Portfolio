@@ -23,10 +23,6 @@ import menu_black from './menu-black.png';
 import menu_white from './menu-white.png';
 import close_black from './close-black.png';
 import close_white from './close-white.png';
-import web_icon from './web-icon.png';
-import mobile_icon from './mobile-icon.png';
-import ui_icon from './ui-icon.png';
-import graphics_icon from './graphics-icon.png';
 import right_arrow from './right-arrow.png';
 import send_icon from './send-icon.png';
 import right_arrow_bold from './right-arrow-bold.png';
@@ -60,10 +56,6 @@ export const assets = {
     menu_white,
     close_black,
     close_white,
-    web_icon,
-    mobile_icon,
-    ui_icon,
-    graphics_icon,
     right_arrow,
     send_icon,
     right_arrow_bold,
@@ -108,65 +100,6 @@ export const workData = [
         description: 'Senior Subject Matter Expert',
         bgImage: '/work-4.png',
         link: '/work/amdocs-limited'
-    },
-];
-
-export const serviceData = [
-    { 
-      icon: assets.mobile_icon, 
-      title: 'Data Strategy & Roadmap Development', 
-      description: 'Crafting a clear data strategy aligned with your business goals. We\'ll help you define your data vision, identify key data assets, and create a roadmap for data-driven success', 
-      link: '/services/data-strategy',
-      bgImage: '/images/DataStrategy.jpg'
-    },
-    { 
-      icon: assets.mobile_icon, 
-      title: 'Data Governance & Compliance', 
-      description: 'Establishing robust data governance frameworks and ensuring compliance with relevant regulations (e.g., GDPR, CCPA). We help you manage data quality, security, and ethical use', 
-      link: '/services/data-governance',
-      bgImage: '/images/Governance.jpg'
-    },
-    { 
-      icon: assets.web_icon, 
-      title: 'Advanced Analytics & Insights', 
-      description: 'Leveraging advanced analytics and machine learning to uncover hidden patterns and generate actionable insights from your data. We help you make smarter decisions and predict future trends', 
-      link: '/services/advanced-analytics',
-      bgImage: '/images/Advanced Analytics.png'
-    },
-    { 
-      icon: assets.ui_icon, 
-      title: 'Data Platform, Security & Infrastructure Modernization', 
-      description: 'Designing and implementing modern data platforms (cloud, on-prem, or hybrid) that are scalable, reliable, and cost-effective. We help you migrate from legacy systems and embrace new technologies', 
-      link: '/services/data-platform',
-      bgImage: '/images/AI-ML.jpg'
-    },
-    { 
-      icon: assets.graphics_icon, 
-      title: 'Business Intelligence & Reporting', 
-      description: 'Developing interactive dashboards and reports that provide a clear view of your business performance. We empower your teams with self-service analytics capabilities', 
-      link: '/services/business-intelligence',
-      bgImage: '/images/data-literacy.jpg'
-    },
-    { 
-      icon: assets.graphics_icon, 
-      title: 'Data-Driven Product Development', 
-      description: 'Incorporating data analytics into your product development lifecycle to create innovative, customer-centric products and services', 
-      link: '/services/data-driven-product-dev',
-      bgImage: '/images/data-driven-product.webp'
-    },
-    { 
-      icon: assets.graphics_icon, 
-      title: 'AI & Machine Learning Solutions', 
-      description: 'Building and deploying custom AI and machine learning models to solve complex business problems, from predictive maintenance to personalized customer experiences', 
-      link: '/services/ai-ml-solutions',
-      bgImage: '/images/AI-ML.jpg'
-    },
-    { 
-      icon: assets.graphics_icon, 
-      title: 'Data Literacy & Upskilling Programs', 
-      description: 'Empowering your workforce with the data literacy and skills needed to thrive in a data-driven world. We offer tailored training programs and workshops', 
-      link: '/services/data-literacy',
-      bgImage: '/images/data-literacy.jpg'
     },
 ];
 

@@ -130,9 +130,8 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
           {/* Contact CTA — desktop */}
           <button
             onClick={() => handleNavClick('contact')}
-            aria-label="Contact Shivendra"
-            className="hidden lg:flex items-center gap-2 px-6 py-2 rounded-full font-Sora font-semibold text-sm transition-all duration-300 text-white hover:shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:-translate-y-px"
-            style={{ background: 'var(--accent-color)' }}
+            className="hidden lg:flex items-center gap-2 px-6 py-2 rounded-full font-Sora font-semibold text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:-translate-y-px"
+            style={{ background: 'var(--accent-color)', color: 'var(--on-accent)' }}
           >
             Get in Touch
             <Image src={assets.arrow_icon_dark} alt="" className="w-3" />
@@ -208,8 +207,8 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
               <div className="mt-auto">
                 <button
                   onClick={() => handleNavClick('contact')}
-                  className="w-full py-3 rounded-full font-Sora font-semibold text-sm text-white"
-                  style={{ background: 'var(--accent-color)' }}
+                  className="w-full py-3 rounded-full font-Sora font-semibold text-sm"
+                  style={{ background: 'var(--accent-color)', color: 'var(--on-accent)' }}
                 >
                   Get in Touch
                 </button>

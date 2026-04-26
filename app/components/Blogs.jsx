@@ -31,10 +31,7 @@ const BlogCard = ({ blog, index }) => (
           </div>
         )}
         {/* Category badge */}
-        <div
-          className="absolute bottom-3 left-3 text-xs font-semibold px-3 py-1 rounded-full text-white"
-          style={{ background: 'var(--accent-color)' }}
-        >
+        <div className="absolute bottom-3 left-3 blog-category-tag">
           {blog.frontmatter.category}
         </div>
       </div>
@@ -113,7 +110,7 @@ const Blogs = ({ blogs }) => {
             className="px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300"
             style={{
               background: selectedCategory === item.name ? 'var(--accent-color)' : 'var(--card-bg)',
-              color: selectedCategory === item.name ? '#fff' : 'var(--text-secondary)',
+              color: selectedCategory === item.name ? 'var(--on-accent)' : 'var(--text-secondary)',
               border: `1px solid ${selectedCategory === item.name ? 'var(--accent-color)' : 'var(--border-color)'}`,
             }}
             aria-label={`Filter by ${item.name}`}
