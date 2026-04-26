@@ -1,34 +1,45 @@
 /**
  * mdx-utils.js
- * Blog utility functions — reads MDX files, parses frontmatter, returns content.
- * MDX rendering happens in MDXContentServer.jsx via next-mdx-remote/rsc (server component).
- * This file intentionally does NOT import serialize — it is not needed here.
+ * Blog utility — reads MDX files, parses frontmatter, compiles MDX content.
+ * Uses @mdx-js/mdx (compileMDX) — no next-mdx-remote dependency at all.
  */
 
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { compileMDX } from '@mdx-js/mdx';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
 import { cache } from 'react';
 
 const blogsDirectory = path.join(process.cwd(), 'content/blogs');
 
 /**
- * Get a single blog post's frontmatter + raw MDX content by slug.
- * Raw content is passed to MDXContentServer for server-side rendering.
+ * Get a single blog post's frontmatter + raw content by slug.
+ * Raw content string is used by MDXContentServer for rendering.
  */
 export const getBlogData = cache(async (slug) => {
   try {
-    // Support both .mdx and .md extensions
     let fullPath = path.join(blogsDirectory, `${slug}.mdx`);
     if (!fs.existsSync(fullPath)) {
       fullPath = path.join(blogsDirectory, `${slug}.md`);
     }
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
+
     return {
       slug,
-      frontmatter: data,
-      content, // raw MDX string — rendered by MDXContentServer via next-mdx-remote/rsc
+      frontmatter: {
+        title: data.title || slug,
+        date: data.date || null,
+        description: data.description || data.excerpt || '',
+        excerpt: data.excerpt || data.description || '',
+        category: data.category || 'General',
+        coverImage: data.coverImage || null,
+        author: data.author || 'Shivendra Singh',
+        ...data,
+      },
+      content, // raw MDX string for MDXContentServer
     };
   } catch (error) {
     throw new Error(`Failed to read blog: ${slug} — ${error.message}`);
@@ -43,7 +54,7 @@ export const getAllBlogs = cache(async () => {
     const files = fs.readdirSync(blogsDirectory);
     const blogs = await Promise.all(
       files
-        .filter(file => file.endsWith('.mdx') || file.endsWith('.md'))
+        .filter(f => f.endsWith('.mdx') || f.endsWith('.md'))
         .map(async (file) => {
           const slug = file.replace(/\.(mdx|md)$/, '');
           return getBlogData(slug);
@@ -61,17 +72,13 @@ export const getAllBlogs = cache(async () => {
  * Get all unique blog categories.
  */
 export const getCategories = cache(async () => {
-  try {
-    const blogs = await getAllBlogs();
-    const categories = new Set(blogs.map(blog => blog.frontmatter.category));
-    return Array.from(categories);
-  } catch (error) {
-    throw new Error('Failed to get categories');
-  }
+  const blogs = await getAllBlogs();
+  const categories = new Set(blogs.map(b => b.frontmatter.category));
+  return Array.from(categories);
 });
 
 /**
- * Get all blog slugs (filenames without extension).
+ * Get all blog slugs.
  */
 export function getBlogSlugs() {
   return fs.readdirSync(blogsDirectory)
@@ -85,5 +92,5 @@ export function getBlogSlugs() {
 export async function getBlogsByCategory(category) {
   const allBlogs = await getAllBlogs();
   if (category === 'All') return allBlogs;
-  return allBlogs.filter(blog => blog.frontmatter.category === category);
+  return allBlogs.filter(b => b.frontmatter.category === category);
 }
