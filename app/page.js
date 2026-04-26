@@ -5,12 +5,13 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import Services from "./components/Services";
+import ThoughtLeadership from "./components/ThoughtLeadership";
 import Work from "./components/Work";
 import Blogs from "./components/Blogs";
 import { usePathname, useSearchParams } from "next/navigation";
 
-// Create a separate component for the search params logic
+const SECTIONS = ['about', 'thought-leadership', 'blogs', 'work', 'contact'];
+
 function HomeContent() {
   const [blogs, setBlogs] = useState([]);
   const [activeSection, setActiveSection] = useState('top');
@@ -22,18 +23,16 @@ function HomeContent() {
     const hash = window.location.hash.replace('#', '');
     if (pathname === '/' && !hash) {
       setActiveSection('top');
-    } else if (hash && ['about', 'services', 'blogs', 'work', 'contact'].includes(hash)) {
+    } else if (hash && SECTIONS.includes(hash)) {
       setActiveSection(hash);
       window.scrollTo(0, 0);
     }
   }, [pathname, searchParams]);
-  
-  // Scroll to top whenever active section changes
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeSection]);
 
-  // Load blogs
   useEffect(() => {
     const loadBlogs = async () => {
       try {
@@ -48,30 +47,28 @@ function HomeContent() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--background)]">
+    <div className="flex flex-col min-h-screen" style={{ background: 'var(--background)' }}>
       <Navbar isOnBlogPage={false} setActiveSection={setActiveSection} />
-      
-      <main className="pt-28 flex-grow">
+      <main className="pt-24 flex-grow">
         {activeSection === 'top' ? (
-            <>
-              <Header />
-              <About />
-              <Services />
-              <Blogs blogs={blogs} />
-              <Work />
-              <Contact />
-            </>
-          ) : (
-            <>
-              {activeSection === 'about' && <About />} 
-              {activeSection === 'services' && <Services />} 
-              {activeSection === 'blogs' && <Blogs blogs={blogs} />} 
-              {activeSection === 'work' && <Work />} 
-              {activeSection === 'contact' && <Contact />} 
-            </>
-          )}
+          <>
+            <Header />
+            <About />
+            <ThoughtLeadership />
+            <Blogs blogs={blogs} />
+            <Work />
+            <Contact />
+          </>
+        ) : (
+          <>
+            {activeSection === 'about' && <About />}
+            {activeSection === 'thought-leadership' && <ThoughtLeadership />}
+            {activeSection === 'blogs' && <Blogs blogs={blogs} />}
+            {activeSection === 'work' && <Work />}
+            {activeSection === 'contact' && <Contact />}
+          </>
+        )}
       </main>
-      
       <Footer />
     </div>
   );
@@ -80,11 +77,14 @@ function HomeContent() {
 export default function Home() {
   return (
     <Suspense fallback={
-      <div className="flex flex-col min-h-screen bg-[var(--background)]">
+      <div className="flex flex-col min-h-screen" style={{ background: 'var(--background)' }}>
         <div className="flex-grow flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
+            <div
+              className="w-10 h-10 rounded-full border-2 border-t-transparent mx-auto animate-spin"
+              style={{ borderColor: 'var(--accent-color)', borderTopColor: 'transparent' }}
+            />
+            <p className="mt-4 text-sm text-[var(--text-secondary)]">Loading…</p>
           </div>
         </div>
       </div>
@@ -93,4 +93,3 @@ export default function Home() {
     </Suspense>
   );
 }
-

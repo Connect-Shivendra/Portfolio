@@ -2,42 +2,63 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion } from 'motion/react';
 import { BlogsList } from '@/assets/assets';
-import Image from 'next/image';
 
 const BLOGS_PER_PAGE = 9;
 
-const BlogCard = ({ blog, index }) => {
-  return (
-    <article className="blog-card bg-[var(--card-bg)] dark:bg-darkHover shadow-lg rounded-lg overflow-hidden h-full transition-colors duration-300 hover:shadow-xl flex flex-col" aria-label={`Blog post: ${blog.frontmatter.title}`}> 
-      <Link href={`/blog/${blog.slug}`} className="block focus:outline-none focus:ring-2 focus:ring-accent-500 rounded-lg">
-        <div className="h-48 bg-gray-200 dark:bg-gray-700 relative">
-          {blog.frontmatter.coverImage ? (
-            <div 
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${blog.frontmatter.coverImage})` }}
-            ></div>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-500 dark:text-white">
-              No image available
-            </div>
-          )}
-          <div className="absolute bottom-0 left-0 bg-darkTheme dark:bg-darkHover text-white text-xs px-2 py-1">
-            {blog.frontmatter.category}
+const BlogCard = ({ blog, index }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4, delay: index * 0.05 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+    className="blog-card flex flex-col group"
+    aria-label={`Blog post: ${blog.frontmatter.title}`}
+  >
+    <Link href={`/blog/${blog.slug}`} className="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] rounded-xl">
+      {/* Cover image */}
+      <div className="h-44 rounded-t-xl overflow-hidden relative" style={{ background: 'var(--hover-bg)' }}>
+        {blog.frontmatter.coverImage ? (
+          <div
+            className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+            style={{ backgroundImage: `url(${blog.frontmatter.coverImage})` }}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-3xl opacity-20">✦</span>
           </div>
+        )}
+        {/* Category badge */}
+        <div
+          className="absolute bottom-3 left-3 text-xs font-semibold px-3 py-1 rounded-full text-white"
+          style={{ background: 'var(--accent-color)' }}
+        >
+          {blog.frontmatter.category}
         </div>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white font-Ovo">{blog.frontmatter.title}</h3>
-          <p className="text-sm text-gray-600 dark:text-white/90 mb-3">{blog.frontmatter.excerpt}</p>
-          <div className="flex justify-between items-center text-xs text-gray-500 dark:text-white/80">
-            <time dateTime={blog.frontmatter.date}>{blog.frontmatter.date}</time>
-            <span>By {blog.frontmatter.author}</span>
-          </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-base font-semibold font-Sora text-[var(--text-primary)] mb-2 leading-snug group-hover:text-[var(--accent-color)] transition-colors duration-300 line-clamp-2">
+          {blog.frontmatter.title}
+        </h3>
+        <p className="text-sm text-[var(--text-secondary)] mb-4 line-clamp-2 leading-relaxed flex-grow">
+          {blog.frontmatter.excerpt}
+        </p>
+        <div className="flex justify-between items-center text-xs text-[var(--text-secondary)] mt-auto pt-3 border-t border-[var(--border-color)]">
+          <time dateTime={blog.frontmatter.date}>
+            {blog.frontmatter.date ? new Date(blog.frontmatter.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' }) : ''}
+          </time>
+          <span className="font-medium" style={{ color: 'var(--accent-color)' }}>
+            {blog.frontmatter.readTime || '5 min read'}
+          </span>
         </div>
-      </Link>
-    </article>
-  );
-};
+      </div>
+    </Link>
+  </motion.article>
+);
 
 const Blogs = ({ blogs }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -46,94 +67,109 @@ const Blogs = ({ blogs }) => {
 
   useEffect(() => {
     if (!blogs) return;
-    let filtered = blogs;
-    if (selectedCategory !== 'All') {
-      filtered = blogs.filter(blog => blog.frontmatter.category === selectedCategory);
-    }
+    const filtered = selectedCategory === 'All'
+      ? blogs
+      : blogs.filter(b => b.frontmatter.category === selectedCategory);
     setFilteredBlogs(filtered);
-    setPage(1); // Reset to first page on filter change
+    setPage(1);
   }, [selectedCategory, blogs]);
 
-  // Pagination logic
   const totalPages = Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE);
   const paginatedBlogs = filteredBlogs.slice((page - 1) * BLOGS_PER_PAGE, page * BLOGS_PER_PAGE);
 
   return (
-    <section 
-      id='blogs' 
-      className='w-full px-[12%] py-10 bg-[var(--background)] text-[var(--foreground)] dark:bg-[var(--background)]'
+    <section
+      id="blogs"
+      className="w-full px-6 md:px-[8%] py-20"
+      style={{ background: 'var(--section-bg)' }}
       aria-label="Blog section"
     >
-      <h2 
-        className='text-center mb-6 text-2xl font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'
+      {/* Header */}
+      <motion.p
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="heading-eyebrow"
       >
-        My Blogs
-      </h2>
-      
-      <div 
-        className='flex flex-wrap items-center gap-3 md:gap-6 rounded-full px-4 md:px-12 py-3 justify-center mb-8 overflow-x-auto whitespace-nowrap'
+        Writing
+      </motion.p>
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        viewport={{ once: true }}
+        className="heading-primary"
       >
-        {BlogsList.map((item, index) => (
-          <button 
-            key={index}
+        Articles & Insights
+      </motion.h2>
+      <div className="gold-divider mb-10" />
+
+      {/* Category filter */}
+      <div className="flex flex-wrap justify-center gap-2 mb-10">
+        {BlogsList.map((item, i) => (
+          <button
+            key={i}
             onClick={() => setSelectedCategory(item.name)}
-            className={`px-3 py-1 rounded-full text-sm transition-colors duration-300 ${
-              selectedCategory === item.name 
-                ? 'bg-darkTheme dark:bg-darkHover text-white' 
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-lightHover dark:hover:bg-darkHover/70'
-            }`}
-            aria-label={`Filter blogs by ${item.name}`}
+            className="px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300"
+            style={{
+              background: selectedCategory === item.name ? 'var(--accent-color)' : 'var(--card-bg)',
+              color: selectedCategory === item.name ? '#fff' : 'var(--text-secondary)',
+              border: `1px solid ${selectedCategory === item.name ? 'var(--accent-color)' : 'var(--border-color)'}`,
+            }}
+            aria-label={`Filter by ${item.name}`}
           >
             {item.name}
           </button>
         ))}
       </div>
 
-      {filteredBlogs && filteredBlogs.length > 0 ? (
+      {/* Grid */}
+      {filteredBlogs.length > 0 ? (
         <>
-          <div 
-            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
-          >
-            {paginatedBlogs.map((blog, index) => (
-              <BlogCard key={index} blog={blog} index={index} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {paginatedBlogs.map((blog, i) => (
+              <BlogCard key={blog.slug || i} blog={blog} index={i} />
             ))}
           </div>
+
+          {/* Pagination */}
           {totalPages > 1 && (
-            <nav className="flex justify-center mt-8 gap-2" aria-label="Blog pagination">
+            <nav className="flex justify-center items-center gap-2 mt-12" aria-label="Blog pagination">
               <button
-                onClick={() => setPage(page - 1)}
+                onClick={() => setPage(p => p - 1)}
                 disabled={page === 1}
-                className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white disabled:opacity-50"
-                aria-label="Previous page"
+                className="px-4 py-2 rounded-full text-sm font-medium border border-[var(--border-color)] text-[var(--text-secondary)] disabled:opacity-40 hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-300"
               >
-                Previous
+                ← Prev
               </button>
               {[...Array(totalPages)].map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setPage(i + 1)}
-                  className={`px-3 py-1 rounded ${page === i + 1 ? 'bg-darkTheme dark:bg-darkHover text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'}`}
-                  aria-label={`Go to page ${i + 1}`}
+                  className="w-9 h-9 rounded-full text-sm font-medium border transition-all duration-300"
+                  style={{
+                    background: page === i + 1 ? 'var(--accent-color)' : 'transparent',
+                    borderColor: page === i + 1 ? 'var(--accent-color)' : 'var(--border-color)',
+                    color: page === i + 1 ? '#fff' : 'var(--text-secondary)',
+                  }}
+                  aria-label={`Page ${i + 1}`}
                 >
                   {i + 1}
                 </button>
               ))}
               <button
-                onClick={() => setPage(page + 1)}
+                onClick={() => setPage(p => p + 1)}
                 disabled={page === totalPages}
-                className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white disabled:opacity-50"
-                aria-label="Next page"
+                className="px-4 py-2 rounded-full text-sm font-medium border border-[var(--border-color)] text-[var(--text-secondary)] disabled:opacity-40 hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-300"
               >
-                Next
+                Next →
               </button>
             </nav>
           )}
         </>
       ) : (
-        <div 
-          className='text-center py-10 text-gray-500 dark:text-white'
-        >
-          No blog posts found in this category.
+        <div className="text-center py-16 text-[var(--text-secondary)]">
+          No posts found in this category.
         </div>
       )}
     </section>

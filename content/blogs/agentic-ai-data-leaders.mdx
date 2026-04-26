@@ -1,0 +1,101 @@
+---
+title: "Agentic AI: What Every Data Leader Needs to Know Right Now"
+date: "2026-04-20"
+category: "AI & Machine Learning"
+excerpt: "Agentic AI isn't a future concept — nearly half of organisations have already adopted it. Here's what it means for your data strategy, your governance framework, and your team."
+coverImage: "/blog/agentic-ai-cover.jpg"
+author: "Shivendra Singh"
+readTime: "8 min read"
+---
+
+# Agentic AI: What Every Data Leader Needs to Know Right Now
+
+Let me start with a number that should get your attention: **47% of organisations have already adopted agentic AI**. That's not a prediction from a Gartner Magic Quadrant. That's from Informatica's CDO Insights 2026 survey of 600 data leaders, published in January this year.
+
+If you're a data leader and agentic AI isn't already on your roadmap, you're not ahead of the curve — you're behind it.
+
+But here's the more uncomfortable truth: **half of those same leaders say data quality is their top challenge in deploying agentic AI**. We're rolling out autonomous systems on top of data foundations that we know are unreliable. That's not a technology risk. That's a governance crisis waiting to happen.
+
+## What Actually Makes AI "Agentic"
+
+Before we get into strategy, let's be precise about what we mean. There's a lot of marketing noise around this term.
+
+Agentic AI systems can:
+- **Plan** — break down a complex goal into subtasks
+- **Execute** — take actions (API calls, database writes, emails, code execution) without human approval at each step
+- **Adapt** — change their approach based on what they observe
+- **Persist** — maintain context and goals across long time horizons
+
+This is fundamentally different from a chatbot that answers questions or a model that classifies images. An agent *does things in the world* — and it does them autonomously, at speed, at scale.
+
+The classic example I give my teams: a RAG-based chatbot that answers customer service questions is generative AI. An agent that reads a customer complaint, checks the order system, issues a refund, updates the CRM, and sends a personalised email — without a human approving each step — is agentic AI.
+
+Same underlying models. Completely different risk profile.
+
+## The Data Quality Problem Is Worse Than You Think
+
+I want to spend time on this because it's where I see the most danger.
+
+When a human analyst works with bad data, they notice. They pause. They ask questions. Their intuition flags something as off. When an agentic system works with bad data, it acts on it — confidently, quickly, and often at a scale no human could match.
+
+I've seen this firsthand. In one deployment, an agentic workflow was quietly over-prioritising certain cost variables in a planning model in a way that didn't align with our risk appetite. We caught it within days because we'd instrumented the system well. But if we hadn't? The agent would have continued making thousands of micro-decisions based on a flawed objective function — each one individually small, collectively significant.
+
+The CDO Insights 2026 data confirms this isn't unique to my experience:
+
+- **57% of data leaders** cite data reliability as a top barrier to moving AI from pilot to production
+- **50% specifically** call out data quality as their biggest challenge for agentic AI
+- **76% say** their AI governance hasn't kept pace with employee use of AI
+
+That third number is the one that keeps me up at night.
+
+## What Good Governance Looks Like for Agentic Systems
+
+If you're building or planning to build agentic AI, here's the governance framework I'd recommend starting with.
+
+### 1. Data Contracts as a First Principle
+
+Agentic systems need data they can trust completely, not data that's "usually fine." This means formalising data contracts — explicit agreements between data producers and consumers about schema, freshness, completeness, and acceptable null rates.
+
+Data contracts aren't new, but agentic AI makes them urgent. When a human is the consumer, they can tolerate ambiguity. An agent cannot.
+
+### 2. Observability Over Auditing
+
+Traditional data governance is retrospective — we audit what happened. Agentic governance needs to be real-time. You need to know what an agent is doing *while it's doing it*, not after it's made 10,000 decisions.
+
+Build observability into every agentic workflow from day one:
+- Log every action the agent takes and why
+- Set trip-wires for unexpected patterns (volume spikes, unusual data access, edge-case decisions)
+- Require human review for decisions above defined thresholds
+
+### 3. Bounded Action Spaces
+
+Every agentic system should have explicit limits on what it can and cannot do. Not as an afterthought — as a core design constraint. What systems can it write to? What's the maximum financial impact of any single action? What happens when it encounters data it doesn't expect?
+
+These aren't technical questions. They're governance questions that data leaders should be driving.
+
+### 4. Rollback Architecture
+
+This one is practical but often missed. If an agent makes 500 decisions in an hour and 50 of them are wrong, can you roll them back? Can you identify which ones? Build your agentic systems with state management that makes intervention possible.
+
+## The Opportunity, Not Just the Risk
+
+I don't want to leave you with the impression that agentic AI is just a governance headache. The upside is real and I've seen it.
+
+Teams using agentic workflows for data pipeline monitoring and remediation are catching data quality issues before they reach downstream consumers — automatically, without human intervention. In one case, an agent identified a schema drift in a third-party data feed, quarantined the affected records, notified the data owner, and drafted a resolution path — all in under three minutes. That used to take hours of on-call engineering time.
+
+The organisations that will win with agentic AI are the ones that treat it as a data challenge, not just an AI challenge. They invest in the data foundation *first*, build governance *in*, and deploy incrementally in low-risk pipelines before scaling.
+
+## What to Do This Quarter
+
+If you're a data leader trying to figure out where to start, here's my practical advice:
+
+1. **Audit your data quality** in the pipelines most likely to feed agentic systems. Be honest about what you find.
+2. **Define your agent action boundaries** — what is in scope and what requires human approval, in writing, before any deployment.
+3. **Pick one low-risk pilot** and instrument it fully. Don't scale until you've proven the observability layer works.
+4. **Update your data governance framework** to explicitly address agentic AI. If your current framework was written before 2024, it almost certainly doesn't.
+
+Agentic AI is not coming. It's here. The question is whether your data foundation is ready for it.
+
+---
+
+*Gartner predicts that by 2030, 50% of organisations will use autonomous AI agents to interpret governance policies and automate compliance enforcement. The data leaders who start building that foundation now will be the ones making that prediction look conservative.*

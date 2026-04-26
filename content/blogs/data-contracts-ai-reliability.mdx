@@ -1,0 +1,130 @@
+---
+title: "Data Contracts: The Missing Link Between Data Quality and AI Reliability"
+date: "2026-03-28"
+category: "Data Governance"
+excerpt: "Data contracts are the most practical thing you can implement right now to make your AI initiatives more reliable. Here's what they are, why they matter, and how to actually implement them."
+coverImage: "/blog/data-contracts-cover.jpg"
+author: "Shivendra Singh"
+readTime: "9 min read"
+---
+
+# Data Contracts: The Missing Link Between Data Quality and AI Reliability
+
+I want to talk about data contracts — not because they're new (they've been around in various forms for years) but because the rise of AI has made them urgent in a way they weren't before.
+
+Here's the core idea. When a software team builds an API, they document it. They publish a contract: here's the endpoint, here's the expected input, here's the schema you'll get back, here's the SLA. If you build something that depends on that API, you know exactly what to expect. And if the API changes in a breaking way, there's a versioning and deprecation process.
+
+Data teams almost never do this. Data flows through organisations like water through old pipes — informally, undocumented, with implicit expectations that break silently when something changes upstream.
+
+That's always been a problem. With AI, it becomes critical.
+
+## Why AI Makes Data Contracts Urgent
+
+When a human analyst consumes data, they notice when something looks off. The numbers feel wrong. A category is missing. A date range has an unexpected gap. Their domain knowledge and intuition act as a buffer.
+
+Machine learning models don't have intuition. They learn patterns from the data they're given — and if that data changes in ways the model wasn't trained to expect, the model doesn't flag an anomaly. It adapts silently. It starts making predictions based on the new (wrong) distribution. And because the outputs still look like outputs — numbers, classifications, recommendations — nobody notices until the damage is done.
+
+This is why **50% of data leaders in the 2026 CDO Insights survey cite data quality as their biggest challenge specifically for agentic AI**. The stakes are higher with autonomous systems. And the solution, at its core, is formalising what "good data" means before anyone depends on it.
+
+That's a data contract.
+
+## What a Data Contract Actually Contains
+
+A data contract is a formal specification that defines the agreement between a data producer (a team, system, or pipeline that creates or publishes data) and a data consumer (a team, model, or application that uses it).
+
+At minimum, a good data contract covers:
+
+**Schema** — What fields exist, what types they are, which are required. Sounds basic. But I've worked at organisations where the same field had three different names across three systems, and the reconciliation logic lived in someone's head.
+
+**Data quality expectations** — Acceptable null rates, value ranges, referential integrity requirements. "Order amount should never be negative" is a quality expectation. "Customer ID should always match a record in the CRM" is another. Write these down.
+
+**Freshness and latency SLAs** — How often is this data updated? What's the maximum acceptable lag? For AI model training, staleness isn't just inconvenient — it can fundamentally compromise model validity.
+
+**Ownership and accountability** — Who is responsible when the contract is violated? This is the human element that most implementations skip, and it's the most important part.
+
+**Versioning and deprecation policy** — How much notice do consumers get when the schema changes? What's the process for handling breaking changes?
+
+**Testing and validation** — How will compliance with the contract be automatically verified? This is where data contracts go from documents to infrastructure.
+
+## How to Actually Implement Them
+
+Theory is easy. Implementation is where most teams stall. Here's the practical approach I've used.
+
+### Start with Your Highest-Risk Pipelines
+
+Don't try to contract everything at once. Start with the pipelines that feed your most important AI models or business decisions. Map the data flows, identify the implicit assumptions, and make them explicit.
+
+A two-week sprint with a data engineer and a data steward can produce a working contract for a critical pipeline. Do that for your top three pipelines before you try to scale.
+
+### Use Code as the Source of Truth
+
+The worst data contracts I've seen are Word documents that live in SharePoint and are updated once a year. The best ones are YAML or JSON files that live in version control, alongside the data pipeline code they describe.
+
+Tools like Great Expectations, Soda, and dbt tests allow you to express data quality expectations as code — and execute those expectations as part of your data pipeline. When data violates a contract, the pipeline fails or routes to a quarantine layer. Silently wrong data never makes it downstream.
+
+Here's a simple example of what a contract-as-code approach looks like with dbt:
+
+```sql
+-- models/orders.sql
+-- Data contract: orders should always have a valid customer_id
+-- and order_amount should be positive
+
+select
+  order_id,
+  customer_id,
+  order_amount,
+  order_date
+from raw_orders
+where order_amount > 0
+  and customer_id is not null
+```
+
+```yaml
+# schema.yml
+models:
+  - name: orders
+    description: "Validated orders data"
+    tests:
+      - not_null:
+          column_name: customer_id
+      - positive_values:
+          column_name: order_amount
+      - relationships:
+          column_name: customer_id
+          to: ref('customers')
+          field: customer_id
+```
+
+This is a contract. It's in version control. It runs on every pipeline execution. It fails loudly when violated.
+
+### Build a Consumer Notification System
+
+When a contract is violated, the producer needs to know — but so do the consumers. Build a notification layer that alerts downstream teams when data quality issues are detected. An AI model that was trained on clean orders data needs to know when the orders pipeline has a problem, so it can suppress predictions or flag them as lower confidence.
+
+This sounds complex, but at its simplest it's a Slack alert and a dashboard. Start there.
+
+### Make Contracts Part of Your Data Product Mindset
+
+The deepest implementation of data contracts comes when you shift to treating data as a product. Data products have owners, SLAs, roadmaps — and contracts with their consumers.
+
+When a new data consumer wants to use a dataset, they sign up for the contract. They're notified of changes. They have a support channel. This is the model that the most mature data organisations have adopted, and it fundamentally changes the relationship between data producers and consumers from informal to accountable.
+
+## The Cultural Challenge
+
+I want to be honest about the hardest part of implementing data contracts, because it's not technical.
+
+It's the conversation with the team that owns the data when you tell them they now have a formal obligation to maintain quality and notify consumers of changes. That conversation reveals whether data ownership in your organisation is meaningful or theoretical.
+
+If you have strong data stewardship — clear owners, documented domains, accountability in someone's KPIs — this conversation is straightforward. If data ownership is ambiguous or nominal, data contracts will expose that gap.
+
+That's actually useful information. The implementation exercise becomes an audit of your governance maturity.
+
+## Where Gartner Is Heading
+
+Gartner's 2026 data and analytics predictions include this: **by 2030, 50% of organisations will use autonomous AI agents to interpret governance policies and technical standards into machine-verifiable data contracts**. That means contracts aren't just a best practice — they're the infrastructure that AI governance systems will depend on.
+
+The organisations investing in data contracts now are building the foundation that makes that future possible. The ones who aren't will find themselves trying to retrofit governance onto AI systems that were designed without it.
+
+Start simple. Start with your most critical pipeline. Make the implicit explicit, put it in version control, and wire it up to automated tests.
+
+That's a data contract. And right now, it might be the highest-ROI thing you can do for your AI strategy.
