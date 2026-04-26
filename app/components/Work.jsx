@@ -3,63 +3,102 @@
 import { assets, workData } from '@/assets/assets';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
 
-const Work = ({isDarkMode}) => {
+const Work = () => {
   return (
-    <motion.div 
-      initial={{opacity: 0}}
-      whileInView={{opacity: 1}}
-      transition={{duration: 1}}
-      id='work' className='w-full px-[12%] py-10 dark:bg-[var(--background)]'> {/* Added dark:bg-[var(--background)] */}
-        <motion.h4 
-          initial={{opacity: 0, y: -20}}
-          whileInView={{opacity: 1, y:0}}
-          transition={{duration: 0.3, delay: 0.5}}
-          className='text-center mb-2 text-lg font-Ovo text-[var(--text-secondary)]'>Work Timeline</motion.h4>
-        <motion.h2 
-          initial={{opacity: 0, y: -20}}
-          whileInView={{opacity: 1, y:0}}
-          transition={{duration: 0.5, delay: 0.5}}
-          className='text-center text-5xl font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>Previous Companies & Deliverables</motion.h2>
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+      id="work"
+      className="w-full px-6 md:px-[8%] lg:px-[12%] py-20"
+      style={{ background: 'var(--section-bg)' }}
+    >
+      {/* Header */}
+      <motion.p
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="heading-eyebrow"
+      >
+        Work Timeline
+      </motion.p>
 
-        <motion.p 
-          initial={{opacity: 0}}
-          whileInView={{opacity: 1}}
-          transition={{duration: 0.5, delay: 0.7}}
-          className='text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo text-[var(--foreground)] dark:text-[var(--foreground)]'>
-            I've worked with large multinational companies, local governments, and startups, delivering impactful solutions across various domains across the globe. Here are some of the key projects I've been involved in.
-        </motion.p>
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        viewport={{ once: true }}
+        className="heading-primary"
+      >
+        Previous Companies &amp; Deliverables
+      </motion.h2>
 
-        <motion.div 
-          initial={{opacity: 0}}
-          whileInView={{opacity: 1}}
-          transition={{duration: 0.6, delay: 0.9}}
-          className='grid grid-cols-3 gap-1 my-10 max-w-6xl mx-auto'>
-            {workData.map((project,index)=>(
-                <Link href={project.link} key={index}>
-                  <motion.div 
-                    whileHover={{scale: 1.02}}
-                    transition={{duration: 0.3}}
-                    className='aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group'
-                    style={{backgroundImage: `url(${project.bgImage})`}}>
-                      <div className='bg-[var(--card-bg)] dark:bg-[var(--card-bg)] w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-2 px-3 flex items-center justify-between duration-500 group-hover:bottom-7'>
-                          <div className="flex-1 min-w-0">
-                              <h2 className='font-semibold text-xs truncate text-[var(--foreground)] dark:text-[var(--foreground)]'>{project.title}</h2>
-                              <p className='text-[10px] text-[var(--foreground)]/80 truncate dark:text-[var(--foreground)]/80'>{project.description}</p>
-                          </div>
-                          <div className='border rounded-full border-[var(--foreground)] dark:border-[var(--foreground)] w-6 aspect-square flex-shrink-0 flex items-center justify-center shadow-[1px_1px_0_var(--foreground)] dark:shadow-[1px_1px_0_var(--foreground)] group-hover:bg-[var(--accent-color)] dark:group-hover:bg-[var(--accent-color)] transition ml-1'>
-                              <Image src={assets.send_icon} alt='send icon' className='w-3' />
-                          </div>
-                      </div>
-                  </motion.div>
-                </Link>
-            ))}    
-        </motion.div>
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        viewport={{ once: true }}
+        className="text-center max-w-2xl mx-auto mb-4 text-[var(--text-secondary)]"
+      >
+        I&apos;ve worked with large multinational companies, local governments, and startups,
+        delivering impactful solutions across various domains across the globe.
+      </motion.p>
 
-    </motion.div>
-    )
-}        
+      <div className="gold-divider mb-12" />
 
-export default Work
+      {/* Work grid */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        viewport={{ once: true }}
+        className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-5xl mx-auto"
+      >
+        {workData.map((project, index) => (
+          <Link href={project.link} key={index}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+              className="aspect-square bg-no-repeat bg-cover bg-center rounded-xl relative cursor-pointer group overflow-hidden border border-[var(--border-color)]"
+              style={{ backgroundImage: `url(${project.bgImage})` }}
+            >
+              {/* Dark overlay on hover */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 rounded-xl" />
+
+              {/* Info card */}
+              <div
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 w-10/12 rounded-lg py-2.5 px-3 flex items-center justify-between duration-500 group-hover:bottom-6 border border-[var(--border-color)]"
+                style={{ background: 'var(--card-bg)' }}
+              >
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-semibold text-xs truncate text-[var(--text-primary)] font-Sora">
+                    {project.title}
+                  </h2>
+                  <p className="text-[10px] text-[var(--text-secondary)] truncate mt-0.5">
+                    {project.description}
+                  </p>
+                </div>
+                {/* Gold arrow button */}
+                <div
+                  className="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center ml-2 transition-all duration-300 group-hover:scale-110"
+                  style={{ background: 'var(--accent-color)' }}
+                >
+                  <Image src={assets.send_icon} alt="View details" className="w-3" />
+                </div>
+              </div>
+            </motion.div>
+          </Link>
+        ))}
+      </motion.div>
+    </motion.section>
+  );
+};
+
+export default Work;

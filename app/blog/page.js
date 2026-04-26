@@ -2,30 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import * as React from 'react';
-import { motion } from "framer-motion";
-import { fadeIn, slideIn, slideUp } from '@/app/utils/animations';
-import Image from 'next/image';
-// import { assets } from '@/assets/assets'; // Commented out as arrow is replaced
+import { motion } from 'motion/react';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 
-export default function BlogPost({ params }) {
-  const { slug } = params;
+export default function BlogListPage({ params }) {
+  const slug = params?.slug;
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch blog post data
   useEffect(() => {
+    if (!slug) return;
     const fetchBlog = async () => {
       setLoading(true);
       setError(null);
       try {
         const response = await fetch(`/api/blogs/${slug}`);
-        if (!response.ok) {
-          throw new Error('Blog post not found');
-        }
+        if (!response.ok) throw new Error('Blog post not found');
         const data = await response.json();
         setBlog(data.blog);
       } catch (err) {
@@ -34,65 +28,59 @@ export default function BlogPost({ params }) {
         setLoading(false);
       }
     };
-    
-    if (slug) {
-        fetchBlog();
-    }
+    fetchBlog();
   }, [slug]);
-
-  // Common wrapper for Loading and Error states
-  const renderStatusPage = (content) => (
-    <>
-      <Navbar />
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="container mx-auto px-[12%] py-16 min-h-screen flex items-center justify-center"
-      >
-        <div className="text-center">
-          {content}
-        </div>
-      </motion.div>
-      <Footer />
-    </>
-  );
 
   // Loading state
   if (loading) {
-    return renderStatusPage(
-      <motion.h1 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-        className="text-2xl font-bold mb-4 font-Ovo"
-      >
-        Loading...
-      </motion.h1>
+    return (
+      <>
+        <Navbar />
+        <div
+          className="min-h-screen flex items-center justify-center"
+          style={{ background: 'var(--background)' }}
+        >
+          <div className="text-center">
+            <div
+              className="w-10 h-10 rounded-full border-2 border-t-transparent mx-auto animate-spin mb-4"
+              style={{ borderColor: 'var(--accent-color)', borderTopColor: 'transparent' }}
+            />
+            <p className="text-sm text-[var(--text-secondary)]">Loading article…</p>
+          </div>
+        </div>
+        <Footer />
+      </>
     );
   }
-  
-  // Error or not found state
+
+  // Error state
   if (error || !blog) {
-    return renderStatusPage(
+    return (
       <>
-        <motion.h1 
-          variants={slideIn("down", "tween", 0.2, 0.5)} initial="initial" animate="whileInView" viewport={{ once: true, amount: 0.1 }}
-          className="text-2xl font-bold mb-4 font-Ovo"
+        <Navbar />
+        <div
+          className="min-h-screen flex items-center justify-center px-6"
+          style={{ background: 'var(--background)' }}
         >
-          {error ? 'Error loading post' : 'Blog post not found'}
-        </motion.h1>
-        <motion.div
-          {...slideUp}
-          transition={{ delay: 0.2 }}
-        >
-          {/* Updated Back Button Style for Error Page */}
-          <Link href="/" className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-4 py-2 rounded-md inline-flex items-center gap-2 hover:opacity-80 transition-opacity text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to home
-          </Link>
-        </motion.div>
+          <div className="text-center max-w-md">
+            <div
+              className="text-5xl mb-4 font-bold font-Sora"
+              style={{ color: 'var(--accent-color)' }}
+            >
+              404
+            </div>
+            <h1 className="text-2xl font-bold mb-4 font-Sora text-[var(--text-primary)]">
+              {error ? 'Error loading post' : 'Blog post not found'}
+            </h1>
+            <Link
+              href="/"
+              className="button-primary inline-flex"
+            >
+              ← Back to Home
+            </Link>
+          </div>
+        </div>
+        <Footer />
       </>
     );
   }
@@ -101,63 +89,71 @@ export default function BlogPost({ params }) {
   return (
     <>
       <Navbar />
-      {/* Removed max-w-4xl from container, adjusted padding */}
-      <motion.div 
-        {...fadeIn}
-        className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 py-24" 
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="px-4 sm:px-6 lg:px-12 xl:px-20 py-24"
+        style={{ background: 'var(--background)' }}
       >
-        {/* Updated Back Button Style */}
+        {/* Back button */}
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-8" // Increased margin bottom
+          className="mb-8 max-w-4xl mx-auto"
         >
-          <Link href="/" className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md inline-flex items-center gap-2 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm">
-             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-             </svg>
-             Back to home
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-300"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to home
           </Link>
         </motion.div>
-        <motion.article 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-none"
+
+        {/* Article */}
+        <motion.article
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
         >
-          {/* Blog Header Section */}
-          <motion.div 
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-6"
-          >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 font-Ovo">{blog.frontmatter.title}</h1>
-            <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-4 gap-x-4 gap-y-2">
-              <span>Published on {blog.frontmatter.date}</span>
-              <span>By {blog.frontmatter.author}</span>
-              <span className="bg-lightHover dark:bg-darkHover text-darkTheme dark:text-white px-2 py-1 rounded-full text-xs">
+          {/* Header */}
+          <div className="mb-10 pb-8 border-b border-[var(--border-color)]">
+            {blog.frontmatter.category && (
+              <span
+                className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full text-white"
+                style={{ background: 'var(--accent-color)' }}
+              >
                 {blog.frontmatter.category}
               </span>
+            )}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-Sora text-[var(--text-primary)] leading-tight">
+              {blog.frontmatter.title}
+            </h1>
+            <div className="flex flex-wrap items-center text-sm text-[var(--text-secondary)] gap-x-4 gap-y-1">
+              <time dateTime={blog.frontmatter.date}>
+                {blog.frontmatter.date ? new Date(blog.frontmatter.date).toLocaleDateString('en-AU', {
+                  year: 'numeric', month: 'long', day: 'numeric'
+                }) : ''}
+              </time>
+              <span>·</span>
+              <span>By {blog.frontmatter.author || 'Shivendra Singh'}</span>
             </div>
             {blog.frontmatter.coverImage && (
-              <motion.div 
-                initial={{ scale: 0.98, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.7 }}
-                className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center rounded-lg mt-6 shadow-md dark:shadow-gray-700" 
+              <div
+                className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center rounded-xl mt-8 border border-[var(--border-color)]"
                 style={{ backgroundImage: `url(${blog.frontmatter.coverImage})` }}
-              >
-              </motion.div>
+              />
             )}
-          </motion.div>
-          {/* Blog Content Section - relies on prose for styling */} 
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="prose dark:prose-invert lg:prose-xl max-w-none blog-content mt-8" 
+          </div>
+
+          {/* Content */}
+          <div
+            className="prose dark:prose-invert lg:prose-xl max-w-none blog-content mt-8"
             dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
           />
         </motion.article>
@@ -166,4 +162,3 @@ export default function BlogPost({ params }) {
     </>
   );
 }
-
