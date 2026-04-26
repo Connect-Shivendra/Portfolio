@@ -5,39 +5,64 @@ import ScrollToTopWrapper from "@/app/components/ScrollToTopWrapper";
 import { DarkModeProvider } from './context/DarkModeContext';
 import { Analytics } from '@vercel/analytics/react';
 
-// Configure Inter font for body text
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Common weights for body
-  variable: "--font-inter", // Optional CSS variable
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-// Configure Sora font for headings (used via Tailwind classes)
 const sora = Sora({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Common weights for headings
-  variable: "--font-sora", // Optional CSS variable
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sora",
+  display: "swap",
 });
 
-
-// This is the Title on the browser Tab
 export const metadata = {
   metadataBase: new URL('https://shivendra.io'),
   title: {
-    default: "Portfolio - Data & Analytics",
-    template: "%s | Portfolio"
+    default: "Shivendra Singh — Head of Data, Information & AI",
+    template: "%s | Shivendra Singh"
   },
-  description: "Share Data Knowledge to the world #Free",
-  keywords: ['Data Analytics', 'Data Strategy', 'Data Governance', 'Business Intelligence'],
-  authors: [{ name: 'Shivendra Singh' }],
+  description: "Transformational data leader with 14+ years of experience in Data Strategy, Architecture, Engineering, Analytics and AI. Based in Sydney, Australia.",
+  keywords: [
+    'Shivendra Singh',
+    'Head of Data',
+    'Chief Data Officer',
+    'Data Strategy',
+    'Data Governance',
+    'Data Architecture',
+    'AI Strategy',
+    'Machine Learning',
+    'Business Intelligence',
+    'Sydney Australia',
+    'Data Leader',
+    'Woolworths',
+    'Optus',
+  ],
+  authors: [{ name: 'Shivendra Singh', url: 'https://shivendra.io' }],
   creator: 'Shivendra Singh',
   openGraph: {
     type: 'website',
     locale: 'en_AU',
     url: 'https://shivendra.io',
-    title: 'Portfolio - Data & Analytics',
-    description: 'Share Data Knowledge to the world #Free',
-    siteName: 'Portfolio',
+    title: 'Shivendra Singh — Head of Data, Information & AI',
+    description: 'Transformational data leader with 14+ years of experience. Based in Sydney, Australia.',
+    siteName: 'Shivendra Singh',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Shivendra Singh — Head of Data, Information & AI',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shivendra Singh — Head of Data, Information & AI',
+    description: 'Transformational data leader with 14+ years of experience. Based in Sydney, Australia.',
   },
   robots: {
     index: true,
@@ -50,8 +75,8 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-site-verification',
+  alternates: {
+    canonical: 'https://shivendra.io',
   },
 };
 
@@ -60,17 +85,13 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#0D1117" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      {/* Apply Inter font to the body, Sora is applied via Tailwind classes */}
-      {/* Removed dark:bg-darkTheme to rely on CSS variable --background */}
       <body
-        className={`${inter.variable} ${sora.variable} ${inter.className} antialiased leading-8
-        overflow-x-hidden 
-        dark:text-white`}
+        className={`${inter.variable} ${sora.variable} ${inter.className} antialiased leading-relaxed overflow-x-hidden`}
       >
         <DarkModeProvider>
           <ErrorBoundary>
@@ -83,5 +104,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-
