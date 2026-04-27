@@ -1,163 +1,305 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
+import { BlogsList } from '@/assets/assets';
 
-export default function BlogListPage({ params }) {
-  const slug = params?.slug;
-  const [blog, setBlog] = useState(null);
+const BLOGS_PER_PAGE = 12;
+
+const CATEGORIES = BlogsList.map(b => b.name);
+
+function SearchIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+    </svg>
+  );
+}
+
+function ClearIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  );
+}
+
+function BlogCard({ blog, index }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: (index % BLOGS_PER_PAGE) * 0.04 }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className="blog-card flex flex-col group"
+      aria-label={`Blog post: ${blog.frontmatter.title}`}
+    >
+      <Link href={`/blog/${blog.slug}`} className="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] rounded-xl">
+        <div className="h-44 rounded-t-xl overflow-hidden relative" style={{ background: 'var(--hover-bg)' }}>
+          {blog.frontmatter.coverImage ? (
+            <div
+              className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              style={{ backgroundImage: `url(${blog.frontmatter.coverImage})` }}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-3xl opacity-20">✦</span>
+            </div>
+          )}
+          <div className="absolute bottom-3 left-3 blog-category-tag">
+            {blog.frontmatter.category}
+          </div>
+        </div>
+
+        <div className="p-5 flex flex-col flex-grow">
+          <h2 className="text-base font-semibold font-Sora text-[var(--text-primary)] mb-2 leading-snug group-hover:text-[var(--accent-color)] transition-colors duration-300 line-clamp-2">
+            {blog.frontmatter.title}
+          </h2>
+          <p className="text-sm text-[var(--text-secondary)] mb-4 line-clamp-2 leading-relaxed flex-grow">
+            {blog.frontmatter.excerpt}
+          </p>
+          <div className="flex justify-between items-center text-xs text-[var(--text-secondary)] mt-auto pt-3 border-t border-[var(--border-color)]">
+            <time dateTime={blog.frontmatter.date}>
+              {blog.frontmatter.date
+                ? new Date(blog.frontmatter.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' })
+                : ''}
+            </time>
+            <span className="font-medium" style={{ color: 'var(--accent-color)' }}>
+              {blog.frontmatter.readTime || '5 min read'}
+            </span>
+          </div>
+        </div>
+      </Link>
+    </motion.article>
+  );
+}
+
+export default function BlogListPage() {
+  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (!slug) return;
-    const fetchBlog = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(`/api/blogs/${slug}`);
-        if (!response.ok) throw new Error('Blog post not found');
-        const data = await response.json();
-        setBlog(data.blog);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBlog();
-  }, [slug]);
+    fetch('/api/blogs')
+      .then(r => r.json())
+      .then(data => setBlogs(data.blogs || []))
+      .catch(() => setBlogs([]))
+      .finally(() => setLoading(false));
+  }, []);
 
-  // Loading state
-  if (loading) {
-    return (
-      <>
-        <Navbar />
-        <div
-          className="min-h-screen flex items-center justify-center"
-          style={{ background: 'var(--background)' }}
-        >
-          <div className="text-center">
-            <div
-              className="w-10 h-10 rounded-full border-2 border-t-transparent mx-auto animate-spin mb-4"
-              style={{ borderColor: 'var(--accent-color)', borderTopColor: 'transparent' }}
-            />
-            <p className="text-sm text-[var(--text-secondary)]">Loading article…</p>
-          </div>
-        </div>
-        <Footer />
-      </>
-    );
-  }
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return blogs.filter(b => {
+      const matchesCategory = selectedCategory === 'All' || b.frontmatter.category === selectedCategory;
+      const matchesQuery = !q
+        || b.frontmatter.title?.toLowerCase().includes(q)
+        || b.frontmatter.excerpt?.toLowerCase().includes(q)
+        || b.frontmatter.category?.toLowerCase().includes(q);
+      return matchesCategory && matchesQuery;
+    });
+  }, [blogs, query, selectedCategory]);
 
-  // Error state
-  if (error || !blog) {
-    return (
-      <>
-        <Navbar />
-        <div
-          className="min-h-screen flex items-center justify-center px-6"
-          style={{ background: 'var(--background)' }}
-        >
-          <div className="text-center max-w-md">
-            <div
-              className="text-5xl mb-4 font-bold font-Sora"
-              style={{ color: 'var(--accent-color)' }}
-            >
-              404
-            </div>
-            <h1 className="text-2xl font-bold mb-4 font-Sora text-[var(--text-primary)]">
-              {error ? 'Error loading post' : 'Blog post not found'}
-            </h1>
-            <Link
-              href="/"
-              className="button-primary inline-flex"
-            >
-              ← Back to Home
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </>
-    );
-  }
+  const totalPages = Math.ceil(filtered.length / BLOGS_PER_PAGE);
+  const paginated = filtered.slice((page - 1) * BLOGS_PER_PAGE, page * BLOGS_PER_PAGE);
 
-  // Blog post content
+  const handleCategory = (cat) => {
+    setSelectedCategory(cat);
+    setPage(1);
+  };
+
+  const handleQuery = (e) => {
+    setQuery(e.target.value);
+    setPage(1);
+  };
+
   return (
     <>
       <Navbar />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="px-4 sm:px-6 lg:px-12 xl:px-20 py-24"
-        style={{ background: 'var(--background)' }}
-      >
-        {/* Back button */}
-        <motion.div
-          initial={{ x: -20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 max-w-4xl mx-auto"
-        >
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-300"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to home
-          </Link>
-        </motion.div>
+      <div className="min-h-screen" style={{ background: 'var(--background)' }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-[8%] pt-28 pb-20">
 
-        {/* Article */}
-        <motion.article
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
           {/* Header */}
-          <div className="mb-10 pb-8 border-b border-[var(--border-color)]">
-            {blog.frontmatter.category && (
-              <span
-                className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full text-white"
-                style={{ background: 'var(--accent-color)' }}
+          <motion.header
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="heading-eyebrow">Writing</p>
+            <h1 className="heading-primary mt-2">Articles &amp; Insights</h1>
+            <div className="gold-divider mx-auto mt-4 mb-6" />
+            <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
+              {blogs.length > 0 ? `${blogs.length} articles` : ''} on data strategy, AI governance, and what it actually takes to lead in this space.
+            </p>
+          </motion.header>
+
+          {/* Search */}
+          <motion.div
+            className="max-w-xl mx-auto mb-8 relative"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+          >
+            <span
+              className="absolute left-4 top-1/2 -translate-y-1/2"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <SearchIcon />
+            </span>
+            <input
+              type="search"
+              value={query}
+              onChange={handleQuery}
+              placeholder="Search articles…"
+              aria-label="Search articles"
+              className="w-full pl-10 pr-10 py-3 rounded-full text-sm outline-none transition-all duration-300 border"
+              style={{
+                background: 'var(--card-bg)',
+                borderColor: query ? 'var(--accent-color)' : 'var(--border-color)',
+                color: 'var(--text-primary)',
+              }}
+            />
+            {query && (
+              <button
+                onClick={() => { setQuery(''); setPage(1); }}
+                aria-label="Clear search"
+                className="absolute right-4 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-70"
+                style={{ color: 'var(--text-secondary)' }}
               >
-                {blog.frontmatter.category}
-              </span>
+                <ClearIcon />
+              </button>
             )}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-Sora text-[var(--text-primary)] leading-tight">
-              {blog.frontmatter.title}
-            </h1>
-            <div className="flex flex-wrap items-center text-sm text-[var(--text-secondary)] gap-x-4 gap-y-1">
-              <time dateTime={blog.frontmatter.date}>
-                {blog.frontmatter.date ? new Date(blog.frontmatter.date).toLocaleDateString('en-AU', {
-                  year: 'numeric', month: 'long', day: 'numeric'
-                }) : ''}
-              </time>
-              <span>·</span>
-              <span>By {blog.frontmatter.author || 'Shivendra Singh'}</span>
-            </div>
-            {blog.frontmatter.coverImage && (
+          </motion.div>
+
+          {/* Category filter */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-2 mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleCategory(cat)}
+                className="px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300"
+                style={{
+                  background: selectedCategory === cat ? 'var(--accent-color)' : 'var(--card-bg)',
+                  color: selectedCategory === cat ? 'var(--on-accent)' : 'var(--text-secondary)',
+                  border: `1px solid ${selectedCategory === cat ? 'var(--accent-color)' : 'var(--border-color)'}`,
+                }}
+                aria-pressed={selectedCategory === cat}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+
+          {/* Results count when filtering */}
+          {(query || selectedCategory !== 'All') && !loading && (
+            <p className="text-center text-sm text-[var(--text-secondary)] mb-6">
+              {filtered.length === 0 ? 'No articles found' : `${filtered.length} article${filtered.length === 1 ? '' : 's'} found`}
+              {query && <> for &ldquo;<span style={{ color: 'var(--accent-color)' }}>{query}</span>&rdquo;</>}
+            </p>
+          )}
+
+          {/* Loading */}
+          {loading && (
+            <div className="flex justify-center py-24">
               <div
-                className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center rounded-xl mt-8 border border-[var(--border-color)]"
-                style={{ backgroundImage: `url(${blog.frontmatter.coverImage})` }}
+                className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin"
+                style={{ borderColor: 'var(--accent-color)', borderTopColor: 'transparent' }}
               />
-            )}
+            </div>
+          )}
+
+          {/* Grid */}
+          {!loading && paginated.length > 0 && (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${selectedCategory}-${query}-${page}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {paginated.map((blog, i) => (
+                  <BlogCard key={blog.slug} blog={blog} index={i} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          )}
+
+          {/* Empty state */}
+          {!loading && paginated.length === 0 && (
+            <div className="text-center py-24">
+              <p className="text-4xl mb-4 opacity-30">✦</p>
+              <p className="text-[var(--text-secondary)]">No articles match your search.</p>
+              <button
+                onClick={() => { setQuery(''); setSelectedCategory('All'); setPage(1); }}
+                className="mt-4 text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-70"
+                style={{ color: 'var(--accent-color)' }}
+              >
+                Clear filters
+              </button>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {!loading && totalPages > 1 && (
+            <nav className="flex justify-center items-center gap-2 mt-12" aria-label="Blog pagination">
+              <button
+                onClick={() => setPage(p => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="px-4 py-2 rounded-full text-sm font-medium border border-[var(--border-color)] text-[var(--text-secondary)] disabled:opacity-40 hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-300"
+              >
+                ← Prev
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i + 1)}
+                  className="w-9 h-9 rounded-full text-sm font-medium border transition-all duration-300"
+                  style={{
+                    background: page === i + 1 ? 'var(--accent-color)' : 'transparent',
+                    borderColor: page === i + 1 ? 'var(--accent-color)' : 'var(--border-color)',
+                    color: page === i + 1 ? 'var(--on-accent)' : 'var(--text-secondary)',
+                  }}
+                  aria-label={`Page ${i + 1}`}
+                  aria-current={page === i + 1 ? 'page' : undefined}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="px-4 py-2 rounded-full text-sm font-medium border border-[var(--border-color)] text-[var(--text-secondary)] disabled:opacity-40 hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all duration-300"
+              >
+                Next →
+              </button>
+            </nav>
+          )}
+
+          {/* Back home */}
+          <div className="text-center mt-16">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              ← Back to home
+            </Link>
           </div>
 
-          {/* Content */}
-          <div
-            className="prose dark:prose-invert lg:prose-xl max-w-none blog-content mt-8"
-            dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
-          />
-        </motion.article>
-      </motion.div>
+        </div>
+      </div>
       <Footer />
     </>
   );

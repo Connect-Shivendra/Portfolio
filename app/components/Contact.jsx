@@ -20,7 +20,7 @@ const Contact = () => {
       errs.name = 'Name must be at least 2 characters.';
     if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email))
       errs.email = 'Enter a valid email address.';
-    if (!fields.phone || !/^[0-9\-\+\s\(\)]{7,20}$/.test(fields.phone))
+    if (fields.phone && !/^[0-9\-\+\s\(\)]{7,20}$/.test(fields.phone))
       errs.phone = 'Enter a valid phone number.';
     if (!fields.message || fields.message.trim().length < 10)
       errs.message = 'Message must be at least 10 characters.';
