@@ -39,7 +39,7 @@ const About = () => {
       <div className="gold-divider mb-16" />
 
       {/* Content */}
-      <div className="flex w-full flex-col lg:flex-row gap-16 items-start">
+      <div className="flex w-full flex-col lg:flex-row gap-16 items-start max-w-6xl mx-auto">
 
         {/* Photo */}
         <motion.div

@@ -1,6 +1,6 @@
 # SKILL: shivendra.io — Project Context & Knowledge Base
 > Read this at the start of every session. Saves reading 50+ files.
-> Last updated: 2026-04-27 (End of Session 5 — work sub-pages themed, reading progress bar, related posts)
+> Last updated: 2026-04-27 (End of Session 7 — contact form fix, /blog listing page rebuilt with search & filter)
 
 ---
 
@@ -94,7 +94,8 @@ Portfolio-main\
   manifest.json                 Updated: gold theme-color, correct name/description
 
   app\
-    page.js                     HOME — ThoughtLeadership replaces Services
+    page.js                     HOME — async server component; fetches blogs via getAllBlogs(), renders HomeClient
+    HomeClient.jsx              'use client' shell — receives blogs prop, activeSection state, hash routing, Suspense wrapper
     layout.js                   Shivendra Singh metadata, data-scroll-behavior
     globals.css                 Gold/navy token system + all component classes
 
@@ -105,7 +106,7 @@ Portfolio-main\
       ThoughtLeadership.jsx     NEW — 6 POV cards replacing Services
       Blogs.jsx                 Gold category pills, gold pagination, card lift
       Work.jsx                  Gold arrow buttons on cards
-      Contact.jsx               Env vars, gold theme
+      Contact.jsx               Env vars, gold theme. Phone validation fixed S7 (truly optional now)
       Footer.jsx                Column layout, gold bar, 2026 copyright
       BlogPostPage.jsx          Gold 404, button-primary, clean errors. Passes relatedPosts prop
       BlogPostClient.jsx        Progress bar (useScroll+useSpring), related posts section (3 cards)
@@ -122,7 +123,9 @@ Portfolio-main\
       blogs\[slug]\route.js     Unchanged, working
 
     blog\
-      page.js                   motion/react (was framer-motion), gold spinner, gold theme
+      page.js                   REBUILT S7 — proper listing page. Search (title/excerpt/category),
+                                category filter chips (BlogsList), result count, empty state,
+                                12-per-page pagination, AnimatePresence grid transitions
       [slug]\page.js            Fetches blog + relatedPosts (same category first, fills to 3)
 
     services\
@@ -290,15 +293,23 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 3. [x] Add related posts at bottom of each blog post ✅ S5
 4. [x] Build `/impact` — showcase measurable outcomes (Woolworths $200k→$80k, EVT $1.7M, etc.) ✅ S6
 
-**Content:**
-5. [ ] Write 5 more blog posts (see topics in §7)
-6. [ ] Refresh 5 existing posts — update 2024 stats to 2026, more conversational
-7. [ ] Add Google site verification to layout.js
+**Bug fixes:**
+5. [x] Contact form phone field — was validated as required but labelled optional ✅ S7
+6. [x] `/blog` listing page — had single-post code on non-dynamic route (broken) ✅ S7
+   - Rebuilt with text search, category filter, result count, empty state, 12-per-page pagination
 
-**Performance / Security:**
-8. [ ] Refactor `page.js` — remove 'use client', make server component
-9. [ ] Add rate limiting to contact form API route
-10. [ ] npm vulns: wait for Next.js to ship patched postcss bundle (DO NOT run npm audit fix --force)
+**Performance:**
+7. [x] Refactor `app/page.js` — server component calls `getAllBlogs()` directly, passes blogs
+       to new `app/HomeClient.jsx` ('use client' shell). Blog cards now SSR'd. ✅ S8
+
+**Content:**
+8. [ ] Write 5 more blog posts (see topics in §7)
+9. [ ] Refresh 5 existing posts — update 2024 stats to 2026, more conversational
+10. [ ] Add Google site verification to layout.js
+
+**Security:**
+11. [ ] Add rate limiting to contact form API route
+12. [ ] npm vulns: wait for Next.js to ship patched postcss bundle (DO NOT run npm audit fix --force)
 
 ---
 
@@ -325,6 +336,8 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 | 2026-04-27 S4 | **Cleanup + Lighthouse.** Deleted Services.jsx. All 8 /services/* sub-pages replaced with server redirects → /#thought-leadership. Removed serviceData + unused icon imports from assets.js. Ran Lighthouse (desktop + mobile). **Accessibility 96→100** via --on-accent token (#1A1A2E on gold, 7.5:1 ratio) applied to button-primary, blog-category-tag, Navbar, Header, Blogs, Footer. Fixed aria-label mismatch on "Get in Touch" button. Added preconnect hints for wikimedia/gstatic/google. npm audit: 7 vulns remain (unfixable without breaking changes). |
 | 2026-04-27 S5 | **Work sub-pages + Blog UX.** All 6 `app/work/*.jsx`: framer-motion→motion/react, removed broken useEffect back-button hook, replaced staggerContainer variant system with per-section `whileInView`, gold back button, gold-divider under h1, card-bg CTA with border, "Contact Me Today" now a working Link→/#contact. Timeline.jsx: motion/react + all CSS vars (no dark: classes). **Reading progress bar**: fixed 4px gold bar via useScroll+useSpring in BlogPostClient. **Related posts**: server-side in blog/[slug]/page.js — same-category first, fills to 3 from recent; rendered as blog-card grid in BlogPostClient below article. |
 | 2026-04-27 S6 | **Impact page.** Built `app/impact/page.jsx` — standalone "Results That Move the Needle" page. Hero + 3-stat animated counter bar (Counter component from Header pattern) + 6 company impact cards (grid, 2-col desktop/1-col mobile) with gold left-border accent, industry tag pills, stat/milestone metric rows, full-case-study links, award badge for EVT. Get in Touch CTA → /#contact. Added "Impact" to Navbar NAV_ITEMS with route-aware handleNavClick (sectionId.startsWith('/') → router.push directly). |
+| 2026-04-27 S7 | **Bug fixes + blog UX.** Contact form: phone validation changed from `!fields.phone \|\|` to `fields.phone &&` — now truly optional. `/blog` listing page: old code had single-post logic (`params?.slug`) on a non-dynamic route, rendering a blank/error page. Rebuilt as a proper listing page: fetch from `/api/blogs`, useMemo filtering (text search on title/excerpt/category + category chips from BlogsList), result count label, empty state with clear-filters button, 12-per-page paginator, AnimatePresence grid fade between pages. Committed and pushed to main. |
+| 2026-04-27 S8 | **Layout fix + SSR refactor.** About section: added `max-w-6xl mx-auto` to content flex div so photo+text block is properly centred under the centred heading (was visually left-anchored). page.js refactor: converted to async server component that calls `getAllBlogs()` directly and passes blogs to new `app/HomeClient.jsx` ('use client' shell with Suspense+useSearchParams). Blog cards are now in initial SSR HTML, not client-fetched. |
 
 ---
 
@@ -335,25 +348,44 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 ```
 I'm working on my personal site shivendra.io — read .claude/SKILL.md for full context.
 
-Today I want to build the /impact page (item 4 on the remaining work list).
+Today I want to work on the next items in the remaining work list (§11).
+```
 
-This is a new route at app/impact/page.jsx — a showcase of measurable career outcomes. Think of it as a "Results" or "Case Studies" page, not a CV. It should feel like a senior data leader's highlight reel.
+---
 
-Key outcomes to feature (from SKILL.md work sub-pages):
-- Woolworths/WooliesX: AWS Redshift $200k→$80k/month, 18% higher email clicks, 3% higher conversion, Apple Wallet integration
-- EVT (Event Hospitality): $1.7M cost savings, 80% faster data processing, 29% reduction in lost sales, 250+ daily self-service users, 36+ dashboards, Business Transformation Runner-Up 2022
-- Optus: 10 million subscriber migration, 12 legacy systems consolidated
-- Amdocs: 250M + 40M subscriber telecom migrations across Asia
-- Fidelity: FATCA compliance, Kimball EDW for UK/Ireland insurance
-- Camden Council: Enterprise Data Strategy (ELG approved), Azure Databricks lakehouse architecture, open data initiatives
+## 15. Next Priority: Refactor app/page.js (Server Component)
 
-Design requirements:
-- Gold/navy theme — use the CSS tokens from SKILL.md §6
-- Animations from motion/react (import from `motion/react`, not framer-motion) — scroll reveal pattern from SKILL.md §9
-- Reuse .card-component, .heading-primary, .gold-divider, .button-primary classes
-- Add a Navbar + Footer (same as every other page)
-- Add a "Get in touch" CTA at the bottom linking to /#contact
-- Mobile-first, accessible
+**Why:** `app/page.js` is currently `'use client'` and fetches all 42 blog posts at runtime via
+`fetch('/api/blogs')`. This means: (1) blank content on first paint until the fetch resolves,
+(2) blog cards not SSR'd so they're invisible to search engines, (3) unnecessary client JS bundle.
 
-Read SKILL.md first, then read one existing page (e.g. app/work/event-hospitality-entertainment/page.jsx) to match the layout pattern. Propose the structure before writing any code.
+**Goal:** Move blog fetching to the server. Keep only the hash-routing/section-switching
+logic on the client.
+
+**Approach — split into two files:**
+
+```
+app/page.js          → Server component (no 'use client')
+                       - Calls getAllBlogs() directly (server-side, cached)
+                       - Passes blogs[] as prop to HomeClient
+                       - No hooks, no state
+
+app/HomeClient.jsx   → 'use client' shell  (new file)
+                       - Receives blogs prop
+                       - Keeps activeSection state + hash-routing useEffect
+                       - Renders Navbar, Header, About, ThoughtLeadership,
+                         Blogs (with blogs prop), Work, Contact, Footer
+                       - Keeps the Suspense wrapper for useSearchParams
+```
+
+**Key constraint:** `useSearchParams()` requires Suspense — keep the existing Suspense
+fallback pattern, just move it into HomeClient.
+
+**Files to touch:**
+- `app/page.js` — rewrite as async server component, import HomeClient
+- `app/HomeClient.jsx` — new file, paste current HomeContent logic, accept blogs prop
+- No changes needed to any child component
+
+**Validation:** After refactor, `curl http://localhost:3000 | grep "blog-card"` should return
+matches (blog cards in the HTML, not just in JS). Before the refactor it returns nothing.
 ```
