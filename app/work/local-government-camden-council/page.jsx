@@ -34,8 +34,8 @@ export default function CamdenCouncilPage() {
       ]}
       technologies="Azure Databricks, PowerBI, Microsoft Purview, Microsoft 365, OpenText Content Manager (EDMS), QGIS (GDA2020), Azure Cloud Services, IoT sensors, MS Defender, Upguard, DAMA governance framework, NSW PPIP Act compliance tooling"
       results="The approved Enterprise Data Strategy has set a clear path to eliminating Camden Council's fragmented point-to-point reporting in favour of a trusted Single Source of Truth. Operational PowerBI dashboards are already enabling data-driven decisions across sustainability, risk, and performance. Open data initiatives have positioned Camden as a transparency leader — including a national first — while governance programs have materially reduced PI data risk and improved regulatory compliance. The hybrid lakehouse delivery model with Microsoft Gold Partners is designed to deliver 18 priority use cases within 18 months."
-      ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Looking to transform your organisation's data landscape? I can help you develop and implement comprehensive data strategies, build cloud-native data platforms, and create insightful visualisations that drive better decision-making across every directorate."
+      ctaTitle="Want to Discuss This Further?"
+      ctaDescription="Happy to detail the data strategy, platforms delivered, and lessons learned from leading data, records, and spatial teams in local government."
     />
   );
 }

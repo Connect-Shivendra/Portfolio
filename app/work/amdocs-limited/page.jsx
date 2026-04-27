@@ -23,8 +23,8 @@ export default function AmdocsLimitedPage() {
       ]}
       technologies="Informatica PowerCenter, UNIX shell scripting, Oracle database management, Amdocs BSS products (CRM, OMS, SRM), data mapping and transformation tools, system integration frameworks, waterfall methodology implementation"
       results="The successful migration of telecom data for both Telkomsel and Globe Telecommunications streamlined their operations by consolidating legacy systems into modern Amdocs platforms. These transformations ensured data consistency and integrity throughout the migration process, optimized ETL processes for large-scale data volumes, and delivered high-quality data transformation with strict adherence to project timelines."
-      ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Need expertise in large-scale data migration or telecom system integration? I can help design and implement solutions that ensure seamless transitions while maintaining data integrity and system performance."
+      ctaTitle="Want to Discuss This Further?"
+      ctaDescription="Happy to discuss the large-scale telecom data migrations, ETL complexity, and technical decisions behind these projects."
     />
   );
 }

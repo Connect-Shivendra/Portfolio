@@ -306,15 +306,15 @@ export default function ImpactPage() {
               className="text-2xl font-semibold mb-3"
               style={{ color: 'var(--text-primary)' }}
             >
-              Interested in driving similar results?
+              Want to Know More?
             </h2>
             <p
               className="mb-6 max-w-xl mx-auto"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Whether you&apos;re building a data strategy from scratch or scaling an
-              existing platform, I&apos;d love to help you turn your data into a
-              competitive advantage.
+              Happy to walk through the approach, challenges, and outcomes behind any of these
+              results in more detail — always keen to connect with people working on interesting
+              data problems.
             </p>
             <Link href="/#contact">
               <button className="button-primary">Get in Touch</button>

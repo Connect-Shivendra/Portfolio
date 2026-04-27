@@ -23,8 +23,8 @@ export default function FidelityInternationalPage() {
       ]}
       technologies="Informatica PowerCenter, SQL, Kimball methodology for data warehouse design, financial data modelling tools, compliance reporting frameworks, ETL process optimisation techniques, database optimisation tools"
       results="The implementation of the FIL LIFE project significantly enhanced Fidelity Insurance's auditing capabilities for UK and Ireland operations. The improved data aggregation and reporting system provided better tracking of capital flows for compliance purposes, while the implementation of FATCA requirements ensured regulatory compliance. The optimised data warehouse design using the Kimball methodology improved query performance and reporting efficiency."
-      ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Need help with financial data warehousing or compliance reporting? I can design and implement solutions that ensure data accuracy, regulatory compliance, and efficient reporting for your financial operations."
+      ctaTitle="Want to Discuss This Further?"
+      ctaDescription="Happy to discuss the EDW architecture, FATCA compliance implementation, and financial data warehousing approach used in this role."
     />
   );
 }

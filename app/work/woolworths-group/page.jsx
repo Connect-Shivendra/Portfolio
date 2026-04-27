@@ -23,8 +23,8 @@ export default function WoolworthsGroupPage() {
       ]}
       technologies="Apache Spark / PySpark on EMR, Informatica IICS, AWS (Kinesis, S3, Lambda, Aurora, DynamoDB, Redshift, ECS), Python, Jenkins, Salesforce Marketing Cloud, PostgreSQL, MySQL, Hive, Credstash, IAM, GitHub, CI/CD pipelines"
       results="The Tequila Decision Engine transformed WooliesX's marketing from broadcast campaigns to precision customer targeting — delivering measurably higher engagement and conversion. Redshift cost optimisation saved $120k per month in AWS infrastructure spend. The KPMG remediation secured the Rewards platform from known vulnerabilities and passed audit. Proximity and Apple Wallet extended the programme's digital reach and competitive positioning."
-      ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Looking to enhance customer targeting and marketing effectiveness through big data? I can help implement cloud-native decision engines that drive personalisation, cut infrastructure costs, and improve conversion across your digital channels."
+      ctaTitle="Want to Discuss This Further?"
+      ctaDescription="Happy to detail the Tequila decision engine architecture, the Redshift cost reduction approach, or the KPMG security remediation work."
     />
   );
 }

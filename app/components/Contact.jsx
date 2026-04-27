@@ -1,18 +1,13 @@
 'use client'
 import { assets } from '@/assets/assets'
 import Image from 'next/image'
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { motion } from "motion/react"
-import ReCAPTCHA from 'react-google-recaptcha'
-import { useDarkMode } from '@/app/context/DarkModeContext'
 
 const Contact = () => {
   const [result, setResult] = useState("");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const captchaRef = useRef();
-  const [captchaToken, setCaptchaToken] = useState('');
-  const { isDarkMode } = useDarkMode();
 
   const validate = (fields) => {
     const errs = {};
@@ -24,8 +19,6 @@ const Contact = () => {
       errs.phone = 'Enter a valid phone number.';
     if (!fields.message || fields.message.trim().length < 10)
       errs.message = 'Message must be at least 10 characters.';
-    if (!captchaToken)
-      errs.captcha = 'Please complete the captcha.';
     return errs;
   };
 
@@ -40,8 +33,6 @@ const Contact = () => {
     setIsSubmitting(true);
     setResult('Sending...');
 
-    formData.append('g-recaptcha-response', captchaToken);
-
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -52,8 +43,6 @@ const Contact = () => {
         setResult('Message sent successfully. I\'ll be in touch soon!');
         event.target.reset();
         setErrors({});
-        setCaptchaToken('');
-        if (captchaRef.current) captchaRef.current.reset();
       } else {
         setResult(data.message || 'Something went wrong. Please try again.');
       }
@@ -93,7 +82,7 @@ const Contact = () => {
         transition={{ duration: 0.5, delay: 0.3 }}
         className='heading-primary'
       >
-        Let&apos;s Work Together
+        Connect
       </motion.h2>
 
       <div className='gold-divider' />
@@ -104,8 +93,8 @@ const Contact = () => {
         transition={{ duration: 0.5, delay: 0.5 }}
         className='text-center max-w-xl mx-auto mb-12 text-[var(--text-secondary)]'
       >
-        Have a project in mind or want to discuss how data strategy can transform your business?
-        I&apos;d love to hear from you.
+        Exploring opportunities in senior data leadership, or want to discuss my work?
+        Always happy to connect and share insights.
       </motion.p>
 
       <motion.form
@@ -159,25 +148,13 @@ const Contact = () => {
         <div className='mb-6'>
           <textarea
             rows='5'
-            placeholder='Tell me about your project or enquiry...'
+            placeholder='What would you like to discuss?'
             name='message'
             className={inputClass}
             aria-label="Your message"
           />
           {errors.message && (
             <p className='text-red-400 text-xs mt-1'>{errors.message}</p>
-          )}
-        </div>
-
-        <div className='mb-6'>
-          <ReCAPTCHA
-            ref={captchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            onChange={token => setCaptchaToken(token)}
-            theme={isDarkMode ? 'dark' : 'light'}
-          />
-          {errors.captcha && (
-            <p className='text-red-400 text-xs mt-1'>{errors.captcha}</p>
           )}
         </div>
 

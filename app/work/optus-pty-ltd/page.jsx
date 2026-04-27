@@ -23,8 +23,8 @@ export default function OptusPage() {
       ]}
       technologies="Informatica PowerCenter, Data profiling and quality assessment tools, Data masking and privacy protection solutions, Amdocs Billing and Customer Care (BCC) platform, Net-cracker OSS platform, Staging environment design and management tools"
       results="The successful migration of customer data from legacy systems to the Amdocs billing platform streamlined Optus's billing operations by consolidating multiple legacy systems. This transformation improved data quality and consistency across systems, enhanced data security through proper masking and privacy controls, and provided a more integrated view of customer information."
-      ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Need help with large-scale data migration or system consolidation? I can design and implement solutions that ensure seamless transitions while maintaining data integrity, security, and compliance with privacy regulations."
+      ctaTitle="Want to Discuss This Further?"
+      ctaDescription="Happy to walk through the 10-million-subscriber migration, data masking approach, and Informatica architecture used in Project Spring."
     />
   );
 }

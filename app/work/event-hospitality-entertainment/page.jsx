@@ -27,8 +27,8 @@ export default function EventHospitalityPage() {
       ]}
       technologies="Snowflake, Matillion (CI/CD), Tableau Online, PowerBI, AWS (S3, Lambda, Glue, SageMaker), Informatica, Azure Active Directory (SSO/MFA), SAML, OpenID, RBAC, ServiceNow (ITSM), Jira, Confluence, Kimball data modelling, Agile/Scrum"
       results="A trusted single source of truth integrating Finance, Sales, Marketing, Customer, and Operational data spanning seven years enabled data-driven decision-making across the enterprise. The BI platform gave business users near real-time visibility via drill-down Tableau dashboards, driving a 29% reduction in lost sales opportunities. Data ingestion times fell 80% and $1.7M was saved through automation and strategic outsourcing. The Telstra partnership data capability helped shape future cross-selling strategy at the SLT level. The CoE raised internal capability across the data function through structured training and knowledge sharing."
-      ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Looking to transform your data landscape with a clear strategy, modern cloud platform, and measurable business outcomes? I can help you go from a legacy EDW to a trusted, self-service data organisation — within budget, and built to last."
+      ctaTitle="Want to Discuss This Further?"
+      ctaDescription="Happy to walk through the Enterprise Data Strategy, Snowflake architecture, award context, or the $1.7M savings story in more detail."
     />
   );
 }

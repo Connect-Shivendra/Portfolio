@@ -82,9 +82,9 @@ const About = () => {
             Spatial Information Services, and Enterprise Information Management. 14+ years transforming
             data landscapes across local government, retail, hospitality, and telco — from architecting
             Woolworths&apos; big data customer decision engine to delivering $1.7M in savings and 250+
-            self-service business users at EVT. I build Enterprise Data Strategies from scratch,
-            implement cloud-native platforms, and lead cross-functional teams to turn data into a
-            genuine competitive advantage.
+            self-service business users at EVT. I lead cross-functional teams, shape enterprise
+            data strategy, and build cloud-native platforms — delivering measurable outcomes
+            across government, retail, and hospitality.
           </p>
 
           {/* Info cards */}
