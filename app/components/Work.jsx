@@ -66,8 +66,8 @@ const Work = () => {
               transition={{ duration: 0.4, delay: index * 0.08 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-              className="aspect-square bg-no-repeat bg-cover bg-center rounded-xl relative cursor-pointer group overflow-hidden border border-[var(--border-color)]"
-              style={{ backgroundImage: `url(${project.bgImage})` }}
+              className="aspect-square bg-no-repeat bg-contain bg-center rounded-xl relative cursor-pointer group overflow-hidden border border-[var(--border-color)]"
+              style={{ backgroundImage: `url(${project.bgImage})`, backgroundColor: 'var(--section-bg)' }}
             >
               {/* Dark overlay on hover */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 rounded-xl" />

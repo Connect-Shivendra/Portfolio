@@ -355,6 +355,7 @@ Today I want to work on the next items in the remaining work list (§11).
 
 ## 15. Next Priority: Refactor app/page.js (Server Component)
 
+
 **Why:** `app/page.js` is currently `'use client'` and fetches all 42 blog posts at runtime via
 `fetch('/api/blogs')`. This means: (1) blank content on first paint until the fetch resolves,
 (2) blog cards not SSR'd so they're invisible to search engines, (3) unnecessary client JS bundle.
@@ -389,3 +390,41 @@ fallback pattern, just move it into HomeClient.
 **Validation:** After refactor, `curl http://localhost:3000 | grep "blog-card"` should return
 matches (blog cards in the HTML, not just in JS). Before the refactor it returns nothing.
 ```
+
+---
+
+## 16. Improvement Backlog
+
+### [Highest] Modernise Website Icons (with Animations)
+**Task:** Replace current icons across the site with a modern icon set and add subtle animations.
+
+**Recommended approach:**
+- **Icon library:** Switch to [Lucide React](https://lucide.dev/) — lightweight, tree-shakable, consistent stroke-based design that feels modern in 2025/26. Alternative: [Phosphor Icons](https://phosphoricons.com/) for more expressive weight variants.
+- **Swap out:** Any existing `react-icons` or inline SVGs → Lucide equivalents.
+- **Animations:** Use motion/react for:
+  - Hover micro-animations on nav/CTA icons (scale + rotate or color shift).
+  - Entrance animations on section icons (fade-in + slide-up on scroll).
+  - Skill/tech icons: staggered entrance in the Skills section.
+- **Approach:** Keep animations subtle (120–200ms, ease-out). Avoid animating every icon simultaneously — use stagger groups by section.
+
+### [High] Improve Blog Visual Formatting
+**Task:** Redesign the blog post layout for better readability and visual hierarchy.
+
+**Areas to address:**
+- Typography scale: tighten heading sizes, improve line-height and `max-width` for body text (~65ch).
+- Add a sticky table of contents for long posts.
+- Syntax highlight code blocks (verify Prism/Shiki theme matches dark/light mode).
+- Pull-quote / callout components for key insights.
+- Reading time + progress bar at the top of each post.
+- Improve mobile reading experience (padding, font size, tap targets).
+- Better image captions and figure styling.
+
+### [Medium] Review & Update Blog Content
+**Task:** Audit existing blog posts and refresh content to reflect current news and technology.
+
+**Approach:**
+- Cross-reference each post against recent developments (check Medium, Dev.to, official docs changelogs).
+- Flag posts that reference deprecated APIs, outdated versions, or superseded practices.
+- Add "Last updated" timestamps and a short "What changed" note at the top of refreshed posts.
+- Source new post ideas from trending Medium tags relevant to the site's focus areas.
+- Aim for at least one new or refreshed post per month.

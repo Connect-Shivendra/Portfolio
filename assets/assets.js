@@ -68,37 +68,37 @@ export const workData = [
     {
         title: 'Camden Council',
         description: 'Head of Information & BI Services',
-        bgImage: '/work-1.png',
+        bgImage: '/Camden-Council.jpg',
         link: '/work/local-government-camden-council'
     },
     {
         title: 'Event Hospitality & Entertainment (ASX: EVT)',
         description: 'Head of Data Platforms & Engineering',
-        bgImage: '/work-1.png',
+        bgImage: '/EVT.jpg',
         link: '/work/event-hospitality-entertainment'
     },
     {
         title: 'Woolworths Group (ASX: WOW)',
         description: 'Data Lead (Consultant)',
-        bgImage: '/work-2.png',
+        bgImage: '/Woolworths.jpg',
         link: '/work/woolworths-group'
     },
     {
         title: 'Optus Pty Ltd (Singtel Group)',
         description: 'Solution Designer',
-        bgImage: '/work-3.png',
+        bgImage: '/Optus.jpg',
         link: '/work/optus-pty-ltd'
     },
     {
         title: 'Fidelity International (FIL)',
         description: 'Data Warehouse Analyst',
-        bgImage: '/work-4.png',
+        bgImage: '/Fidelity.jpg',
         link: '/work/fidelity-international'
     },
     {
         title: 'Amdocs Limited (NASDAQ: DOX)',
         description: 'Senior Subject Matter Expert',
-        bgImage: '/work-4.png',
+        bgImage: '/Amdocs.jpg',
         link: '/work/amdocs-limited'
     },
 ];
