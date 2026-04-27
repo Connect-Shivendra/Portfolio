@@ -274,7 +274,7 @@ export default function Header() {
           className="max-w-2xl text-center text-lg text-[var(--text-secondary)] leading-relaxed mb-10"
         >
           Head of Information &amp; BI Services at Camden Council. Building enterprise data strategies,
-          cloud-native platforms, and data-driven cultures across Australia&apos;s largest organisations for 13+ years.
+          cloud-native platforms, and data-driven cultures across Australia&apos;s largest organisations for 14+ years.
         </motion.p>
 
         {/* CTA Buttons */}

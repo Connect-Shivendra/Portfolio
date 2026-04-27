@@ -238,7 +238,7 @@ export default function ImpactPage() {
               className="text-lg max-w-2xl mx-auto"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Six organisations. 13+ years. Measurable outcomes across local government,
+              Six organisations. 14+ years. Measurable outcomes across local government,
               retail, hospitality, telco, and financial services.
             </p>
           </motion.header>

@@ -21,8 +21,8 @@ const Footer = () => {
               style={{ background: 'var(--accent-color)' }}
             />
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-              Head of Data, Information & AI. Transforming organisations through
-              trusted data and strategic AI leadership.
+              Head of Information & BI Services at Camden Council. Transforming organisations
+              through trusted data platforms and strategic leadership.
             </p>
             <a
               href="mailto:connect.shivendra@gmail.com"

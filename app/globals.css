@@ -168,7 +168,7 @@
   .summary-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    @apply rounded-xl p-6 transition-all duration-300 cursor-pointer;
+    @apply flex flex-col rounded-xl p-6 transition-all duration-300 cursor-pointer;
   }
 
   .summary-card:hover {

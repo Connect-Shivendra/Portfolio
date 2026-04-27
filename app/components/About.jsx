@@ -79,7 +79,7 @@ const About = () => {
         >
           <p className="max-w-2xl mb-10 text-[var(--text-secondary)] leading-relaxed text-base">
             Currently Head of Information &amp; BI Services at Camden Council, leading Data &amp; Insights,
-            Spatial Information Services, and Enterprise Information Management. 13+ years transforming
+            Spatial Information Services, and Enterprise Information Management. 14+ years transforming
             data landscapes across local government, retail, hospitality, and telco — from architecting
             Woolworths&apos; big data customer decision engine to delivering $1.7M in savings and 250+
             self-service business users at EVT. I build Enterprise Data Strategies from scratch,

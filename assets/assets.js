@@ -105,7 +105,7 @@ export const workData = [
 
 export const infoList = [
     { icon: assets.code_icon, iconDark: assets.code_icon_dark, title: 'Tools & Platforms', description: 'Azure Databricks, Snowflake, AWS (×2 Certified), PowerBI, Tableau, Matillion, Informatica, PySpark, MS Purview & more' },
-    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education & Certifications', description: 'B.Tech Computer Science · AWS Certified Solutions Architect & SysOps Administrator · TOGAF · Azure · CDMP' },
+    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education & Certs', description: 'B.Tech Computer Science · AWS Certified (SA & SysOps) · TOGAF · Azure · CDMP' },
     { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Proven Impact', description: '$1.7M saved at EVT · AWS cost cut $200k→$80k/month at WooliesX · 29% fewer lost sales via KPI dashboards' },
 ];
 
