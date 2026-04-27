@@ -118,8 +118,8 @@ export default function ThoughtLeadership() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
             viewport={{ once: true }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="relative rounded-xl p-6 flex flex-col group cursor-pointer"
+            whileHover={{ boxShadow: '0 8px 32px rgba(201,168,76,0.18)', transition: { duration: 0.3 } }}
+            className="relative rounded-xl p-6 flex flex-col group cursor-pointer transition-colors duration-300"
             style={{
               background: p.color,
               border: `1px solid ${p.border}`,
@@ -159,14 +159,12 @@ export default function ThoughtLeadership() {
               &ldquo;{p.hook}&rdquo;
             </p>
 
-            {/* Body — visible on hover on desktop, always on mobile */}
-            <motion.p
-              className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6 hidden md:block"
-              initial={{ opacity: 0, height: 0 }}
-              whileHover={{ opacity: 1, height: 'auto' }}
-            >
-              {p.body}
-            </motion.p>
+            {/* Body — expands on hover (desktop), always shown on mobile */}
+            <div className="hidden md:block overflow-hidden max-h-0 group-hover:max-h-48 transition-[max-height] duration-500 ease-in-out">
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                {p.body}
+              </p>
+            </div>
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6 md:hidden">
               {p.body}
             </p>
@@ -183,11 +181,6 @@ export default function ThoughtLeadership() {
               </Link>
             </div>
 
-            {/* Gold hover border glow */}
-            <motion.div
-              className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ boxShadow: '0 0 20px rgba(201,168,76,0.1)' }}
-            />
           </motion.article>
         ))}
       </div>
