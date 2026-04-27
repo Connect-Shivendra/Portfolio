@@ -1,6 +1,6 @@
 # SKILL: shivendra.io — Project Context & Knowledge Base
 > Read this at the start of every session. Saves reading 50+ files.
-> Last updated: 2026-04-27 (End of Session 7 — contact form fix, /blog listing page rebuilt with search & filter)
+> Last updated: 2026-04-27 (End of Session 9 — rate limiting, lucide icons, blog visual improvements, TOC)
 
 ---
 
@@ -305,10 +305,10 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 **Content:**
 8. [ ] Write 5 more blog posts (see topics in §7)
 9. [ ] Refresh 5 existing posts — update 2024 stats to 2026, more conversational
-10. [ ] Add Google site verification to layout.js
+10. [ ] Add Google site verification to layout.js — need verification code from Google Search Console (add as `verification` field in metadata object)
 
 **Security:**
-11. [ ] Add rate limiting to contact form API route
+11. [x] Add rate limiting to contact form API route ✅ S9 — created `/api/contact/route.js`, 5 req/hr per IP, Contact.jsx now POSTs to `/api/contact` instead of directly to Web3Forms
 12. [ ] npm vulns: wait for Next.js to ship patched postcss bundle (DO NOT run npm audit fix --force)
 
 ---
@@ -338,6 +338,7 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 | 2026-04-27 S6 | **Impact page.** Built `app/impact/page.jsx` — standalone "Results That Move the Needle" page. Hero + 3-stat animated counter bar (Counter component from Header pattern) + 6 company impact cards (grid, 2-col desktop/1-col mobile) with gold left-border accent, industry tag pills, stat/milestone metric rows, full-case-study links, award badge for EVT. Get in Touch CTA → /#contact. Added "Impact" to Navbar NAV_ITEMS with route-aware handleNavClick (sectionId.startsWith('/') → router.push directly). |
 | 2026-04-27 S7 | **Bug fixes + blog UX.** Contact form: phone validation changed from `!fields.phone \|\|` to `fields.phone &&` — now truly optional. `/blog` listing page: old code had single-post logic (`params?.slug`) on a non-dynamic route, rendering a blank/error page. Rebuilt as a proper listing page: fetch from `/api/blogs`, useMemo filtering (text search on title/excerpt/category + category chips from BlogsList), result count label, empty state with clear-filters button, 12-per-page paginator, AnimatePresence grid fade between pages. Committed and pushed to main. |
 | 2026-04-27 S8 | **Layout fix + SSR refactor.** About section: added `max-w-6xl mx-auto` to content flex div so photo+text block is properly centred under the centred heading (was visually left-anchored). page.js refactor: converted to async server component that calls `getAllBlogs()` directly and passes blogs to new `app/HomeClient.jsx` ('use client' shell with Suspense+useSearchParams). Blog cards are now in initial SSR HTML, not client-fetched. |
+| 2026-04-27 S9 | **Rate limiting + Icons + Blog UX.** Contact form now proxies via `/api/contact/route.js` (IP rate limit: 5/hr). Installed lucide-react; replaced all PNG icon assets with Lucide components site-wide (Navbar, Header, About, Work, Blog, BlogPostClient, Impact). About info icons get `whileHover` rotate+scale. Comprehensive blog prose redesign in globals.css (gold bullets, pull-quote blockquotes, dark code blocks, styled tables, figure captions, mobile fixes). New `TableOfContents.jsx` sticky sidebar for blog posts (xl+, IntersectionObserver active tracking). BlogPostPage extracts headings server-side; BlogEnhancer auto-generates heading IDs. |
 
 ---
 
@@ -395,29 +396,24 @@ matches (blog cards in the HTML, not just in JS). Before the refactor it returns
 
 ## 16. Improvement Backlog
 
-### [Highest] Modernise Website Icons (with Animations)
-**Task:** Replace current icons across the site with a modern icon set and add subtle animations.
+### [Highest] Modernise Website Icons (with Animations) ✅ S9
+**Done:** Installed `lucide-react@1.11.0`. Replaced all PNG icon assets with Lucide components:
+- Navbar: Sun/Moon (dark toggle), Menu, X (close), ArrowRight (CTA)
+- Header: ArrowRight (Say Hello), Download (CV)
+- About: Code2/GraduationCap/Briefcase for info cards — with `whileHover={{ rotate: 8, scale: 1.1 }}` animation
+- Work: ArrowUpRight (card arrow)
+- Blog listing: Search, X (clear)
+- BlogPostClient: ArrowLeft (back nav, both instances)
+- Impact: Check (metrics), ChevronRight (case study link)
+- BlogEnhancer copy button: kept as DOM-injected SVG strings (imperative, can't use React components)
+- Logo images (logo/logo_dark) and tool logos kept as Image (brand assets)
 
-**Recommended approach:**
-- **Icon library:** Switch to [Lucide React](https://lucide.dev/) — lightweight, tree-shakable, consistent stroke-based design that feels modern in 2025/26. Alternative: [Phosphor Icons](https://phosphoricons.com/) for more expressive weight variants.
-- **Swap out:** Any existing `react-icons` or inline SVGs → Lucide equivalents.
-- **Animations:** Use motion/react for:
-  - Hover micro-animations on nav/CTA icons (scale + rotate or color shift).
-  - Entrance animations on section icons (fade-in + slide-up on scroll).
-  - Skill/tech icons: staggered entrance in the Skills section.
-- **Approach:** Keep animations subtle (120–200ms, ease-out). Avoid animating every icon simultaneously — use stagger groups by section.
-
-### [High] Improve Blog Visual Formatting
-**Task:** Redesign the blog post layout for better readability and visual hierarchy.
-
-**Areas to address:**
-- Typography scale: tighten heading sizes, improve line-height and `max-width` for body text (~65ch).
-- Add a sticky table of contents for long posts.
-- Syntax highlight code blocks (verify Prism/Shiki theme matches dark/light mode).
-- Pull-quote / callout components for key insights.
-- Reading time + progress bar at the top of each post.
-- Improve mobile reading experience (padding, font size, tap targets).
-- Better image captions and figure styling.
+### [High] Improve Blog Visual Formatting ✅ S9
+**Done:**
+- `globals.css`: comprehensive `.blog-prose` redesign — 17px body text, 1.85 line-height, gold bullet dots on ul, pull-quote blockquotes (gold left border + tinted background), always-dark terminal-style code blocks (`#0d1117`), styled tables (gold header, striped rows), figure/figcaption support, callout class, scroll-margin-top for sticky nav, mobile font/padding improvements
+- `TableOfContents.jsx`: new sticky sidebar component (xl+ only), IntersectionObserver active heading tracking, hidden on mobile
+- `BlogPostPage.jsx`: extracts h2/h3 headings server-side via regex, xl grid layout `[1fr_240px]` with TOC sidebar
+- `BlogEnhancer.jsx`: auto-generates heading IDs from text content for TOC anchor links
 
 ### [Medium] Review & Update Blog Content
 **Task:** Audit existing blog posts and refresh content to reflect current news and technology.
