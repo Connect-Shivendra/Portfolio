@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm audit *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\('next:', p.dependencies.next, '\\\\njest-env-jsdom:', p.devDependencies['jest-environment-jsdom']\\)\")",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(JSON.stringify\\({...p.devDependencies, ...p.dependencies}, null, 2\\)\\)\")",
+      "Bash(npm view *)",
+      "Bash(node -e \"const v = JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\); const stable = v.filter\\(x => !x.includes\\('canary'\\) && !x.includes\\('rc'\\) && !x.includes\\('beta'\\)\\); console.log\\('latest stable versions:', stable.slice\\(-5\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/next/package.json'\\).version\\)\")",
+      "Bash(npm install *)",
+      "Bash(node -e \"try { console.log\\(require\\('c:/Users/Shivendra/Desktop/Website/Portfolio-main/node_modules/next/node_modules/postcss/package.json'\\).version\\) } catch\\(e\\) { console.log\\('not nested:', e.message\\) }\")",
+      "Bash(npm run *)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-desktop.json\" --form-factor desktop --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-desktop.json\" --preset desktop --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-mobile.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "Bash(node -e ' *)",
+      "Bash(taskkill /F /IM node.exe /T)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-desktop-2.json\" --preset desktop --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-mobile-2.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-desktop-3.json\" --preset desktop --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "Bash(lighthouse http://localhost:3000 --output json --output-path \"c:\\\\Users\\\\Shivendra\\\\Desktop\\\\Website\\\\Portfolio-main\\\\lighthouse-mobile-3.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo)",
+      "PowerShell(Stop-Process -Name \"node\" -Force -ErrorAction SilentlyContinue)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/impact)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/work/event-hospitality-entertainment)",
+      "Bash(npx next *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
