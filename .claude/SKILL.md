@@ -417,10 +417,71 @@ matches (blog cards in the HTML, not just in JS). Before the refactor it returns
 
 ### [Medium] Review & Update Blog Content
 **Task:** Audit existing blog posts and refresh content to reflect current news and technology.
-
-**Approach:**
-- Cross-reference each post against recent developments (check Medium, Dev.to, official docs changelogs).
-- Flag posts that reference deprecated APIs, outdated versions, or superseded practices.
-- Add "Last updated" timestamps and a short "What changed" note at the top of refreshed posts.
-- Source new post ideas from trending Medium tags relevant to the site's focus areas.
+- Cross-reference posts against recent developments; flag deprecated APIs, outdated versions, superseded practices.
+- Add "Last updated" timestamps and short "What changed" note at top of refreshed posts.
 - Aim for at least one new or refreshed post per month.
+
+---
+
+### [High] Device Testing & Lighthouse Audit
+**Task:** Test on real devices and run Lighthouse across all key pages.
+- Run Lighthouse (Chrome DevTools) on `/`, `/blog`, `/blog/[slug]`, `/impact` — capture scores for Performance, Accessibility, Best Practices, SEO.
+- Test on iPhone SE (375px), iPad (768px), and 1440px desktop.
+- Fix any regressions from recent changes (TOC sidebar, icon swap, blog prose).
+- Target: Perf ≥ 90, Accessibility = 100, SEO = 100 on desktop; Perf ≥ 75 mobile.
+
+---
+
+### [High] Performance Audit — Bundle & Loading
+**Task:** Audit for file size and loading performance issues.
+- Identify: unused CSS rules in globals.css, redundant JS imports, uncompressed assets in `/public` and `/assets`, synchronous loading patterns.
+- Run `next build` output to identify large chunks; use `@next/bundle-analyzer` if needed.
+- Top 5 wins to implement (in order of impact): image optimisation (WebP/AVIF via next/image), lazy-load below-fold sections, tree-shake unused lucide icons, defer Prism.js, purge unused Tailwind classes.
+- Document what was changed and why for each fix.
+
+---
+
+### [Medium] Colour System — Semantic Tokens & WCAG AA
+**Task:** Enforce semantic naming and verify all foreground/background pairings meet WCAG AA (4.5:1 text, 3:1 UI).
+- Rename raw hex tokens to semantic names (e.g. `--color-surface`, `--color-on-surface`) alongside existing tokens.
+- Audit every pairing: `--text-primary` on `--background`, `--text-secondary` on `--card-bg`, `--on-accent` on `--accent-color`, etc. — in both light and dark themes.
+- Structure `:root` and `.dark` so a third theme (e.g. `.high-contrast`) can be added by declaring the same token set — no component changes needed.
+- Document contrast ratios in a comment block at the top of `globals.css`.
+
+---
+
+### [Medium] CSS Audit — Unused Rules
+**Task:** Identify and remove unused CSS from the main bundle.
+- Option A: Run PurgeCSS or Tailwind's built-in purge against all JSX/JS files; review what gets removed before committing.
+- Option B: Audit functionality section-by-section — check each component's class usage against `globals.css` component classes.
+- Priority: check `.blog-prose` variants, old `.nav-pill`, `.heading-secondary`, any leftover service-page classes.
+- Do NOT remove CSS that is conditionally applied via JS (e.g. `.dark`, `:hover` states).
+
+---
+
+### [Medium] Sitemap Audit & Regeneration
+**Task:** Audit `sitemap.xml` against current site structure and regenerate with correct priorities.
+- List all routes: `/`, `/blog`, `/blog/[42 slugs]`, `/impact`, `/work/[6 slugs]`, redirect-only pages.
+- Remove any stale URLs (old `/services/*` pages now redirect).
+- Priority schema: primary pages (`/`, `/blog`, `/impact`) → `1.0`; section hubs (`/work`, `/blog`) → `0.8`; individual posts/work pages → `0.6`.
+- `changefreq`: blog posts → `monthly`; impact/work → `yearly`; home → `weekly`.
+- Output updated `public/sitemap.xml`. Verify against Google Search Console after deploy.
+
+---
+
+### [Medium] Google Analytics 4 Event Tracking
+**Task:** Add GA4 event tracking without modifying existing functionality.
+- Events to implement: nav link clicks (label = item.label), CV download click, contact form submit (success/fail), blog search interactions, category filter changes, code block copy clicks, scroll depth (25/50/75/100%) on blog posts and `/impact`.
+- Use GA4 naming conventions: `navigation_click`, `file_download`, `form_submit`, `search`, `filter_select`, `code_copy`, `scroll_depth`.
+- Add `gtag.js` via `next/script` with `strategy="afterInteractive"` in `layout.js`.
+- Create `app/utils/analytics.js` with typed helper functions for each event.
+- Add a reference doc listing all event names, parameters, and which component fires them.
+
+---
+
+### [Low] UX Friction Audit
+**Task:** Review interface and navigation patterns; identify and fix friction points.
+- Check: unclear affordances on work cards (hover reveals CTA — not obvious on touch), no visual skip-to-content link for keyboard users, blog pagination has no "go to page N" input for 42 posts, contact form has no character count on message field, mobile nav has no active-page indicator.
+- For each issue: describe problem → why it matters → specific fix.
+- Prioritise by user impact, not implementation effort.
+- Deliver as a prioritised list with proposed fixes before implementing.
