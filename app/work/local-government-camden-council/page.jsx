@@ -3,36 +3,39 @@ import Timeline from '@/app/components/Timeline';
 import WorkPageLayout from '@/app/components/WorkPageLayout';
 
 const timelineEvents = [
-  { date: "June 2024", title: "Role Commencement", description: "Started as Head of Information & BI Services, overseeing Data & Insights, Enterprise Information Management, and Spatial Information Services." },
-  { date: "July 2024", title: "Enterprise Data Strategy", description: "Developed and received ELG approval for comprehensive data strategy focusing on data foundations, capabilities, and governance." },
-  { date: "August 2024", title: "Enterprise BI Implementation", description: "Launched operational dashboards for Sustainability, Customer Planning & Performance, Employee Surveys, and Risk Management." },
-  { date: "September 2024", title: "Data Lakehouse Planning", description: "Interviewed local government data leaders across Australia to finalise Azure Databricks architecture for the Enterprise Data Lakehouse." },
-  { date: "October 2024", title: "Open Data Initiatives", description: "Launched innovative open data projects including Mowing Schedule visualisation and Hook, Line & Capture for community engagement." },
-  { date: "November 2024", title: "EDMS Upgrade Planning", description: "Initiated planning for Opentext Content Manager upgrade and evaluation of cloud-based alternatives." },
+  { date: "June 2024", title: "Role Commencement", description: "Started as Head of Information & BI Services, taking ownership of Data & Insights (D&I), Enterprise Information Management (EIM / EDMS / Records Management), and Spatial Information Services (SIS — GIS/mapping) within the DTI branch." },
+  { date: "July 2024", title: "Enterprise Data Strategy Approved", description: "Developed and received ELG approval for a comprehensive data strategy centred on a greenfield Azure Databricks-based Enterprise Data Lakehouse, 18 priority PowerBI use cases, and a DAMA-aligned governance framework — with 54 additional high-value use cases identified across six directorates." },
+  { date: "August 2024", title: "Enterprise BI Dashboards Live", description: "Launched operational PowerBI dashboards covering Sustainability (renewable energy, waste, IoT water quality), Customer Planning & Performance (KPIs across all directorates), Employee Satisfaction (eNPS trends), Enterprise Risk reporting, and Cybersecurity incident monitoring via MS Defender and Upguard." },
+  { date: "September 2024", title: "Data Lakehouse Architecture Finalised", description: "Interviewed local government data leaders across Australia (City of Melbourne, City of Greater Geelong, etc.) to benchmark use cases, tech stacks, and costs. Finalised Azure Databricks through a rigorous ROI exercise. Engaged Microsoft Gold Partners to accelerate delivery and reduce time-to-outcomes." },
+  { date: "October 2024", title: "Open Data Initiatives Launched", description: "Launched Australia's first council mowing schedule visualised on a Camden LGA boundary map on the public open data portal. Also delivered Hook, Line & Capture — a community fish-tracking platform for the Nepean waterways, being extended to other Sydney Parkland Councils via NSW state funding." },
+  { date: "November 2024", title: "Governance & Compliance Programs", description: "Implemented NSW Information Classification, Labelling & Handling via MS Purview across M365 products. Commenced PI Audit & Remediation under the NSW PPIP Act. ELG-endorsed Record Destruction program underway, prioritising HR and Family Daycare data in EDMS. EDMS upgrade planning (OpenText Content Manager 9.x → 10.x) and GDA2020 QGIS datum upgrade initiated." },
 ];
 
 export default function CamdenCouncilPage() {
   return (
     <WorkPageLayout
       title="Local Government: Camden Council"
-      role="Head of Data, Information & AI"
+      role="Head of Information & BI Services"
       companyImage="/Camden-Council.jpg"
       timeline={<Timeline events={timelineEvents} />}
       overview={[
-        "As Head of Information & BI Services at Camden Council, I spearhead Data & Insights (D&I), Enterprise Information Management (EIM — EDMS), and Spatial Information Services (SIS — QGIS) functions within the DTI branch. My role focuses on implementing data-driven strategies and solutions to enhance decision-making across the organisation.",
-        "A key achievement has been the development and approval of the Enterprise Data Strategy, which outlines a comprehensive approach to improving data maturity, delivering high-value use cases, and implementing robust governance frameworks.",
+        "As Head of Information & BI Services at Camden Council, I lead three cross-functional teams within the DTI branch: Data & Insights (D&I), Enterprise Information Management (EIM — EDMS and Records Management), and Spatial Information Services (SIS — GIS and mapping). My mandate is to empower the organisation with data-driven insights, deliver trusted enterprise information assets, and build the data foundations that underpin Council's strategic objectives.",
+        "A flagship achievement has been developing and securing ELG approval for a comprehensive Enterprise Data Strategy — anchored by a greenfield Azure Databricks-based Data Lakehouse as the organisation's Single Source of Truth. The strategy maps 18 priority use cases and a further 54 high-value use cases across six directorates, to be delivered via a hybrid operating model with Microsoft Gold Partners over 18 months. I also manage vendor relationships and procurement across Australia, New Zealand, Germany, and India, including buy NSW, Core& and PSPA frameworks.",
       ]}
       achievements={[
-        "Developed and received approval for comprehensive Enterprise Data Strategy aligned with organisational goals",
-        "Designed and implemented operational dashboards in PowerBI covering Sustainability, Performance, Employee Satisfaction, and Risk Management",
-        "Led the planning and architecture selection for a greenfield Azure Databricks-based Enterprise Data Lakehouse",
-        "Launched innovative open data initiatives to foster transparency and community engagement",
-        "Implemented NSW Information Classification and Labelling using MS Purview on M365 products",
+        "Developed and secured ELG approval for Enterprise Data Strategy — 18 priority PowerBI use cases approved, with 54 additional high-value use cases identified across 6 directorates",
+        "Launched operational PowerBI dashboards: Sustainability (renewable energy, waste, IoT water quality), KPI performance reporting, eNPS employee surveys, Enterprise Risk, and Cybersecurity incident tracking via MS Defender and Upguard",
+        "Finalised Azure Databricks as target lakehouse architecture after interviewing data leaders at City of Melbourne, City of Greater Geelong, and other Australian councils — selected through rigorous ROI benchmarking",
+        "Launched Australia's first council mowing schedule open data map on a public portal; delivered Hook, Line & Capture community fish-tracking platform (expanding to other Sydney Parkland Councils via NSW state funding)",
+        "Implemented NSW Information Classification, Labelling & Handling via MS Purview across M365; commenced PI Audit & Remediation under NSW PPIP Act",
+        "Led ELG-endorsed Record Destruction program — destruction of high-risk PI data (HR and Family Daycare) underway in EDMS",
+        "Initiated EDMS upgrade (OpenText Content Manager 9.x → 10.x), cloud EDMS evaluation, and GDA2020 QGIS datum upgrade to reduce manual intervention in NSW Spatial Services Cadastre processing",
+        "Managing vendor relationships across Australia, New Zealand, Germany, and India — negotiations via buy NSW, Core& and PSPA procurement frameworks",
       ]}
-      technologies="Azure Databricks, PowerBI, Microsoft Purview, Opentext Content Manager, QGIS, Azure Cloud Services, IoT sensors, M365 products, DAMA framework for data governance"
-      results="The implementation of the Enterprise Data Strategy and associated initiatives has positioned Camden Council to make more informed, data-driven decisions. The planned Enterprise Data Lakehouse will create a single source of truth, eliminating siloed information and enabling cross-functional insights. Open data initiatives have enhanced community engagement and transparency, while improved governance frameworks have strengthened data security and compliance."
+      technologies="Azure Databricks, PowerBI, Microsoft Purview, Microsoft 365, OpenText Content Manager (EDMS), QGIS (GDA2020), Azure Cloud Services, IoT sensors, MS Defender, Upguard, DAMA governance framework, NSW PPIP Act compliance tooling"
+      results="The approved Enterprise Data Strategy has set a clear path to eliminating Camden Council's fragmented point-to-point reporting in favour of a trusted Single Source of Truth. Operational PowerBI dashboards are already enabling data-driven decisions across sustainability, risk, and performance. Open data initiatives have positioned Camden as a transparency leader — including a national first — while governance programs have materially reduced PI data risk and improved regulatory compliance. The hybrid lakehouse delivery model with Microsoft Gold Partners is designed to deliver 18 priority use cases within 18 months."
       ctaTitle="Interested in Similar Solutions?"
-      ctaDescription="Looking to transform your organisation's data landscape? I can help you develop and implement comprehensive data strategies, build robust data platforms, and create insightful visualisations that drive better decision-making."
+      ctaDescription="Looking to transform your organisation's data landscape? I can help you develop and implement comprehensive data strategies, build cloud-native data platforms, and create insightful visualisations that drive better decision-making across every directorate."
     />
   );
 }

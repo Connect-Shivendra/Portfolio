@@ -62,12 +62,12 @@ const IMPACT_CARDS = [
     role: 'Head of Data Platforms & Engineering',
     industry: 'Hospitality & Entertainment',
     href: '/work/event-hospitality-entertainment',
-    award: 'Business Transformation Runner-Up 2022',
+    award: 'CEO Rising Star 2020 · Business Transformation Runner-Up 2022',
     metrics: [
-      { stat: '$1.7M', label: 'documented cost savings' },
-      { stat: '80%', label: 'faster data ingestion and processing' },
-      { stat: '29%', label: 'reduction in lost sales opportunities' },
-      { stat: '250+', label: 'daily self-service business users across 36+ dashboards' },
+      { stat: '$1.7M', label: 'documented cost savings via outsourcing and end-to-end automation' },
+      { stat: '80%', label: 'reduction in data ingestion and processing times' },
+      { stat: '29%', label: 'reduction in lost sales opportunities via transparent KPI dashboards' },
+      { stat: '250+', label: 'daily self-service business users across 36+ Tableau dashboards' },
     ],
   },
   {
@@ -103,13 +103,14 @@ const IMPACT_CARDS = [
   },
   {
     company: 'Camden Council',
-    role: 'Head of Data, Information & AI',
+    role: 'Head of Information & BI Services',
     industry: 'Local Government',
     href: '/work/local-government-camden-council',
     metrics: [
-      { label: 'Enterprise Data Strategy approved by Executive Leadership Group' },
-      { label: 'Azure Databricks lakehouse architecture deployed' },
-      { label: 'Open data initiatives published for the public' },
+      { stat: '18', label: 'priority PowerBI use cases approved (+ 54 identified across 6 directorates)' },
+      { label: 'Enterprise Data Strategy approved — greenfield Azure Databricks lakehouse as Single Source of Truth' },
+      { label: "Australia's first council mowing schedule published as open data on a public portal" },
+      { label: 'NSW Information Classification & Labelling implemented via MS Purview across M365' },
     ],
   },
 ];
@@ -237,8 +238,8 @@ export default function ImpactPage() {
               className="text-lg max-w-2xl mx-auto"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Six organisations. Fifteen years. Measurable outcomes across retail,
-              hospitality, telco, fintech, and government.
+              Six organisations. 13+ years. Measurable outcomes across local government,
+              retail, hospitality, telco, and financial services.
             </p>
           </motion.header>
 

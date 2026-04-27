@@ -273,8 +273,8 @@ export default function Header() {
           transition={{ delay: 1.6, duration: 0.7 }}
           className="max-w-2xl text-center text-lg text-[var(--text-secondary)] leading-relaxed mb-10"
         >
-          Transforming enterprises through trusted data, AI strategy, and 14+ years of hands-on delivery
-          across Australia&apos;s largest organisations.
+          Head of Information &amp; BI Services at Camden Council. Building enterprise data strategies,
+          cloud-native platforms, and data-driven cultures across Australia&apos;s largest organisations for 13+ years.
         </motion.p>
 
         {/* CTA Buttons */}

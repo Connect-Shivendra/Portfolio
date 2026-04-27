@@ -78,11 +78,13 @@ const About = () => {
           className="flex-1"
         >
           <p className="max-w-2xl mb-10 text-[var(--text-secondary)] leading-relaxed text-base">
-            Data leader with 14+ years of experience in Data Strategy, Architecture, Engineering,
-            Analytics and Program Delivery. Proven track record of transforming data ecosystems,
-            driving innovation and enabling business growth through strategic leadership. Skilled in
-            managing large, cross-functional teams across continents, with a focus on building
-            trustable, accessible and actionable data solutions.
+            Currently Head of Information &amp; BI Services at Camden Council, leading Data &amp; Insights,
+            Spatial Information Services, and Enterprise Information Management. 13+ years transforming
+            data landscapes across local government, retail, hospitality, and telco — from architecting
+            Woolworths&apos; big data customer decision engine to delivering $1.7M in savings and 250+
+            self-service business users at EVT. I build Enterprise Data Strategies from scratch,
+            implement cloud-native platforms, and lead cross-functional teams to turn data into a
+            genuine competitive advantage.
           </p>
 
           {/* Info cards */}
