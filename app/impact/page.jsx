@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import { motion } from 'motion/react';
+import { Check, ChevronRight } from 'lucide-react';
 
 function Counter({ target, prefix = '', suffix = '' }) {
   const [count, setCount] = useState(0);
@@ -115,18 +116,13 @@ const IMPACT_CARDS = [
 
 function CheckIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-4 w-4 shrink-0 mt-0.5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
+    <Check
+      size={16}
       strokeWidth={2.5}
+      className="shrink-0 mt-0.5"
       aria-hidden="true"
       style={{ color: 'var(--accent-color)' }}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
+    />
   );
 }
 
@@ -210,9 +206,7 @@ function ImpactCard({ card, index }) {
         aria-label={`View full case study for ${card.company}`}
       >
         Full case study
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
+        <ChevronRight size={16} strokeWidth={2} aria-hidden="true" />
       </Link>
     </motion.article>
   );

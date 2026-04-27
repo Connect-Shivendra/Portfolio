@@ -6,26 +6,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import { BlogsList } from '@/assets/assets';
+import { Search, X } from 'lucide-react';
 
 const BLOGS_PER_PAGE = 12;
 
 const CATEGORIES = BlogsList.map(b => b.name);
-
-function SearchIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
-    </svg>
-  );
-}
-
-function ClearIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  );
-}
 
 function BlogCard({ blog, index }) {
   return (
@@ -149,7 +134,7 @@ export default function BlogListPage() {
               className="absolute left-4 top-1/2 -translate-y-1/2"
               style={{ color: 'var(--text-secondary)' }}
             >
-              <SearchIcon />
+              <Search className="h-4 w-4" aria-hidden="true" />
             </span>
             <input
               type="search"
@@ -171,7 +156,7 @@ export default function BlogListPage() {
                 className="absolute right-4 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-70"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                <ClearIcon />
+                <X className="h-3.5 w-3.5" aria-hidden="true" />
               </button>
             )}
           </motion.div>

@@ -15,6 +15,13 @@ import 'prismjs/components/prism-sql';
 
 export default function BlogEnhancer() {
   useEffect(() => {
+    // Add IDs to headings for TOC anchor links
+    document.querySelectorAll('.blog-content h2, .blog-content h3').forEach(h => {
+      if (!h.id) {
+        h.id = h.textContent.trim().toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+      }
+    });
+
     // Add language classes to code blocks if not present
     const codeBlocks = document.querySelectorAll('.blog-content pre code');
     codeBlocks.forEach(block => {

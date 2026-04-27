@@ -2,7 +2,18 @@ import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
 import BlogPostClient from '@/app/components/BlogPostClient';
 import MDXContentServer from '@/app/components/MDXContentServer';
+import TableOfContents from '@/app/components/TableOfContents';
 import Link from 'next/link';
+
+function extractHeadings(content) {
+  if (!content) return [];
+  const matches = [...content.matchAll(/^(#{2,3})\s+(.+)$/gm)];
+  return matches.map(m => ({
+    level: m[1].length,
+    text: m[2].trim().replace(/[*_`[\]]/g, ''),
+    id: m[2].trim().toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-'),
+  }));
+}
 
 export default function BlogPostPage({ blog, error, relatedPosts = [] }) {
   if (!blog) {
@@ -48,20 +59,24 @@ export default function BlogPostPage({ blog, error, relatedPosts = [] }) {
   }
 
   const renderedContent = <MDXContentServer content={blog.content} />;
+  const headings = extractHeadings(blog.content);
 
   return (
     <>
       <Navbar isOnBlogPage={true} />
       <main
-        className="px-4 sm:px-6 lg:px-12 xl:px-20 pt-32 pb-16"
+        className="px-4 sm:px-6 lg:px-12 xl:px-16 pt-32 pb-16"
         style={{ background: 'var(--background)' }}
       >
-        <div className="max-w-4xl mx-auto">
-          <BlogPostClient
-            blog={blog}
-            renderedContent={renderedContent}
-            relatedPosts={relatedPosts}
-          />
+        <div className="max-w-6xl mx-auto">
+          <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:gap-14">
+            <BlogPostClient
+              blog={blog}
+              renderedContent={renderedContent}
+              relatedPosts={relatedPosts}
+            />
+            <TableOfContents headings={headings} />
+          </div>
         </div>
       </main>
       <Footer />

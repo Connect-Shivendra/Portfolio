@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, animate, stagger } from 'motion/react';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
+import { ArrowRight, Download } from 'lucide-react';
 
 // Particle canvas — gold dust floating in the background
 function ParticleField() {
@@ -296,7 +297,7 @@ export default function Header() {
             />
             <span className="relative flex items-center gap-2">
               Say Hello
-              <Image src={assets.right_arrow_bold} alt="" className="w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </span>
           </a>
 
@@ -311,7 +312,7 @@ export default function Header() {
             }}
           >
             Download CV
-            <Image src={assets.download_icon} alt="" className="w-4" />
+            <Download size={16} strokeWidth={1.5} aria-hidden="true" />
           </a>
         </motion.div>
 

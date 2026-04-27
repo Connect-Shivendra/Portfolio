@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useDarkMode } from '@/app/context/DarkModeContext'
 import { motion, AnimatePresence } from 'motion/react'
+import { Sun, Moon, Menu, X, ArrowRight } from 'lucide-react'
 
 const NAV_ITEMS = [
   { label: 'Home',                  id: 'top' },
@@ -124,12 +125,11 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               transition={{ duration: 0.3 }}
+              style={{ color: 'var(--text-primary)' }}
             >
-              <Image
-                src={isDarkMode ? assets.sun_icon : assets.moon_icon}
-                alt={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="w-5"
-              />
+              {isDarkMode
+                ? <Sun size={18} strokeWidth={1.5} aria-hidden="true" />
+                : <Moon size={18} strokeWidth={1.5} aria-hidden="true" />}
             </motion.div>
           </button>
 
@@ -140,7 +140,7 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
             style={{ background: 'var(--accent-color)', color: 'var(--on-accent)' }}
           >
             Get in Touch
-            <Image src={assets.arrow_icon_dark} alt="" className="w-3" />
+            <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
           </button>
 
           {/* Hamburger — mobile */}
@@ -149,11 +149,7 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
           >
-            <Image
-              src={isDarkMode ? assets.menu_white : assets.menu_black}
-              alt=""
-              className="w-5"
-            />
+            <Menu size={20} strokeWidth={1.5} style={{ color: 'var(--text-primary)' }} aria-hidden="true" />
           </button>
         </div>
       </nav>
@@ -185,11 +181,7 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <Image
-                  src={isDarkMode ? assets.close_white : assets.close_black}
-                  alt=""
-                  className="w-5"
-                />
+                <X size={20} strokeWidth={1.5} style={{ color: 'var(--text-primary)' }} aria-hidden="true" />
               </button>
 
               {/* Gold accent bar */}

@@ -4,6 +4,7 @@ import { assets, workData } from '@/assets/assets';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
 
 const Work = () => {
   return (
@@ -90,7 +91,7 @@ const Work = () => {
                   className="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center ml-2 transition-all duration-300 group-hover:scale-110"
                   style={{ background: 'var(--accent-color)' }}
                 >
-                  <Image src={assets.send_icon} alt="View details" className="w-3" />
+                  <ArrowUpRight size={14} strokeWidth={2} aria-hidden="true" style={{ color: 'var(--on-accent)' }} />
                 </div>
               </div>
             </motion.div>

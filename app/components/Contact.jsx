@@ -40,11 +40,10 @@ const Contact = () => {
     setIsSubmitting(true);
     setResult('Sending...');
 
-    formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_KEY);
     formData.append('g-recaptcha-response', captchaToken);
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         body: formData,
       });

@@ -3,6 +3,9 @@
 import { assets, infoList, toolsData } from '@/assets/assets';
 import Image from 'next/image';
 import { motion } from 'motion/react';
+import { Code2, GraduationCap, Briefcase } from 'lucide-react';
+
+const ABOUT_ICONS = [Code2, GraduationCap, Briefcase];
 
 const About = () => {
   return (
@@ -90,21 +93,30 @@ const About = () => {
             viewport={{ once: true }}
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mb-14"
           >
-            {infoList.map(({ icon, title, description }, index) => (
-              <motion.li
-                key={index}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="summary-card"
-              >
-                <Image src={icon} alt={title} className="w-7 mt-2 mb-3" />
-                <h3 className="mb-2 font-semibold font-Sora text-[var(--text-primary)]">
-                  {title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {description}
-                </p>
-              </motion.li>
-            ))}
+            {infoList.map(({ title, description }, index) => {
+              const Icon = ABOUT_ICONS[index];
+              return (
+                <motion.li
+                  key={index}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="summary-card"
+                >
+                  <motion.div
+                    whileHover={{ rotate: 8, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                    className="mt-2 mb-3 inline-block"
+                  >
+                    <Icon size={28} strokeWidth={1.5} style={{ color: 'var(--accent-color)' }} aria-hidden="true" />
+                  </motion.div>
+                  <h3 className="mb-2 font-semibold font-Sora text-[var(--text-primary)]">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                    {description}
+                  </p>
+                </motion.li>
+              );
+            })}
           </motion.ul>
 
           {/* Tools */}
