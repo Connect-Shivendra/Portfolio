@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { motion, useScroll, useSpring } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
+import BlogEnhancer from '@/app/components/BlogEnhancer';
 
 function AnimatedWords({ text, className }) {
   return (
@@ -149,6 +150,9 @@ export default function BlogPostClient({ blog, renderedContent, relatedPosts = [
             </div>
           )}
         </header>
+
+        {/* BlogEnhancer: Prism syntax highlighting + copy buttons */}
+        <BlogEnhancer />
 
         {/* MDX content */}
         <motion.div

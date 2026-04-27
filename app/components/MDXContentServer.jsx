@@ -16,13 +16,13 @@ const components = {
       {children}
     </h1>
   ),
-  h2: ({ children }) => (
-    <h2 className="text-2xl md:text-3xl font-semibold font-Sora text-[var(--text-primary)] mt-10 mb-4 pb-2 border-b border-[var(--border-color)]">
+  h2: ({ children, id }) => (
+    <h2 id={id} className="text-2xl md:text-3xl font-semibold font-Sora text-[var(--text-primary)] mt-10 mb-4 pb-2 border-b border-[var(--border-color)]">
       {children}
     </h2>
   ),
-  h3: ({ children }) => (
-    <h3 className="text-xl font-semibold font-Sora text-[var(--text-primary)] mt-8 mb-3">
+  h3: ({ children, id }) => (
+    <h3 id={id} className="text-xl font-semibold font-Sora text-[var(--text-primary)] mt-8 mb-3">
       {children}
     </h3>
   ),
