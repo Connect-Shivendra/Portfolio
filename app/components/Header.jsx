@@ -285,7 +285,7 @@ export default function Header() {
         >
           <a
             href="#contact"
-            className="group relative px-10 py-3.5 rounded-full font-semibold overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(201,168,76,0.4)]"
+            className="group relative px-10 py-3.5 rounded-full font-semibold overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(201,168,76,0.4)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2"
             style={{ background: 'var(--accent-color)', color: 'var(--on-accent)' }}
           >
             {/* Shimmer effect */}
@@ -303,7 +303,7 @@ export default function Header() {
           <a
             href="/Shivendra-Singh-HoData-CV.pdf"
             download
-            className="px-10 py-3.5 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 border hover:shadow-[0_0_20px_rgba(201,168,76,0.2)]"
+            className="px-10 py-3.5 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 border hover:shadow-[0_0_20px_rgba(201,168,76,0.2)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2"
             style={{
               borderColor: 'var(--accent-color)',
               color: 'var(--text-primary)',

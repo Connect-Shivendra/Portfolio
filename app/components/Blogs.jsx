@@ -147,7 +147,7 @@ const Blogs = ({ blogs }) => {
                   style={{
                     background: page === i + 1 ? 'var(--accent-color)' : 'transparent',
                     borderColor: page === i + 1 ? 'var(--accent-color)' : 'var(--border-color)',
-                    color: page === i + 1 ? '#fff' : 'var(--text-secondary)',
+                    color: page === i + 1 ? 'var(--on-accent)' : 'var(--text-secondary)',
                   }}
                   aria-label={`Page ${i + 1}`}
                 >

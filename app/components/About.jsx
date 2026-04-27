@@ -60,6 +60,7 @@ const About = () => {
             <Image
               src={assets.user_image}
               alt="Shivendra Singh — Head of Data, Information & AI"
+              priority
               className="w-64 lg:w-72 rounded-3xl relative z-10 border border-[var(--border-color)]"
             />
           </div>

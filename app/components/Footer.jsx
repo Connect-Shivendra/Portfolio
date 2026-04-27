@@ -40,13 +40,18 @@ const Footer = () => {
                 Navigation
               </p>
               <ul className="space-y-2">
-                {['About', 'Blog', 'My Work', 'Contact'].map(item => (
-                  <li key={item}>
+                {[
+                  { label: 'About', href: '/#about' },
+                  { label: 'Blog', href: '/#blogs' },
+                  { label: 'My Work', href: '/#work' },
+                  { label: 'Contact', href: '/#contact' },
+                ].map(({ label, href }) => (
+                  <li key={label}>
                     <a
-                      href={`/#${item.toLowerCase().replace(' ', '-')}`}
+                      href={href}
                       className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors duration-300"
                     >
-                      {item}
+                      {label}
                     </a>
                   </li>
                 ))}

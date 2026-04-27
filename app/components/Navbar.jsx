@@ -136,7 +136,7 @@ const Navbar = ({ isOnBlogPage = false, setActiveSection }) => {
           {/* Contact CTA — desktop */}
           <button
             onClick={() => handleNavClick('contact')}
-            className="hidden lg:flex items-center gap-2 px-6 py-2 rounded-full font-Sora font-semibold text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:-translate-y-px"
+            className="hidden lg:flex items-center gap-2 px-6 py-2 rounded-full font-Sora font-semibold text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:-translate-y-px focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] focus:ring-offset-2"
             style={{ background: 'var(--accent-color)', color: 'var(--on-accent)' }}
           >
             Get in Touch

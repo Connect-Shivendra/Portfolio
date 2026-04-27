@@ -226,7 +226,7 @@ export default function ImpactPage() {
         className="min-h-screen"
         style={{ background: 'var(--background)', color: 'var(--foreground)' }}
       >
-        <div className="container mx-auto px-4 py-8 pt-24 lg:pt-32 max-w-6xl">
+        <div className="container mx-auto px-6 py-8 pt-24 lg:pt-32 max-w-6xl">
 
           {/* Hero */}
           <motion.header
