@@ -1,6 +1,6 @@
 # SKILL: shivendra.io — Project Context & Knowledge Base
 > Read this at the start of every session. Saves reading 50+ files.
-> Last updated: 2026-04-27 (End of Session 9 — rate limiting, lucide icons, blog visual improvements, TOC)
+> Last updated: 2026-04-27 (End of Session 10 — luxurious motion animations on blog posts and work pages)
 
 ---
 
@@ -339,6 +339,7 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 | 2026-04-27 S7 | **Bug fixes + blog UX.** Contact form: phone validation changed from `!fields.phone \|\|` to `fields.phone &&` — now truly optional. `/blog` listing page: old code had single-post logic (`params?.slug`) on a non-dynamic route, rendering a blank/error page. Rebuilt as a proper listing page: fetch from `/api/blogs`, useMemo filtering (text search on title/excerpt/category + category chips from BlogsList), result count label, empty state with clear-filters button, 12-per-page paginator, AnimatePresence grid fade between pages. Committed and pushed to main. |
 | 2026-04-27 S8 | **Layout fix + SSR refactor.** About section: added `max-w-6xl mx-auto` to content flex div so photo+text block is properly centred under the centred heading (was visually left-anchored). page.js refactor: converted to async server component that calls `getAllBlogs()` directly and passes blogs to new `app/HomeClient.jsx` ('use client' shell with Suspense+useSearchParams). Blog cards are now in initial SSR HTML, not client-fetched. |
 | 2026-04-27 S9 | **Rate limiting + Icons + Blog UX.** Contact form now proxies via `/api/contact/route.js` (IP rate limit: 5/hr). Installed lucide-react; replaced all PNG icon assets with Lucide components site-wide (Navbar, Header, About, Work, Blog, BlogPostClient, Impact). About info icons get `whileHover` rotate+scale. Comprehensive blog prose redesign in globals.css (gold bullets, pull-quote blockquotes, dark code blocks, styled tables, figure captions, mobile fixes). New `TableOfContents.jsx` sticky sidebar for blog posts (xl+, IntersectionObserver active tracking). BlogPostPage extracts headings server-side; BlogEnhancer auto-generates heading IDs. |
+| 2026-04-27 S10 | **Luxurious motion animations — blog posts + work pages.** Created `WorkPageLayout.jsx` (shared layout for all 6 work pages): company photo hero with dark overlay + animated gold radial glow, word-by-word title blur-reveal, scaleX gold divider, slide-in back button, achievement cards stagger in from left with spring gold check bubbles + hover card glow, tech pills stagger fade with hover gold highlight, section headings with animated scaleY gold left border, CTA shimmer sweep + pulsing accent line + whileHover button glow. All 6 `app/work/*.jsx` refactored to pure data components. `BlogPostClient.jsx` rebuilt: word-by-word title reveal, category tag spring scale-in, cover image Ken Burns entrance (scale 1.04→1) + one-shot gold shimmer sweep, excerpt animated left border scaleY, meta row stagger, blog content fade-up, back button whileHover, related cards stagger + cover zoom on hover. |
 
 ---
 
