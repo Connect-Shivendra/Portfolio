@@ -50,14 +50,6 @@ export const metadata = {
     title: 'Shivendra Singh — Head of Data, Information & AI',
     description: 'Transformational data leader with 14+ years of experience. Based in Sydney, Australia.',
     siteName: 'Shivendra Singh',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Shivendra Singh — Head of Data, Information & AI',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
