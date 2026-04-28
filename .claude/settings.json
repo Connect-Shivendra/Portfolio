@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(lighthouse *)"
+      "Bash(lighthouse *)",
+      "WebFetch(domain:www.anthropic.com)"
     ]
   }
 }

@@ -78,6 +78,9 @@ export const metadata = {
   alternates: {
     canonical: 'https://shivendra.io',
   },
+  verification: {
+    google: '5li3_tCQeKi57dlqG5L0WbS4gUv0b4VhPCKanVmAyW4',
+  },
 };
 
 export default function RootLayout({ children }) {

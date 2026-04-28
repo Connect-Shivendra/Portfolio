@@ -305,12 +305,13 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 
 **Content:**
 8. [ ] Write 5 more blog posts (see topics in §7)
-9. [ ] Refresh 5 existing posts — update 2024 stats to 2026, more conversational
-10. [ ] Add Google site verification to layout.js — need verification code from Google Search Console (add as `verification` field in metadata object)
+9. [x] Refresh 5 existing posts — updated to 2026 dates, conversational intros, AI sections ✅ S15
+         Posts refreshed: cloud-data-architecture, data-ethics-privacy, australian-government-data-frameworks, data-lakes-vs-warehouses, data-governance-framework
+10. [x] Add Google site verification to layout.js ✅ S15 — `verification.google` added to metadata in `app/layout.js`
 
 **Security:**
 11. [x] Add rate limiting to contact form API route ✅ S9 — created `/api/contact/route.js`, 5 req/hr per IP, Contact.jsx now POSTs to `/api/contact` instead of directly to Web3Forms
-12. [ ] npm vulns: wait for Next.js to ship patched postcss bundle (DO NOT run npm audit fix --force)
+12. [ ] npm vulns: wait for Next.js to ship patched postcss bundle (DO NOT run npm audit fix --force) ⛔ BLOCKED: upstream Next.js fix required
 
 ---
 
@@ -345,6 +346,7 @@ whileHover={{ y: -4, transition: { duration: 0.2 } }}
 | 2026-04-27 S12 | **Bug fix — TOC anchor links not scrolling.** Two independent failures: (1) `MDXContentServer.jsx` custom `h2`/`h3` components destructured only `{ children }`, silently dropping the `id` prop that `rehype-slug` adds — headings rendered with no `id` attribute. Fixed by accepting `id` explicitly and applying it. (2) `BlogEnhancer.jsx` (fallback DOM-based ID injection + Prism syntax highlighting + copy buttons) was never mounted anywhere — it was exported but never imported. Fixed by importing and rendering it in `BlogPostClient.jsx`. Both fixes together ensure TOC `#anchor` links resolve to real DOM elements and the page scrolls correctly. |
 | 2026-04-27 S14 | **Recruiter pivot + reCAPTCHA removal.** Removed `react-google-recaptcha` from Contact.jsx (rate limiting via `/api/contact` is sufficient). Cleaned Google CSP entries (`script-src`, `frame-src`) from `next.config.mjs`. Replaced all consulting/sales-pitch language site-wide: Contact heading → "Connect", subtext → recruiter-friendly, textarea placeholder updated; Impact page CTA → "Want to Know More?" with neutral body; all 6 work page `ctaTitle`/`ctaDescription` → "Want to Discuss This Further?" with role-specific detail invitations. About.jsx bio last sentence reworded. CV download link updated to `Shivendra-Singh-Gov_DataLeader.pdf` (user to place file in `/public/`). |
 | 2026-04-27 S13 | **CV data enrichment — site-wide content update.** Created 7 persistent memory files (user_identity, user_role_camden, user_role_evt, user_role_woolworths, user_roles_early, user_skills, user_achievements) from CV PDF + detailed user-provided context. Updated: `assets.js` infoList (specific tech stack, both AWS certs, hard metrics); `About.jsx` bio (current role, $1.7M/250 users/WooliesX metrics); `Header.jsx` subtitle (accurate current title and mandate); `Impact` page (Camden 18 use cases + first-in-AU open data, EVT dual-award badge, 13+ years copy); Camden Council work page (3 teams, all 8 projects with specifics, vendor procurement frameworks); EVT work page (both awards, Kimball methodology, negotiation wins — 10% Tableau/8% Snowflake/30% vendor, Telstra partnership, CoE training programs, CapEx memo process); Woolworths work page (Tequila PySpark detail, $120k/month Redshift saving, Proximity, Apple Wallet, KPMG remediation detail). |
+| 2026-04-28 S15 | **Blog refresh — 5 posts updated to 2026.** Items 9 confirmed done, 10 and 12 confirmed blocked. Refreshed: cloud-data-architecture (AI-ready arch patterns, Apache Iceberg as standard, updated trends from future→present); data-ethics-privacy (EU AI Act now in force Aug 2024, AU Privacy Act 2024 penalties $50M/30% turnover, GenAI/synthetic data ethics); australian-government-data-frameworks (AU Data & Digital Govt Strategy 2023, NSW AI Strategy, AI governance obligations, local govt open data angle); data-lakes-vs-warehouses (Apache Iceberg dominant, Databricks/Snowflake convergence, AI/LLM workloads — vector stores/feature stores as new arch driver); data-governance-framework (AI governance as 7th objective, full AI governance section — AI register/model lineage/prompt governance/agentic AI accountability). All dates updated to 2026, author to "Shivendra Singh", conversational intros added. |
 
 ---
 
