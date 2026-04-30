@@ -43,7 +43,7 @@ export default function BlogPostPage({ blog, error, relatedPosts = [] }) {
             >
               ← Back to Home
             </Link>
-            {error && (
+            {error && process.env.NODE_ENV === 'development' && (
               <pre className="mt-8 text-xs text-left p-4 rounded-xl overflow-x-auto border border-[var(--border-color)]"
                 style={{ background: 'var(--card-bg)', color: 'var(--text-secondary)' }}
                 role="alert"
