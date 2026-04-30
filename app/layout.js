@@ -4,6 +4,7 @@ import { ErrorBoundary } from "@/app/components/ErrorBoundary";
 import ScrollToTopWrapper from "@/app/components/ScrollToTopWrapper";
 import { DarkModeProvider } from './context/DarkModeContext';
 import { Analytics } from '@vercel/analytics/react';
+import { headers } from 'next/headers';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -75,7 +76,10 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // Force dynamic rendering so Next.js reads x-nonce from middleware
+  // and stamps its inline bootstrap scripts with the CSP nonce.
+  await headers();
   return (
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <head>
@@ -86,8 +90,6 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://upload.wikimedia.org" />
-        <link rel="preconnect" href="https://www.gstatic.com" />
-        <link rel="preconnect" href="https://www.google.com" />
       </head>
       <body
         className={`${inter.variable} ${sora.variable} ${inter.className} antialiased leading-relaxed overflow-x-hidden`}
