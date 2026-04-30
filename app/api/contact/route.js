@@ -1,22 +1,35 @@
 import { NextResponse } from 'next/server';
-import { Redis } from '@upstash/redis';
-import { Ratelimit } from '@upstash/ratelimit';
 
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL,
-  token: process.env.KV_REST_API_TOKEN,
-});
+// Lazy-initialised so missing env vars don't crash the module at build time
+let ratelimit = null;
+function getRatelimit() {
+  if (ratelimit) return ratelimit;
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) return null;
+  const { Redis } = require('@upstash/redis');
+  const { Ratelimit } = require('@upstash/ratelimit');
+  const redis = new Redis({ url: process.env.KV_REST_API_URL, token: process.env.KV_REST_API_TOKEN });
+  ratelimit = new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(5, '1 h'), analytics: true });
+  return ratelimit;
+}
 
-// 5 submissions per IP per hour, persisted across deployments and instances
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(5, '1 h'),
-  analytics: true,
-});
+// In-memory fallback when Redis is not configured
+const store = new Map();
+function checkRateLimitMemory(ip) {
+  const now = Date.now();
+  const entry = store.get(ip);
+  if (!entry || now > entry.resetAt) { store.set(ip, { count: 1, resetAt: now + 3600000 }); return false; }
+  if (entry.count >= 5) return true;
+  entry.count++;
+  return false;
+}
 
 async function checkRateLimit(ip) {
-  const { success } = await ratelimit.limit(ip);
-  return !success; // returns true when rate-limited
+  const rl = getRatelimit();
+  if (rl) {
+    const { success } = await rl.limit(ip);
+    return !success;
+  }
+  return checkRateLimitMemory(ip);
 }
 
 export async function POST(request) {
