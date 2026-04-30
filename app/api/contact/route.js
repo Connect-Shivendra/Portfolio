@@ -1,19 +1,22 @@
 import { NextResponse } from 'next/server';
+import { Redis } from '@upstash/redis';
+import { Ratelimit } from '@upstash/ratelimit';
 
-const store = new Map();
-const LIMIT = 5;
-const WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN,
+});
 
-function checkRateLimit(ip) {
-  const now = Date.now();
-  const entry = store.get(ip);
-  if (!entry || now > entry.resetAt) {
-    store.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return false;
-  }
-  if (entry.count >= LIMIT) return true;
-  entry.count++;
-  return false;
+// 5 submissions per IP per hour, persisted across deployments and instances
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, '1 h'),
+  analytics: true,
+});
+
+async function checkRateLimit(ip) {
+  const { success } = await ratelimit.limit(ip);
+  return !success; // returns true when rate-limited
 }
 
 export async function POST(request) {
@@ -22,7 +25,7 @@ export async function POST(request) {
     request.headers.get('x-real-ip') ??
     'unknown';
 
-  if (checkRateLimit(ip)) {
+  if (await checkRateLimit(ip)) {
     return NextResponse.json(
       { success: false, message: 'Too many submissions. Please try again in an hour.' },
       { status: 429 }
