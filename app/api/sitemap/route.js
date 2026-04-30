@@ -1,7 +1,7 @@
 import { getAllBlogs } from '@/app/utils/mdx-utils';
 
 export async function GET() {
-  const baseUrl = 'https://your-domain.com';
+  const baseUrl = 'https://shivendra.io';
   const posts = await getAllBlogs();
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

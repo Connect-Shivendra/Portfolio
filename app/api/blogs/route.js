@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getAllBlogs } from '@/app/utils/mdx-utils';
 
+export const revalidate = 300;
+
 export async function GET() {
   try {
     const blogs = await getAllBlogs();

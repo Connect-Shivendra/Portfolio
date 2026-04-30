@@ -37,7 +37,30 @@ export async function POST(request) {
     );
   }
 
-  formData.set('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_KEY);
+  const name = formData.get('name')?.toString().trim() ?? '';
+  const email = formData.get('email')?.toString().trim() ?? '';
+  const message = formData.get('message')?.toString().trim() ?? '';
+
+  if (!name || !email || !message) {
+    return NextResponse.json(
+      { success: false, message: 'Name, email, and message are required.' },
+      { status: 400 }
+    );
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json(
+      { success: false, message: 'Invalid email address.' },
+      { status: 400 }
+    );
+  }
+  if (name.length > 100 || message.length > 2000) {
+    return NextResponse.json(
+      { success: false, message: 'Input exceeds maximum length.' },
+      { status: 400 }
+    );
+  }
+
+  formData.set('access_key', process.env.WEB3FORMS_KEY);
 
   const upstream = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
