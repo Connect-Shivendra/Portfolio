@@ -18,12 +18,21 @@ function checkRateLimit(ip) {
 
 export async function POST(request) {
   const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
+    request.headers.get('x-real-ip') ??
+    'unknown';
 
   if (checkRateLimit(ip)) {
     return NextResponse.json(
       { success: false, message: 'Too many submissions. Please try again in an hour.' },
       { status: 429 }
+    );
+  }
+
+  if (!process.env.WEB3FORMS_KEY) {
+    return NextResponse.json(
+      { success: false, message: 'Service configuration error.' },
+      { status: 500 }
     );
   }
 
@@ -35,6 +44,12 @@ export async function POST(request) {
       { success: false, message: 'Invalid form data.' },
       { status: 400 }
     );
+  }
+
+  // Honeypot — bots fill this hidden field, humans don't
+  const website = formData.get('website')?.toString().trim() ?? '';
+  if (website) {
+    return NextResponse.json({ success: false, message: 'Invalid submission.' }, { status: 400 });
   }
 
   const name = formData.get('name')?.toString().trim() ?? '';
@@ -62,10 +77,30 @@ export async function POST(request) {
 
   formData.set('access_key', process.env.WEB3FORMS_KEY);
 
-  const upstream = await fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    body: formData,
-  });
-  const data = await upstream.json();
+  let upstream;
+  try {
+    upstream = await Promise.race([
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout')), 8000)
+      ),
+    ]);
+  } catch {
+    return NextResponse.json(
+      { success: false, message: 'Service unavailable. Please try again later.' },
+      { status: 503 }
+    );
+  }
+
+  let data;
+  try {
+    data = await upstream.json();
+  } catch {
+    return NextResponse.json(
+      { success: false, message: 'Unexpected response from service.' },
+      { status: 500 }
+    );
+  }
+
   return NextResponse.json(data, { status: upstream.status });
 }

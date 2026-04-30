@@ -19,6 +19,9 @@ const blogsDirectory = path.join(process.cwd(), 'content/blogs');
  * Raw content string is used by MDXContentServer for rendering.
  */
 export const getBlogData = cache(async (slug) => {
+  if (!slug || !/^[a-zA-Z0-9_-]+$/.test(slug)) {
+    throw new Error('Invalid slug');
+  }
   try {
     let fullPath = path.join(blogsDirectory, `${slug}.mdx`);
     if (!fs.existsSync(fullPath)) {

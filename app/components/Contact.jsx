@@ -105,6 +105,9 @@ const Contact = () => {
         className='w-full max-w-2xl card-component p-8 md:p-10'
         noValidate
       >
+        {/* Honeypot — hidden from users, filled only by bots */}
+        <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" aria-hidden="true" />
+
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
           <div>
             <input

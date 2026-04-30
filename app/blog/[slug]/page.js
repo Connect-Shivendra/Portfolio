@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
         title,
         description,
         images: coverImage ? [coverImage] : [],
-        creator: '@your-twitter-handle',
+        creator: '@shivendra_singh',
       },
       alternates: {
         canonical: `/blog/${slug}`,
@@ -43,6 +43,9 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPost({ params }) {
   const { slug } = await params;
+  if (!slug || !/^[a-zA-Z0-9_-]+$/.test(slug)) {
+    return <BlogPostPage blog={null} error={new Error('Not found')} relatedPosts={[]} />;
+  }
   let blog = null;
   let error = null;
   let relatedPosts = [];
